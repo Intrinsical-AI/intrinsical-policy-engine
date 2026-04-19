@@ -1,0 +1,32 @@
+version: "1.0.0"
+derivations:
+  - id: STARTER-DERIVE-REVIEW-FROM-AUTOMATION
+    when: "has('starter.automated_decision')"
+    set_flags:
+      - starter.needs_review
+  - id: STARTER-DERIVE-REVIEW-FROM-DATA
+    when: "has('starter.sensitive_data')"
+    set_flags:
+      - starter.needs_review
+packs:
+  - id: STARTER-PACK-CONTROL-REVIEW
+    when: "has('starter.needs_review')"
+    add_actions:
+      - STARTER-CONTROL-REVIEW
+stops: []
+halt: []
+classifiers:
+  version: "1.0.0"
+  role_mapping: []
+  risk_tiers:
+    - id: starter_review
+      priority: 10
+      when: "has('starter.needs_review')"
+      output:
+        tier: review
+        regimes:
+          - starter
+  outcome_rules:
+    - id: starter_review_outcome
+      when_tier: review
+      outcome: starter_review

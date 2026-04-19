@@ -1,0 +1,13 @@
+framework_id: starter
+roles:
+  - control_owner
+tiers:
+  - review
+regimes:
+  - starter
+routes: []
+outcomes:
+  - pending
+  - starter_review
+subject_attributes:
+  - owner

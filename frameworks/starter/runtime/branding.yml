@@ -1,0 +1,5 @@
+framework_name: Starter Pack
+engine_name: intrinsical-policy-engine
+cli_prog: ipe
+ics_prodid: -//intrinsical-policy-engine//Starter Pack//EN
+omission_roles: []

@@ -1,0 +1,11 @@
+version: "1.0.0"
+default_due_days: 30
+fallback_split_id: review
+splits:
+  - id: review
+    filename: starter_review_backlog.csv
+    keywords:
+      - STARTER
+      - CONTROL
+      - REVIEW
+    description: Starter control review tasks.

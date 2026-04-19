@@ -1,0 +1,29 @@
+# Starter Export
+
+This export was generated from the public Intrinsical Policy Engine starter
+pack.
+
+## What This Contains
+
+- A neutral control-review example.
+- A deterministic trace of answers, flags, selected actions, and evidence links.
+- Integrity metadata and checksums for the generated files.
+
+## What This Does Not Contain
+
+- Regulatory coverage.
+- Commercial policy calibration.
+- Sector-specific assessment logic.
+- Any guarantee that the workflow is compliant with a law, standard, or contract.
+
+## Selected Action
+
+{% for action in actions_meta | default([]) %}
+- `{{ action.id | default(action.get("id", "")) }}`: {{ action.title | default(action.get("title", "")) }}
+{% else %}
+- No action was selected.
+{% endfor %}
+
+Use this export as a technical authoring example only. Review and validate any
+real framework pack with qualified domain, security, and legal reviewers before
+enterprise use.

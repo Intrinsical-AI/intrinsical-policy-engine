@@ -1,0 +1,10 @@
+version: "1.0.0"
+registry:
+  - id: starter.automated_decision
+    description: Workflow includes an automated decision or recommendation.
+  - id: starter.sensitive_data
+    description: Workflow uses sensitive or confidential inputs.
+  - id: starter.owner_assigned
+    description: A named owner is assigned to review and maintain the workflow.
+  - id: starter.needs_review
+    description: Workflow should receive a documented control review.

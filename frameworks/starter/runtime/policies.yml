@@ -1,0 +1,24 @@
+subject_profile:
+  classification_key: "review_tier"
+  default_name: "Starter Control"
+  attributes: []
+routing:
+  review_tiers:
+    - review
+  impact_review_required_flags:
+    - starter.sensitive_data
+  preferred_route: "standard-review"
+  alternative_route: "enhanced-review"
+  impact_review_only_route: "control-review"
+  prefer_primary_if_flags: []
+  prefer_primary_if_articles: []
+  route_action_exclusions: {}
+due_dates:
+  policy_weights: {}
+  calendar_aliases: {}
+metrics:
+  default_score: 0.1
+  default_source: "starter"
+  hitl_signals: []
+  article_signals: []
+predicates: []

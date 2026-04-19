@@ -1,0 +1,40 @@
+groups:
+  - id: starter_scope
+    title: Starter scope
+    questions:
+      - id: STARTER_Q1
+        text: Does this workflow include an automated decision or recommendation?
+        type: choice
+        map_to_flags:
+          "yes":
+            - starter.automated_decision
+          "no": []
+        options:
+          - value: "yes"
+            label: "Yes"
+          - value: "no"
+            label: "No"
+      - id: STARTER_Q2
+        text: Does this workflow use sensitive or confidential inputs?
+        type: choice
+        map_to_flags:
+          "yes":
+            - starter.sensitive_data
+          "no": []
+        options:
+          - value: "yes"
+            label: "Yes"
+          - value: "no"
+            label: "No"
+      - id: STARTER_Q3
+        text: Is a named owner assigned to maintain this workflow?
+        type: choice
+        map_to_flags:
+          "yes":
+            - starter.owner_assigned
+          "no": []
+        options:
+          - value: "yes"
+            label: "Yes"
+          - value: "no"
+            label: "No"

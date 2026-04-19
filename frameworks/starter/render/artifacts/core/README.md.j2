@@ -1,0 +1,21 @@
+# Starter Export
+
+This export was generated from the public starter pack.
+
+## Outcome
+
+- Outcome: `{{ outcome | default("pending") }}`
+- Selected actions: {{ actions | default([]) | length }}
+
+## Actions
+
+{% for action in actions_meta | default([]) %}
+- `{{ action.id | default(action.get("id", "")) }}`: {{ action.title | default(action.get("title", "")) }}
+{% else %}
+- No actions selected.
+{% endfor %}
+
+## Limits
+
+This starter output is educational only. It is not legal advice, not official
+guidance, and not a compliance certification.

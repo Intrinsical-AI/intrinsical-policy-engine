@@ -1,0 +1,12 @@
+framework:
+  id: starter
+  name: "Starter Pack"
+  version: "0.1.0"
+  status: "educational"
+  release_date: "2026-04-19"
+  description: "Neutral educational pack for Intrinsical Policy Engine authoring and smoke tests."
+engine:
+  min_version: ">=1.0.0"
+notes:
+  - "This pack is illustrative only."
+  - "It does not encode regulatory coverage or legal guidance."

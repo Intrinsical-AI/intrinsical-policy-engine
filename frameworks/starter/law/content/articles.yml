@@ -1,0 +1,5 @@
+version: "1.0.0"
+taxonomy:
+  - id: TOPIC-STARTER-CONTROLS
+    title: Control review
+    description: Educational topic for documenting reviewable workflow controls.

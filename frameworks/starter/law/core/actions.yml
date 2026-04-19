@@ -1,0 +1,14 @@
+version: "1.0.0"
+actions:
+  - id: STARTER-CONTROL-REVIEW
+    title: Document a control review
+    description: Create a short review describing ownership, inputs, decision points, and follow-up checks.
+    applies_to: any
+    priority: medium
+    when: "has('starter.needs_review')"
+    articles:
+      - TOPIC-STARTER-CONTROLS
+    legal_refs:
+      - "Starter Pack: Control Review"
+    evidence:
+      - starter/control-review.md

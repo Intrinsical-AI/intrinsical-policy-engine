@@ -1,0 +1,52 @@
+pack_format_version: 1
+framework_id: starter
+version: 0.1.0
+timestamp: "2026-04-19T00:00:00Z"
+compatible_engine_versions:
+  - ">=1.0.0"
+merge_policy:
+  order: lexicographic
+  dict_merge: shallow
+  list_merge: concatenate
+  scalar_collision: last_wins
+  critical_keys:
+    - framework_id
+    - version
+contracts:
+  flags:
+    - law/core/flags.yml
+  rules:
+    - law/core/rules.yml
+  actions:
+    - law/core/actions.yml
+  articles:
+    - law/content/articles.yml
+  questions:
+    - law/content/questions/*.yml
+  evidence_map:
+    - law/policy/evidence_map.yml
+  due_rules:
+    - law/policy/due_rules.yml
+  dedups:
+    - law/policy/dedups.yml
+  calendar:
+    - law/policy/law_calendar.yml
+  audit:
+    - law/policy/audit.yml
+  risk_config:
+    - law/policy/risk_config.yml
+bundle_profiles:
+  - delivery/profiles/*.yml
+runtime:
+  semantics:
+    - runtime/semantics.yml
+  policies:
+    - runtime/policies.yml
+  presentation:
+    - runtime/branding.yml
+templates_dir: render
+evidence_templates_dir: evidence/templates
+schemas_dir: meta/schemas
+runtime_files:
+  context_defaults: render/config/context_defaults.yml
+  backlog_config: render/config/backlog_config.yml

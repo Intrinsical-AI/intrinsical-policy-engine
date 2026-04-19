@@ -1,0 +1,19 @@
+profiles:
+  starter_smoke:
+    id: starter_smoke
+    kind: control_review
+    root_dir: .
+    applies_if:
+      - "true"
+    nodes:
+      - id: starter_start_here
+        kind: file
+        name: 00_START_HERE.md
+        template: artifacts/core/00_START_HERE.md.j2
+        context: default
+        predicates: []
+        trace_back_to:
+          actions:
+            - STARTER-CONTROL-REVIEW
+          evidences:
+            - TOPIC-STARTER-CONTROLS

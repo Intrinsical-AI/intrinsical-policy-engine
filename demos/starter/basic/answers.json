@@ -1,0 +1,13 @@
+{
+  "answers": {
+    "STARTER_Q1": "yes",
+    "STARTER_Q2": "yes",
+    "STARTER_Q3": "yes"
+  },
+  "system": {
+    "name": "Example workflow"
+  },
+  "owner": {
+    "name": "Example owner"
+  }
+}

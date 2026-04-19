@@ -1,0 +1,23 @@
+# Pre-commit hooks for Intrinsical Policy Engine
+# See https://pre-commit.com for more information
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.0
+    hooks:
+      # Run the linter (with auto-fix)
+      - id: ruff
+        args: [--fix]
+      # Run the formatter
+      - id: ruff-format
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.18.2
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - types-PyYAML
+          - types-jsonschema
+          - pydantic>=2.9.0
+        args: [--ignore-missing-imports]
+        # Only run on src, not tests (tests have more relaxed typing)
+        files: ^src/
