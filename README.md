@@ -76,7 +76,4 @@ The public core is licensed under MPL-2.0. See [LICENSE](LICENSE).
 
 ## Marks
 
-Intrinsical Policy Engine™ and Intrinsical-AI™ are names used by Pablo P.C.
-for this project and related software/services. Branding use should not imply
-endorsement, sponsorship, certification, or commercial affiliation with Pablo
-P.C.
+Intrinsical Policy Engine™ and Intrinsical-AI™ are names used by Pablo P.C. for this project and related software/services. Use of these names must not imply endorsement, sponsorship, certification, or commercial affiliation with Pablo P.C.
