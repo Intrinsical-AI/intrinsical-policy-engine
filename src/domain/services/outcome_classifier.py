@@ -53,7 +53,7 @@ def _evaluate_risk_tiers_from_yaml(
                 if tier == "none":
                     tier = str(output.get("tier") or "none")
                 regimes.extend(str(regime) for regime in output.get("regimes", []) or [])
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise AssessmentError(
                 f"[RULE-ERR-01] Failed to evaluate risk tier rule '{when}': {exc}"
             ) from exc
@@ -113,7 +113,7 @@ def _matches_outcome_rule(
             ast = parse_when(when_flags)
             if not eval_ast(ast, final_flags):
                 return False
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             raise AssessmentError(
                 f"[RULE-ERR-02] Failed to evaluate outcome rule "
                 f"'{rule.get('id', '<unknown>')}': {exc}"

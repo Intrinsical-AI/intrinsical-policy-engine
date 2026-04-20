@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 def overlay(
     actions: list[Any],  # List of ActionDefinition objects (Pydantic)
-    articles: "ArticlesContract",  # noqa: UP037
+    articles: "ArticlesContract",
     selected_ids: set[ActionId] | None = None,
 ) -> dict[ArticleId, set[ActionId]]:
     """Build mapping from articles to related action IDs.

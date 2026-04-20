@@ -64,9 +64,7 @@ def resolve_routing_route(
         alternative_route,
         impact_review_only_route,
         route_source,
-    ) = _resolve_route_labels(
-        policy, runtime
-    )
+    ) = _resolve_route_labels(policy, runtime)
     review_tiers = set(policy.review_tiers)
     impact_review_flags = set(policy.impact_review_required_flags)
 
@@ -116,7 +114,7 @@ def resolve_routing_route(
                     prefer_primary = True
                     reason = "yaml_flags"
                     break
-            except Exception as exc:  # noqa: BLE001
+            except Exception as exc:
                 raise AssessmentError(
                     f"Invalid routing_router flag condition '{expr}': {exc}"
                 ) from exc

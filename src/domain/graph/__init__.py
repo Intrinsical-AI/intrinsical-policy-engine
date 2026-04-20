@@ -26,19 +26,16 @@ from src.domain.graph.models import ActionNode, ArticleNode, EvidenceEntry, Grap
 from src.domain.graph.queries import GraphQueryEngine
 
 __all__ = [
-    # Core
-    "ComplianceGraphBuilder",
-    "GraphInput",
-    "ArticleNode",
     "ActionNode",
+    "ArticleNode",
+    "ComplianceGraphBuilder",
     "EvidenceEntry",
-    # Filtering
     "GraphFilter",
-    "filter_graph",
-    "apply_filters_or",
-    "combine_filters",
-    # Utilities
-    "audit_graph",
-    "export_graphml",
+    "GraphInput",
     "GraphQueryEngine",
+    "apply_filters_or",
+    "audit_graph",
+    "combine_filters",
+    "export_graphml",
+    "filter_graph",
 ]

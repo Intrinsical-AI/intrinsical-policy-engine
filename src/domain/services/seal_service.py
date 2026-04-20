@@ -99,7 +99,7 @@ CRITICAL_METADATA_FILES = frozenset(
 )
 
 
-def seal_export(snapshot: SealInput, *, strict: bool = True) -> SealResult:  # noqa: C901
+def seal_export(snapshot: SealInput, *, strict: bool = True) -> SealResult:
     """Evaluate a seal snapshot and return the pure sealing result."""
     errors: list[str] = []
     warnings: list[str] = []

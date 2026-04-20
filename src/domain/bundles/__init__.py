@@ -18,9 +18,9 @@ from src.domain.bundles.models import BundleNode, BundleProfile
 from src.domain.bundles.registry import PREDICATES, PredicateRegistry
 
 __all__ = [
-    "EvalContext",
+    "PREDICATES",
     "BundleNode",
     "BundleProfile",
-    "PREDICATES",
+    "EvalContext",
     "PredicateRegistry",
 ]

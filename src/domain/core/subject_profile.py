@@ -60,10 +60,8 @@ def _attribute_value_from_rule(
     matches: list[Any] = []
     for candidate in rule.matches:
         matched = False
-        if (
-            candidate.flag
-            and candidate.flag in final_flags
-            or (candidate.prefix and any(flag.startswith(candidate.prefix) for flag in final_flags))
+        if (candidate.flag and candidate.flag in final_flags) or (
+            candidate.prefix and any(flag.startswith(candidate.prefix) for flag in final_flags)
         ):
             matched = True
         if matched:

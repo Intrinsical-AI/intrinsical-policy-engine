@@ -106,7 +106,7 @@ def compute_role_warnings(roles: list[str]) -> list[str]:
     if {"provider", "importer"} <= roles_set:
         warnings.append(
             "role_coherence.provider_and_importer: provider and importer roles "
-            "detected for the same system; verify value-chain allocation (Art. 23–25)."
+            "detected for the same system; verify value-chain allocation (Art. 23-25)."
         )
 
     if {"provider", "distributor"} <= roles_set:

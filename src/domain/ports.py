@@ -16,14 +16,14 @@ from src.domain.framework_layout import FrameworkLayout
 from src.domain.services.seal_service import SealInput
 
 __all__ = [
+    "BacklogConfigPort",
     "ContractBundle",
     "ContractsPort",
     "ExporterPort",
+    "FrameworkPackSourcePort",
+    "GitMetadataPort",
     "PlanStorePort",
     "QualityPort",
-    "GitMetadataPort",
-    "FrameworkPackSourcePort",
-    "BacklogConfigPort",
     "SealStorePort",
 ]
 

@@ -139,7 +139,7 @@ def flatten_calendar(calendar: dict | None) -> dict:
     return inner if isinstance(inner, dict) else {}
 
 
-def apply_due_hints(  # noqa: C901
+def apply_due_hints(
     action_ids: list[ActionId],
     due_rules: DueRulesContract,
     calendar: dict[str, Any],
