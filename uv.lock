@@ -233,16 +233,15 @@ dependencies = [
     { name = "jinja2" },
     { name = "jsonschema" },
     { name = "networkx" },
-    { name = "pre-commit" },
     { name = "pydantic" },
     { name = "pyyaml" },
 ]
 
 [package.optional-dependencies]
 dev = [
-    { name = "flask" },
     { name = "hypothesis" },
     { name = "mypy" },
+    { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pytest-xdist" },
@@ -256,14 +255,13 @@ ui = [
 
 [package.metadata]
 requires-dist = [
-    { name = "flask", marker = "extra == 'dev'", specifier = ">=3.0.0" },
     { name = "flask", marker = "extra == 'ui'", specifier = ">=3.0.0" },
     { name = "hypothesis", marker = "extra == 'dev'", specifier = ">=6.100.0" },
     { name = "jinja2", specifier = "==3.1.6" },
     { name = "jsonschema", specifier = "==4.25.1" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.18.2" },
     { name = "networkx", specifier = ">=3.0,<4.0" },
-    { name = "pre-commit", specifier = ">=4.5.1" },
+    { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.5.1" },
     { name = "pydantic", specifier = ">=2.12.3" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.4.2" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=7.0.0" },
