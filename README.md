@@ -1,5 +1,8 @@
 # Intrinsical Policy Engine™
 
+[![CI](https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/workflows/ci.yml)
+[![License: MPL-2.0](https://img.shields.io/badge/License-MPL_2.0-blue.svg)](LICENSE)
+
 Intrinsical Policy Engine is a framework-neutral policy/rules engine suitable
 for auditable assessment workflows. It turns structured answers plus a
 versioned framework pack into a reproducible assessment plan, export package,
