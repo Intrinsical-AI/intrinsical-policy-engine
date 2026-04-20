@@ -928,7 +928,7 @@ def _apply_auxiliary_blocks(ctx: dict[str, Any], defaults: dict[str, Any]) -> No
     ctx.setdefault("disclaimer_version", defaults.get("disclaimer_version", "1.1"))
 
 
-def build_artifact_context(  # noqa: C901
+def build_artifact_context(
     plan: dict[str, Any],
     *,
     strict: bool = True,

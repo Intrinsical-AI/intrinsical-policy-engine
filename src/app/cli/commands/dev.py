@@ -311,7 +311,7 @@ def _handle_concat(args: Namespace) -> int:
     # Build argv for the script
     argv = []
     if args.groups != ["all"]:
-        argv.extend(["--groups"] + args.groups)
+        argv.extend(["--groups", *args.groups])
     if args.preset:
         argv.extend(["--preset", args.preset])
     if args.base_dir != ".":
@@ -632,11 +632,11 @@ def _handle_profile(args: Namespace) -> int:
 
     # Prepend the public CLI if not present.
     if command_parts[0] not in ("ipe", "uv"):
-        command_parts = ["ipe"] + command_parts
+        command_parts = ["ipe", *command_parts]
 
     # If it's a CLI invocation, prepend 'uv run'
     if command_parts[0] == "ipe":
-        command_parts = ["uv", "run"] + command_parts
+        command_parts = ["uv", "run", *command_parts]
 
     try:
         profile_command(

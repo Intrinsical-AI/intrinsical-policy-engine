@@ -530,7 +530,7 @@ class ExportOrchestrator:
 
         try:
             recomputed = compute_plan_hash(dict(plan))
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             self._log_event(
                 "export.plan_hash_consistency.error",
                 {"error": str(exc)},
@@ -862,7 +862,7 @@ class ExportOrchestrator:
             adapter = YamlContractsAdapter()
             current_bundle = adapter.load(str(self.config.contracts_dir))
             current_hash = compute_bundle_hash(current_bundle)
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
             if self.config.strict:
                 raise RuntimeError(
                     f"Failed to load contracts for coherence check in strict mode: {exc}"

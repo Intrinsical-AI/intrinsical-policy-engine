@@ -12,7 +12,7 @@ import hashlib
 from enum import Enum
 from typing import Any
 
-__all__ = ["SanitizationMode", "sanitize_value", "sanitize_payload"]
+__all__ = ["SanitizationMode", "sanitize_payload", "sanitize_value"]
 
 
 class SanitizationMode(str, Enum):

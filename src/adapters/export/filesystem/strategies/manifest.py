@@ -264,9 +264,13 @@ class ManifestStrategy(ExportStrategy):
         # This allows strict mode validation without requiring GPG infrastructure
         import os
 
-        skip_gpg_env = os.getenv("IPE_SKIP_GPG_SIGNING") or os.getenv(
-            "LEXOPS_SKIP_GPG_SIGNING",
-        ) or ""
+        skip_gpg_env = (
+            os.getenv("IPE_SKIP_GPG_SIGNING")
+            or os.getenv(
+                "LEXOPS_SKIP_GPG_SIGNING",
+            )
+            or ""
+        )
         skip_gpg = skip_gpg_env.lower() in {"1", "true", "yes"}
         logger: StructuredLogger | None = getattr(exporter, "_logger", None)
 

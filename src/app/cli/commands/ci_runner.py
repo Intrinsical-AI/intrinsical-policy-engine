@@ -107,9 +107,7 @@ class CIRunner:
                     {
                         "severity": "error",
                         "code": "CI-002",
-                        "msg": (
-                            f"Missing evidence for required action '{aid}' in Review system."
-                        ),
+                        "msg": (f"Missing evidence for required action '{aid}' in Review system."),
                     }
                 )
 

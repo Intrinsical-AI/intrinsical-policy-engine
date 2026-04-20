@@ -4,4 +4,4 @@
 
 from src.app.factories.graph_factory import GraphFactory, build_compliance_graph
 
-__all__ = ["build_compliance_graph", "GraphFactory"]
+__all__ = ["GraphFactory", "build_compliance_graph"]

@@ -630,7 +630,7 @@ def create_app(contracts_dir: Path, answers_path: str | None = None) -> Flask:  
                     html = (
                         "<div id='run-status' class='card' data-status='error'>"
                         "<div class='muted'>Lint failed</div>"
-                        f"<pre style='white-space: pre-wrap; font-size: 12px;'>{str(e)}</pre></div>"
+                        f"<pre style='white-space: pre-wrap; font-size: 12px;'>{e!s}</pre></div>"
                     )
                     return html
 
@@ -694,7 +694,7 @@ def create_app(contracts_dir: Path, answers_path: str | None = None) -> Flask:  
                     html = (
                         "<div id='run-status' class='card' data-status='error'>"
                         "<div class='muted'>Export failed</div>"
-                        f"<pre style='white-space: pre-wrap; font-size: 12px;'>{str(e)}</pre></div>"
+                        f"<pre style='white-space: pre-wrap; font-size: 12px;'>{e!s}</pre></div>"
                     )
                     return html
 
@@ -794,7 +794,7 @@ def create_app(contracts_dir: Path, answers_path: str | None = None) -> Flask:  
             return (
                 "<div id='run-status' class='card' data-status='error'>"
                 "<div class='muted'>Unexpected error</div>"
-                f"<pre style='white-space: pre-wrap; font-size: 12px;'>{str(e)}</pre></div>"
+                f"<pre style='white-space: pre-wrap; font-size: 12px;'>{e!s}</pre></div>"
             )
 
     @app.get("/api/preview")

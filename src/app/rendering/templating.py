@@ -57,7 +57,7 @@ def fill(ctx: dict[str, Any], key: str, default: str | None = None) -> str:
     )
 
     # Return answer if exists and is not empty
-    if key in answers and answers[key]:
+    if answers.get(key):
         return str(answers[key])
 
     # Red Team Fix (Fase 0.1): Check if default is itself a placeholder pattern

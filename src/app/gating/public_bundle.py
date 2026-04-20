@@ -148,7 +148,7 @@ def gate_g3_integrity(export_root: Path) -> list[str]:
                 continue
             sha, fname = parts
             expected[fname.strip()] = sha.strip()
-    except (OSError, UnicodeDecodeError, ValueError) as exc:  # noqa: BLE001
+    except (OSError, UnicodeDecodeError, ValueError) as exc:
         return [f"CRITICAL: Failed to parse CHECKSUMS.sha256: {exc}"]
 
     # Verify files on disk match expected
@@ -190,7 +190,7 @@ def gate_g3_integrity(export_root: Path) -> list[str]:
 
 def _resolve_export_root(target_dir: Path) -> Path | None:
     """Infer export root by walking parents for CHECKSUMS.sha256."""
-    for parent in [target_dir] + list(target_dir.parents):
+    for parent in [target_dir, *target_dir.parents]:
         if (parent / "CHECKSUMS.sha256").exists():
             return parent
     return None

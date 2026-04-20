@@ -88,10 +88,10 @@ class YamlContractsAdapter(ContractsPort):
 
         env = (os.getenv("IPE_ENV") or os.getenv("LEXOPS_ENV") or "prod").lower()
         strict_env = (
-            os.getenv("IPE_STRICT_CONTRACTS")
-            or os.getenv("LEXOPS_STRICT_CONTRACTS")
-            or ""
-        ).strip().lower()
+            (os.getenv("IPE_STRICT_CONTRACTS") or os.getenv("LEXOPS_STRICT_CONTRACTS") or "")
+            .strip()
+            .lower()
+        )
 
         if strict_env in ("0", "false", "no"):
             return False
@@ -104,9 +104,13 @@ class YamlContractsAdapter(ContractsPort):
     @staticmethod
     def _should_tolerate_questions_errors() -> bool:
         """Check if questions.yml errors should be tolerated."""
-        tolerate = os.getenv("IPE_TOLERATE_QUESTIONS_ERRORS") or os.getenv(
-            "LEXOPS_TOLERATE_QUESTIONS_ERRORS",
-        ) or ""
+        tolerate = (
+            os.getenv("IPE_TOLERATE_QUESTIONS_ERRORS")
+            or os.getenv(
+                "LEXOPS_TOLERATE_QUESTIONS_ERRORS",
+            )
+            or ""
+        )
         return tolerate.lower() in (
             "1",
             "true",

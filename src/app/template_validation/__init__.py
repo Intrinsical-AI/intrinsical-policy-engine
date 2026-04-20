@@ -9,7 +9,7 @@ from src.app.template_validation.template_validator import (
 )
 
 __all__ = [
-    "TemplateValidator",
     "TemplateValidationResult",
+    "TemplateValidator",
     "validate_templates",
 ]

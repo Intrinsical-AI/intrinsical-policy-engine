@@ -154,19 +154,19 @@ class LinearExportConfig(ExportConfig):
         labelIds_by_label: Mapping of label names to label IDs
     """
 
-    teamId: str | None = Field(  # noqa: N815
+    teamId: str | None = Field(
         default=None,
         description="Linear team ID",
     )
-    projectId: str | None = Field(  # noqa: N815
+    projectId: str | None = Field(
         default=None,
         description="Linear project ID",
     )
-    labelIds: list[str] = Field(  # noqa: N815
+    labelIds: list[str] = Field(
         default_factory=list,
         description="Label IDs to apply to all issues",
     )
-    labelIds_by_label: dict[str, str] = Field(  # noqa: N815
+    labelIds_by_label: dict[str, str] = Field(
         default_factory=dict,
         description="Mapping of label names to label IDs",
     )

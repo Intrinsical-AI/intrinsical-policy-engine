@@ -142,9 +142,7 @@ def run_assessment(
         Includes audit metadata (answers_path, hashes) if answers file provided.
     """
     # Compute templates hash
-    templates_dir, templates_hash = _resolve_templates_and_hash(
-        contracts_dir, getattr(args, "templates", None)
-    )
+    _, templates_hash = _resolve_templates_and_hash(contracts_dir, getattr(args, "templates", None))
     base_date = _parse_base_date(getattr(args, "base_date", None))
 
     plan = assess_from_bundle(

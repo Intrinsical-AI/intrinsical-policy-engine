@@ -8,7 +8,7 @@ from src.adapters.logging.protocol import StructuredLogger
 
 __all__ = [
     "FsLogger",
-    "StructuredLogger",
     "StdlibLoggerAdapter",
+    "StructuredLogger",
     "adapt_logger",
 ]
