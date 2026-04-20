@@ -70,9 +70,7 @@ def _defined_ids(root: Path) -> tuple[set[str], set[str], set[str], set[str]]:
 
     flags = {str(item.get("id")) for item in flags_doc.get("registry", []) if item.get("id")}
     actions = {str(item.get("id")) for item in actions_doc.get("actions", []) if item.get("id")}
-    articles = {
-        str(item.get("id")) for item in articles_doc.get("taxonomy", []) if item.get("id")
-    }
+    articles = {str(item.get("id")) for item in articles_doc.get("taxonomy", []) if item.get("id")}
     evidence_paths: set[str] = set()
     for entries in evidence_doc.values():
         if not isinstance(entries, list):

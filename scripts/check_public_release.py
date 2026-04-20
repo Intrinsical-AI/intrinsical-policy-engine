@@ -130,7 +130,9 @@ def _candidate_files() -> list[Path]:
 
 def _is_allowed_path(rel: Path) -> bool:
     rel_s = rel.as_posix()
-    return rel_s in ALLOWED_ROOT_FILES or any(rel_s.startswith(prefix) for prefix in ALLOWED_PREFIXES)
+    return rel_s in ALLOWED_ROOT_FILES or any(
+        rel_s.startswith(prefix) for prefix in ALLOWED_PREFIXES
+    )
 
 
 def _is_text_file(path: Path) -> bool:
