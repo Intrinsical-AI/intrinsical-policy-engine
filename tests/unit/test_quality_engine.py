@@ -6,8 +6,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from src.adapters.quality.engine import QualityEngine
-from src.app.use_cases.seal import collect_seal_input
+from intrinsical_policy_engine.adapters.quality.engine import QualityEngine
+from intrinsical_policy_engine.app.use_cases.seal import collect_seal_input
 
 
 def _write_json(path: Path, payload: object) -> None:

@@ -8,8 +8,17 @@ certification authority.
 - Treat input answers as potentially sensitive.
 - Do not include raw confidential answers in outputs unless you explicitly
   intend to retain them.
+- Load only framework packs and templates controlled by a trusted authoring
+  process. Pack paths and symbolic links are constrained, but Jinja templates
+  are not an isolation boundary for hostile code or content.
 - Review generated artifacts before sharing them.
 - Use sealing as an integrity check, not as a guarantee of truth.
+- Export output must not equal, contain, or sit inside its framework pack. A
+  reused output tree containing symbolic links is rejected before logs,
+  assessment traces, summaries, or artifacts are written.
+- A strict or release workflow must treat an absent GPG signature as a failed
+  signing operation. Unsigned output is supported only through an explicit
+  development/CI policy and is not release evidence.
 
 ## Limitations
 

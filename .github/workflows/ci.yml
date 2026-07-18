@@ -17,11 +17,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
@@ -42,14 +46,67 @@ jobs:
           IPE_SKIP_GPG_SIGNING: "1"
         run: |
           uv run ipe export --contracts frameworks/starter --answers demos/starter/basic/answers.json --out out/starter --strict --strict-templates
-          uv run ipe seal --export-dir out/starter
+          uv run ipe seal --export-dir out/starter --no-sign
       - name: Tests
-        run: uv run pytest tests/unit tests/smoke --tb=short --cov=src --cov-report=term-missing --cov-fail-under=19
-      - name: Build distribution artifacts
-        run: uv build
-      - name: Run installed CLI from an isolated environment
+        run: uv run pytest tests/unit tests/smoke --tb=short --cov=intrinsical_policy_engine --cov-report=term-missing --cov-fail-under=19
+      - name: Build sdist and wheel from sdist
         shell: bash
         run: |
-          wheel="$(find dist -maxdepth 1 -name '*.whl' -print -quit)"
-          test -n "$wheel"
-          uv run --isolated --no-project --with "$wheel" ipe --version
+          uv build --sdist --clear
+          mapfile -t sdists < <(find dist -maxdepth 1 -type f -name '*.tar.gz' -print)
+          test "${#sdists[@]}" -eq 1
+          uv build --wheel "${sdists[0]}" --out-dir dist
+      - name: Resolve exact distribution artifacts
+        shell: bash
+        run: |
+          mapfile -t wheels < <(find dist -maxdepth 1 -type f -name '*.whl' -print)
+          mapfile -t sdists < <(find dist -maxdepth 1 -type f -name '*.tar.gz' -print)
+          test "${#wheels[@]}" -eq 1
+          test "${#sdists[@]}" -eq 1
+          echo "IPE_3_0_WHEEL=$PWD/${wheels[0]}" >> "$GITHUB_ENV"
+          echo "IPE_3_0_SDIST=$PWD/${sdists[0]}" >> "$GITHUB_ENV"
+      - name: Validate exact wheel and sdist contents
+        run: uv run pytest -q tests/unit/test_python_package_contract.py
+      - name: Run installed workflow outside the checkout
+        shell: bash
+        run: |
+          repository="$PWD"
+          scratch="$(mktemp -d)"
+          cd "$scratch"
+          uv run --isolated --no-project --with "$IPE_3_0_WHEEL" ipe --version
+          uv run --isolated --no-project --with "$IPE_3_0_WHEEL" ipe lint \
+            --contracts "$repository/frameworks/starter" --strict
+          IPE_SKIP_GPG_SIGNING=1 uv run --isolated --no-project --with "$IPE_3_0_WHEEL" \
+            ipe export \
+            --contracts "$repository/frameworks/starter" \
+            --answers "$repository/demos/starter/basic/answers.json" \
+            --out "$scratch/out" \
+            --strict \
+            --strict-templates
+          uv run --isolated --no-project --with "$IPE_3_0_WHEEL" ipe seal \
+            --export-dir "$scratch/out" --no-sign
+          uv run --isolated --no-project --with "$IPE_3_0_WHEEL" \
+            python - "$scratch/out" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          metadata = Path(sys.argv[1]) / "_metadata"
+          summary = json.loads((metadata / "summary.json").read_text(encoding="utf-8"))
+          assert summary["artifact_schema_version"] == "3.0.0a1"
+          assert summary["pack"]["id"] == "starter"
+          assert summary["pack"]["manifest_timestamp"] == "2026-04-19T00:00:00Z"
+          assert not (metadata / "wizard_answers.json").exists()
+          PY
+      - name: Type-check a wheel consumer
+        shell: bash
+        run: |
+          scratch="$(mktemp -d)"
+          cat > "$scratch/consumer.py" <<'PY'
+          from intrinsical_policy_engine.api import Engine, EngineConfig
+
+          engine: Engine = Engine(EngineConfig())
+          PY
+          cd "$scratch"
+          uv run --isolated --no-project --with "$IPE_3_0_WHEEL" --with mypy \
+            mypy --strict consumer.py
