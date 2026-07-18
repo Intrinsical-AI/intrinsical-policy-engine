@@ -65,6 +65,7 @@ demos, no generated real-world outputs, and no private repository history.
 
 ## Documentation
 
+- [CHANGELOG.md](CHANGELOG.md)
 - [PROVENANCE.md](PROVENANCE.md)
 - [BOUNDARIES.md](BOUNDARIES.md)
 - [docs/WRITE_YOUR_FIRST_PACK.md](docs/WRITE_YOUR_FIRST_PACK.md)
@@ -72,6 +73,7 @@ demos, no generated real-world outputs, and no private repository history.
 - [docs/AUTHORING_ERRORS.md](docs/AUTHORING_ERRORS.md)
 - [docs/POLICY_SCHEMA.md](docs/POLICY_SCHEMA.md)
 - [docs/SECURITY_AND_LIMITATIONS.md](docs/SECURITY_AND_LIMITATIONS.md)
+- [docs/ENVIRONMENT_COMPATIBILITY.md](docs/ENVIRONMENT_COMPATIBILITY.md)
 
 ## License
 

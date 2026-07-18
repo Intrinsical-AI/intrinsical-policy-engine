@@ -34,10 +34,11 @@ def main() -> int:
         epilog="""
 Examples:
   ipe lint --contracts frameworks/starter
-  ipe export --contracts frameworks/starter --answers demos/example/answers.json
+  ipe export --contracts frameworks/starter \\
+    --answers demos/starter/basic/answers.json --out out/starter
   ipe validate all --contracts frameworks/starter
   ipe ops pdf --in out/raw --out out/pdf
-  ipe seal --export-dir out/demos/example/raw
+  ipe seal --export-dir out/starter
 
 For more information, see: https://github.com/Intrinsical-AI/intrinsical-policy-engine
 """,

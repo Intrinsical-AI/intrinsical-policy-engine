@@ -227,7 +227,7 @@ wheels = [
 
 [[package]]
 name = "intrinsical-policy-engine"
-version = "2.0.0+public.0"
+version = "2.0.1+public.0"
 source = { editable = "." }
 dependencies = [
     { name = "jinja2" },

@@ -81,11 +81,29 @@ class QualityEngine:
             data = json.loads(read_text_safe(str(path)) or "")
         except (OSError, UnicodeDecodeError, json.JSONDecodeError, ValueError):
             return False, "json_parse_error"
+        if path.name == "evidence_quality.json":
+            return self._diagnose_evidence_quality_data(data)
         if isinstance(data, dict):
             nz = [k for k, v in data.items() if v not in (None, "", [], {})]
             ok = len(nz) >= self.cfg.json_min_keys
             return ok, ("ok" if ok else "json_insufficient_keys")
         return False, "json_insufficient_keys"
+
+    @staticmethod
+    def _diagnose_evidence_quality_data(data: object) -> tuple[bool, Reason]:
+        """Validate the generated evidence-quality report's stable shape.
+
+        Empty maps are meaningful for a starter pack with no missing evidence,
+        so this artifact cannot use the generic non-empty-key heuristic.
+        """
+        if not isinstance(data, dict):
+            return False, "json_insufficient_keys"
+        required_maps = ("quality_by_file", "missing_reasons_by_article")
+        if not all(key in data for key in required_maps):
+            return False, "json_insufficient_keys"
+        if not all(isinstance(data[key], dict) for key in required_maps):
+            return False, "json_insufficient_keys"
+        return True, "ok"
 
     def _diagnose_yaml(self, path: Path) -> tuple[bool, Reason]:
         """Diagnose YAML file validity."""

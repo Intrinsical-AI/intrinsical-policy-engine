@@ -703,7 +703,7 @@ def eval_ast(ast: ASTNode, flags: Set[Flag]) -> bool:
         # unrelated flags such as "other.flag".
         return any(flag == prefix or flag.startswith(prefix + ".") for flag in flags)
 
-    raise RuleParseError(expression=str(ast), reason=f"Unknown AST operator: {op}")
+    raise RuleEvaluationError(f"Unknown AST operator: {op}")
 
 
 def select_actions(flags: set[Flag], actions: list[dict[str, Any] | Any]) -> list[str]:

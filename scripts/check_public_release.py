@@ -11,13 +11,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 ALLOWED_ROOT_FILES = {
+    ".gitattributes",
     ".gitignore",
     ".pre-commit-config.yaml",
     "BOUNDARIES.md",
+    "CHANGELOG.md",
     "LICENSE",
     "NOTICE",
     "PROVENANCE.md",
     "README.md",
+    "SECURITY.md",
     "pyproject.toml",
     "uv.lock",
 }
