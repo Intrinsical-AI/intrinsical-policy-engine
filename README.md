@@ -27,6 +27,14 @@ integrity only; they do not prove legal truth, operational correctness, or
 regulatory acceptance. Use this software at your own risk under the MPL-2.0
 no-warranty terms.
 
+## Development Status
+
+This branch declares `3.0.0a1` while the 3.0 packaging and embedding contracts
+are being validated. It is an unreleased, local alpha: the version in this
+checkout or in a wheel built from it is not evidence of a published release or
+of remote CI status. See [CHANGELOG.md](CHANGELOG.md) for released 2.x versions
+and the current unreleased changes.
+
 ## Quickstart
 
 ```bash
@@ -41,11 +49,56 @@ IPE_SKIP_GPG_SIGNING=1 uv run ipe export \
   --strict \
   --strict-templates
 
-uv run ipe seal --export-dir out/starter
+uv run ipe seal --export-dir out/starter --no-sign
 ```
 
 The starter export should produce metadata under `out/starter/_metadata/` and a
-sealed package manifest/checksum set.
+sealed package manifest/checksum set. The quickstart opts out of GPG signing
+explicitly; omit `--no-sign` for signed delivery and ensure a secret key is
+available.
+
+### Embedding API (3.0 alpha)
+
+Products embedding the engine should use the supported facade rather than
+importing application or domain modules directly:
+
+```python
+from pathlib import Path
+
+from intrinsical_policy_engine.api import (
+    AssessmentRequest,
+    Engine,
+    ExecutionPolicy,
+)
+
+result = Engine().assess(
+    AssessmentRequest(
+        pack=Path("frameworks/starter"),
+        answers={"uses_automated_decisions": True},
+        policy=ExecutionPolicy(strict=True),
+    )
+)
+if not result.success:
+    raise RuntimeError([diagnostic.code for diagnostic in result.diagnostics])
+```
+
+The 3.0 alpha facade covers pack validation, assessment, export, sealing, typed
+diagnostics, and composable gate reports. See
+[docs/MIGRATION_3.md](docs/MIGRATION_3.md) for the compatibility and packaging
+contract.
+
+An embedding product may pass an optional `ProductIdentity` on
+`ExportRequest`; this records the product name and version in export provenance
+without changing the engine or pack identity. Raw answers are sensitive and
+are not persisted by default. Persisting them requires the explicit
+`include_raw_answers=True` API setting or CLI `--include-raw-answers` flag.
+
+`release=True` is also an explicit policy boundary: a release export requires
+`ExecutionPolicy(strict=True)` and rejects incomplete-coverage and unsigned
+output bypasses before creating its output directory.
+
+The 3.0 wheel includes a PEP 561 `py.typed` marker, so type checkers can consume
+the annotations exposed by `intrinsical_policy_engine` from an installed wheel.
 
 ## What Is Included
 
@@ -74,6 +127,7 @@ demos, no generated real-world outputs, and no private repository history.
 - [docs/POLICY_SCHEMA.md](docs/POLICY_SCHEMA.md)
 - [docs/SECURITY_AND_LIMITATIONS.md](docs/SECURITY_AND_LIMITATIONS.md)
 - [docs/ENVIRONMENT_COMPATIBILITY.md](docs/ENVIRONMENT_COMPATIBILITY.md)
+- [docs/MIGRATION_3.md](docs/MIGRATION_3.md) — 3.0 alpha API and packaging contract
 
 ## License
 

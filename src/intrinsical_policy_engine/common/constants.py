@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright 2024-2026 Pablo P.C.
+"""Common constants used across the application."""
+
+from typing import Final
+
+DEFAULT_ENCODING: Final[str] = "utf-8"
+CANONICAL_ENGINE_NAME: Final[str] = "intrinsical-policy-engine"
+CANONICAL_ENGINE_VERSION: Final[str] = "3.0.0a1"
+CANONICAL_ARTIFACT_SCHEMA_VERSION: Final[str] = "3.0.0a1"
+UNKNOWN_ENGINE_COMMIT: Final[str] = "unknown"

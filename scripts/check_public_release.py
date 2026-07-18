@@ -17,6 +17,7 @@ ALLOWED_ROOT_FILES = {
     "BOUNDARIES.md",
     "CHANGELOG.md",
     "LICENSE",
+    "MANIFEST.in",
     "NOTICE",
     "PROVENANCE.md",
     "README.md",
@@ -80,6 +81,7 @@ TEXT_SUFFIXES = {
     "",
     ".cfg",
     ".csv",
+    ".in",
     ".ini",
     ".j2",
     ".json",
@@ -88,22 +90,34 @@ TEXT_SUFFIXES = {
     ".py",
     ".toml",
     ".txt",
+    ".typed",
     ".yml",
     ".yaml",
 }
+DISALLOWED_TEXT_CONTROL_BYTES = frozenset((*range(0, 9), 11, *range(14, 32), 127))
 
 
 def _git_files() -> list[Path]:
     if not (ROOT / ".git").exists():
         return []
     proc = subprocess.run(
-        ["git", "ls-files"],
+        ["git", "ls-files", "--cached", "--others", "--exclude-standard"],
         cwd=ROOT,
         text=True,
         capture_output=True,
         check=True,
     )
-    return [Path(line) for line in proc.stdout.splitlines() if line.strip()]
+    files: list[Path] = []
+    for line in proc.stdout.splitlines():
+        if not line.strip():
+            continue
+        rel = Path(line)
+        candidate = ROOT / rel
+        # ``exists`` is false for dangling symlinks, which must still be scanned
+        # and rejected. Deleted-but-still-indexed paths, however, are ignored.
+        if candidate.exists() or candidate.is_symlink():
+            files.append(rel)
+    return files
 
 
 def _walk_files() -> list[Path]:
@@ -122,7 +136,7 @@ def _walk_files() -> list[Path]:
         rel = path.relative_to(ROOT)
         if any(part in blocked_dirs or part == "__pycache__" for part in rel.parts):
             continue
-        if path.is_file():
+        if path.is_file() or path.is_symlink():
             files.append(rel)
     return files
 
@@ -148,6 +162,10 @@ def scan_public_tree() -> list[str]:
         rel_s = rel.as_posix()
         abs_path = ROOT / rel
 
+        if abs_path.is_symlink():
+            violations.append(f"blocked symlink: {rel_s}")
+            continue
+
         if not _is_allowed_path(rel):
             violations.append(f"blocked path: {rel_s}")
             continue
@@ -157,13 +175,24 @@ def scan_public_tree() -> list[str]:
             continue
 
         if not _is_text_file(rel):
+            violations.append(f"unsupported file type: {rel_s}")
             continue
 
         if rel_s == "scripts/check_public_release.py":
             continue
 
         try:
-            text = abs_path.read_text(encoding="utf-8")
+            payload = abs_path.read_bytes()
+        except OSError as exc:
+            violations.append(f"unreadable file: {rel_s}: {exc.__class__.__name__}")
+            continue
+
+        if any(byte in DISALLOWED_TEXT_CONTROL_BYTES for byte in payload):
+            violations.append(f"binary content in text file: {rel_s}")
+            continue
+
+        try:
+            text = payload.decode("utf-8")
         except UnicodeDecodeError:
             violations.append(f"non-utf8 text file: {rel_s}")
             continue
