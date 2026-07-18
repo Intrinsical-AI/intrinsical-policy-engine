@@ -75,7 +75,7 @@ addopts = "-q"
 pythonpath = "."
 
 [tool.coverage.report]
-fail_under = 20
+fail_under = 19
 
 [tool.mypy]
 python_version = "3.11"

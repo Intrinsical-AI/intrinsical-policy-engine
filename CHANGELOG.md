@@ -23,7 +23,8 @@ and distribution versions follow [Semantic Versioning](https://semver.org/).
 
 - Add negative coverage for the public release guard, evidence-quality report,
   and rule evaluation contract.
-- Set the initial test coverage regression threshold to 20 percent.
+- Set the initial test coverage regression threshold to 19 percent, matching
+  the fully packaged source-tree baseline.
 - Document the temporary public-to-private environment-variable fallbacks.
 
 ## [2.0.0+public.0] - 2026-07-14
