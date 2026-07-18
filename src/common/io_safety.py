@@ -5,11 +5,59 @@ I/O safety utilities for atomic writes and concurrency control.
 """
 
 import contextlib
+import errno
 import os
+import random
 import tempfile
 import time
 from collections.abc import Generator
 from pathlib import Path
+from typing import Any, BinaryIO
+
+_IS_WINDOWS = os.name == "nt"
+_LOCK_BUSY_ERRNOS = {errno.EACCES, errno.EAGAIN, errno.EWOULDBLOCK}
+
+
+def _prepare_lock_file(file: BinaryIO) -> None:
+    """Ensure the byte-range used by the Windows lock exists."""
+    if not _IS_WINDOWS:
+        return
+
+    file.seek(0, os.SEEK_END)
+    if file.tell() == 0:
+        file.write(b"\0")
+        file.flush()
+    file.seek(0)
+
+
+def _try_lock(file: BinaryIO) -> None:
+    """Try once to acquire a platform-native, non-blocking exclusive lock."""
+    if _IS_WINDOWS:
+        import msvcrt
+
+        file.seek(0)
+        windows_api: Any = msvcrt
+        windows_api.locking(file.fileno(), windows_api.LK_NBLCK, 1)
+        return
+
+    import fcntl
+
+    fcntl.flock(file, fcntl.LOCK_EX | fcntl.LOCK_NB)
+
+
+def _unlock(file: BinaryIO) -> None:
+    """Release a lock acquired by :func:`_try_lock`."""
+    if _IS_WINDOWS:
+        import msvcrt
+
+        file.seek(0)
+        windows_api: Any = msvcrt
+        windows_api.locking(file.fileno(), windows_api.LK_UNLCK, 1)
+        return
+
+    import fcntl
+
+    fcntl.flock(file, fcntl.LOCK_UN)
 
 
 def atomic_write_text(path: Path, text: str, encoding: str = "utf-8") -> None:
@@ -45,7 +93,7 @@ def atomic_write_text(path: Path, text: str, encoding: str = "utf-8") -> None:
 def acquire_lock(
     lockfile: Path, timeout: float = 0.0, poll_ms: int = 100
 ) -> Generator[None, None, None]:
-    """Acquire an exclusive lock using fcntl.flock (Linux/Unix).
+    """Acquire a platform-native exclusive filesystem lock.
 
     PROPERTIES:
     - Exclusive: Only one process holds it.
@@ -64,49 +112,44 @@ def acquire_lock(
     Raises:
         BlockingIOError: If lock cannot be acquired within timeout.
     """
-    import errno
-    import fcntl
-    import random
-
-    start_time = time.time()
+    start_time = time.monotonic()
 
     # Ensure directory exists
     lockfile.parent.mkdir(parents=True, exist_ok=True)
 
-    # 1. Open the file (create if missing)
-    # We maintain the file handle open while holding the lock
-    with open(lockfile, "w", encoding="utf-8") as f:
+    # Keep the same file handle open while holding the lock. Append mode avoids
+    # truncating a fencing token written by the process that currently owns it.
+    with open(lockfile, "a+b") as f:
+        _prepare_lock_file(f)
+        acquired = False
         try:
             while True:
                 try:
-                    # 2. Try to acquire exclusive, non-blocking lock
-                    fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
-
-                    # 3. Write fencing token (for debug/human visibility only)
-                    with contextlib.suppress(OSError):
-                        f.seek(0)
-                        f.truncate()
-                        f.write(f"pid={os.getpid()}\ntimestamp={time.time()}\n")
-                        f.flush()
-
-                    yield
-                    return  # Successfully yielded and finished
-
+                    _try_lock(f)
                 except OSError as e:
-                    # EWOULDBLOCK / EAGAIN means locked by another process
-                    if e.errno != errno.EWOULDBLOCK and e.errno != errno.EAGAIN:
+                    if e.errno not in _LOCK_BUSY_ERRNOS:
                         raise
 
-                    # Check timeout
-                    if timeout <= 0 or (time.time() - start_time) >= timeout:
+                    if timeout <= 0 or (time.monotonic() - start_time) >= timeout:
                         raise BlockingIOError(f"Could not acquire lock: {lockfile}") from e
 
-                    # Jittered backoff (poll_ms +/- 20%)
                     jitter = (random.random() - 0.5) * 0.4 * (poll_ms / 1000.0)
-                    time.sleep((poll_ms / 1000.0) + jitter)
-        finally:
-            # Unlock and close behavior:
-            # flock is removed when fd is closed.
+                    time.sleep(max(0.0, (poll_ms / 1000.0) + jitter))
+                else:
+                    acquired = True
+                    break
+
+            # Fencing token is for diagnostics only; lock ownership is enforced
+            # by the operating system.
             with contextlib.suppress(OSError):
-                # Explicit unlock (good practice though close() does it)
-                fcntl.flock(f, fcntl.LOCK_UN)
+                f.seek(0)
+                f.truncate()
+                token = f"pid={os.getpid()}\ntimestamp={time.time()}\n".encode()
+                f.write(token)
+                f.flush()
+
+            yield
+        finally:
+            if acquired:
+                with contextlib.suppress(OSError):
+                    _unlock(f)

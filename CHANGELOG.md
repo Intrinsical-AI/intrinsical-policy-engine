@@ -18,6 +18,8 @@ and distribution versions follow [Semantic Versioning](https://semver.org/).
   errors.
 - Package the CLI and shared implicit subpackages so the built wheel runs
   outside the source tree.
+- Use native non-blocking filesystem locks on both Unix and Windows when
+  persisting plans.
 
 ### Changed
 
