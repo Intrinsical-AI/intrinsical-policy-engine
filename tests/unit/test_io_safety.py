@@ -13,8 +13,9 @@ def test_acquire_lock_writes_fencing_token(tmp_path):
     lockfile = tmp_path / "state.lock"
 
     with io_safety.acquire_lock(lockfile):
-        token = lockfile.read_text(encoding="utf-8")
+        pass
 
+    token = lockfile.read_text(encoding="utf-8")
     assert "pid=" in token
     assert "timestamp=" in token
 
