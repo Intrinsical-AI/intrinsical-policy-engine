@@ -44,4 +44,12 @@ jobs:
           uv run ipe export --contracts frameworks/starter --answers demos/starter/basic/answers.json --out out/starter --strict --strict-templates
           uv run ipe seal --export-dir out/starter
       - name: Tests
-        run: uv run pytest tests/unit tests/smoke --tb=short --cov=src --cov-report=term-missing
+        run: uv run pytest tests/unit tests/smoke --tb=short --cov=src --cov-report=term-missing --cov-fail-under=19
+      - name: Build distribution artifacts
+        run: uv build
+      - name: Run installed CLI from an isolated environment
+        shell: bash
+        run: |
+          wheel="$(find dist -maxdepth 1 -name '*.whl' -print -quit)"
+          test -n "$wheel"
+          uv run --isolated --no-project --with "$wheel" ipe --version

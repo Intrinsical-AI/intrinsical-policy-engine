@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "intrinsical-policy-engine"
-version = "2.0.0+public.0"
+version = "2.0.1+public.0"
 description = "Framework-neutral policy/rules assessment engine and export toolkit"
 readme = "README.md"
 authors = [{ name = "Pablo P.C." }]
@@ -73,6 +73,9 @@ max-complexity = 15
 [tool.pytest.ini_options]
 addopts = "-q"
 pythonpath = "."
+
+[tool.coverage.report]
+fail_under = 19
 
 [tool.mypy]
 python_version = "3.11"
