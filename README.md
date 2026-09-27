@@ -66,8 +66,7 @@ demos, no generated real-world outputs, and no private repository history.
 ## Documentation
 
 - [CHANGELOG.md](CHANGELOG.md)
-- [PROVENANCE.md](PROVENANCE.md)
-- [BOUNDARIES.md](BOUNDARIES.md)
+- [Boundaries and provenance](BOUNDARIES.md)
 - [docs/WRITE_YOUR_FIRST_PACK.md](docs/WRITE_YOUR_FIRST_PACK.md)
 - [docs/MINIMUM_AUTHORING_PATH.md](docs/MINIMUM_AUTHORING_PATH.md)
 - [docs/AUTHORING_ERRORS.md](docs/AUTHORING_ERRORS.md)
