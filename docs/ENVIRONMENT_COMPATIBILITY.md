@@ -17,7 +17,7 @@ the 3.0 configuration redesign.
 | `IPE_DEMO_MODE` | `LEXOPS_DEMO_MODE` | Export context builder | Marks generated context as demo output unless the plan supplies an explicit boolean. | Changes presentation metadata, not assessment rules. | Remove fallback; keep a typed public profile option if still required. |
 | `IPE_DEV_MODE` | `LEXOPS_DEV_MODE` | CLI command registration | Shows maintainer-only CLI commands in help. | Expands the visible maintenance surface. | Remove fallback; keep the public name only if dev commands remain. |
 | `IPE_OUT_DIR` | `LEXOPS_OUT_DIR` | Output path resolver | Supplies the default output directory when no CLI path is passed. | Controls a filesystem write target. | Remove fallback; validate the public path through central configuration. |
-| `IPE_SKIP_GPG_SIGNING` | `LEXOPS_SKIP_GPG_SIGNING` | Filesystem manifest strategy | Skips signing for CI or development exports. | Must never silently qualify an unsigned package as a published release. | Remove fallback and model unsigned CI output explicitly in the 3.0 gate report. |
+| `IPE_SKIP_GPG_SIGNING` | `LEXOPS_SKIP_GPG_SIGNING` | Export manifest and seal CLI boundaries | Skips signing for CI or development artifacts. | Must never silently qualify an unsigned package as a published release. | Remove fallback and model unsigned CI output explicitly in the 3.0 gate report. |
 
 ## 2.x policy
 

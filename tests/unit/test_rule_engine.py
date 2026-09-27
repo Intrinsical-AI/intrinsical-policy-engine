@@ -5,8 +5,8 @@ from __future__ import annotations
 
 import pytest
 
-from src.domain.exceptions import RuleEvaluationError
-from src.domain.services.rule_engine import eval_ast
+from intrinsical_policy_engine.domain.exceptions import RuleEvaluationError
+from intrinsical_policy_engine.domain.services.rule_engine import eval_ast
 
 
 def test_eval_ast_raises_evaluation_error_for_unknown_operator() -> None:

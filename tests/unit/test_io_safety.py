@@ -6,7 +6,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from src.common import io_safety
+from intrinsical_policy_engine.common import io_safety
 
 
 def test_acquire_lock_writes_fencing_token(tmp_path):

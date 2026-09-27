@@ -1,10 +1,11 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+# SPDX license expressions in ``project.license`` require PEP 639 support.
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "intrinsical-policy-engine"
-version = "2.0.1+public.0"
+version = "3.0.0a1"
 description = "Framework-neutral policy/rules assessment engine and export toolkit"
 readme = "README.md"
 authors = [{ name = "Pablo P.C." }]
@@ -16,11 +17,12 @@ dependencies = [
     "jsonschema==4.25.1",
     "pyyaml==6.0.3",
     "networkx>=3.0,<4.0",
-    "pydantic>=2.12.3",
+    "packaging>=24.0,<27.0",
+    "pydantic>=2.12.3,<3.0.0",
 ]
 
 [project.scripts]
-ipe = "src.app.cli.main:main"
+ipe = "intrinsical_policy_engine.app.cli.main:main"
 
 [project.optional-dependencies]
 dev = [
@@ -39,9 +41,12 @@ ui = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["src*", "scripts*"]
+where = ["src"]
+include = ["intrinsical_policy_engine*"]
 namespaces = false
+
+[tool.setuptools.package-data]
+intrinsical_policy_engine = ["py.typed"]
 
 [tool.ruff]
 line-length = 100
@@ -54,25 +59,25 @@ select = ["E", "F", "I", "UP", "BLE", "B", "C90", "SIM", "RUF"]
 max-complexity = 15
 
 [tool.ruff.lint.per-file-ignores]
-"src/adapters/contracts/yaml/contract_validators.py" = ["C901"]
+"src/intrinsical_policy_engine/adapters/contracts/yaml/contract_validators.py" = ["C901"]
 "tests/**/*" = ["E501"]
-"src/adapters/ui/server.py" = ["E501"]
+"src/intrinsical_policy_engine/adapters/ui/server.py" = ["E501"]
 "demos/**/*" = ["E501"]
-"src/app/constants.py" = ["E501"]
+"src/intrinsical_policy_engine/app/constants.py" = ["E501"]
 "scripts/check_public_release.py" = ["E501"]
 # RUF012: ClassVar annotations pending — tracked as debt
-"src/adapters/export/filesystem/strategies/manifest.py" = ["RUF012"]
-"src/adapters/quality/engine.py" = ["RUF012"]
-"src/adapters/quality/gates.py" = ["RUF012"]
-"src/app/cli/commands/_helpers.py" = ["RUF012"]
-"src/app/cli/commands/dev.py" = ["RUF012"]
-"src/app/gating/public_bundle.py" = ["RUF012"]
-"src/domain/graph/__init__.py" = ["RUF012"]
-"src/domain/services/coherence_checker.py" = ["RUF012"]
+"src/intrinsical_policy_engine/adapters/export/filesystem/strategies/manifest.py" = ["RUF012"]
+"src/intrinsical_policy_engine/adapters/quality/engine.py" = ["RUF012"]
+"src/intrinsical_policy_engine/adapters/quality/gates.py" = ["RUF012"]
+"src/intrinsical_policy_engine/app/cli/commands/_helpers.py" = ["RUF012"]
+"src/intrinsical_policy_engine/app/cli/commands/dev.py" = ["RUF012"]
+"src/intrinsical_policy_engine/app/gating/public_bundle.py" = ["RUF012"]
+"src/intrinsical_policy_engine/domain/graph/__init__.py" = ["RUF012"]
+"src/intrinsical_policy_engine/domain/services/coherence_checker.py" = ["RUF012"]
 
 [tool.pytest.ini_options]
 addopts = "-q"
-pythonpath = "."
+pythonpath = "src"
 
 [tool.coverage.report]
 fail_under = 19
