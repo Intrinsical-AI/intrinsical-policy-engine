@@ -73,3 +73,7 @@ def test_public_release_guard_walks_tree_without_git(
     monkeypatch.setattr(guard, "ROOT", tmp_path)
     assert guard._candidate_files() == [Path("README.md")]
     assert guard.scan_public_tree() == []
+
+
+def test_public_release_guard_rejects_retired_provenance_file() -> None:
+    assert not guard._is_allowed_path(Path("PROVENANCE.md"))

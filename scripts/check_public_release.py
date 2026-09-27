@@ -18,7 +18,6 @@ ALLOWED_ROOT_FILES = {
     "CHANGELOG.md",
     "LICENSE",
     "NOTICE",
-    "PROVENANCE.md",
     "README.md",
     "SECURITY.md",
     "pyproject.toml",
