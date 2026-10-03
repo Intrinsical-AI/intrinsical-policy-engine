@@ -81,3 +81,7 @@ The public core is licensed under MPL-2.0. See [LICENSE](LICENSE).
 ## Marks
 
 Intrinsical Policy Engine™ and Intrinsical-AI™ are names used by Pablo P.C. for this project and related software/services. Use of these names must not imply endorsement, sponsorship, certification, or commercial affiliation with Pablo P.C.
+
+Strict exports reject unreadable checksum inputs. Strict sealing with signing
+requires a successful GPG signature and does not create a ZIP on signing failure.
+Use the explicit unsigned option for intentionally unsigned seals.

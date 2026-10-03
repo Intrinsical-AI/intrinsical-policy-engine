@@ -9,7 +9,7 @@ import shutil
 from collections.abc import Iterable
 from pathlib import Path
 
-from src.app.config.artifact_names import LOGS_DIR
+from src.app.config.artifact_names import LOCKFILE_NAME, LOGS_DIR
 from src.app.config.constants import MAX_DIRECTORY_SEARCH_DEPTH
 
 
@@ -27,7 +27,7 @@ def find_repo_root(start: Path) -> Path | None:
     return None
 
 
-essential_names = {LOGS_DIR}
+essential_names = {LOGS_DIR, LOCKFILE_NAME}
 
 
 def clean_out_dir(out_dir: Path, keep: Iterable[Path] | None = None) -> None:
@@ -72,7 +72,7 @@ def clean_out_dir(out_dir: Path, keep: Iterable[Path] | None = None) -> None:
             continue
         if any(rp.is_relative_to(cr) for rp in keep_set):
             continue
-        if child.is_dir() and (child.name in essential_names):
+        if child.name in essential_names:
             continue
         if child.is_dir():
             shutil.rmtree(child, ignore_errors=True)
