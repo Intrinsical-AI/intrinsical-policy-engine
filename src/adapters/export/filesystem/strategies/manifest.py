@@ -237,7 +237,9 @@ class ManifestStrategy(ExportStrategy):
                     "sha256": hashlib.sha256(content).hexdigest(),
                     "size": str(len(content)),
                 }
-            except OSError:
+            except OSError as exc:
+                if context.strict:
+                    raise RuntimeError(f"STRICT MODE: cannot hash {rel_path}") from exc
                 file_hashes[rel_path] = {"sha256": "ERROR", "size": "0"}
 
         # Enforce SSOT + entrypoint invariants before writing checksums
@@ -286,6 +288,8 @@ class ManifestStrategy(ExportStrategy):
             elif signer.is_available():
                 if signer.has_secret_key():
                     sig_path = signer.sign_file(checksums_out)
+                    if sig_path is None and context.strict:
+                        raise RuntimeError("STRICT MODE: GPG signing failed.")
                 elif context.strict:
                     raise RuntimeError("STRICT MODE: GPG Secret Key required but not found.")
             elif context.strict:

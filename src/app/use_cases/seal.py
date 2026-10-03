@@ -172,12 +172,24 @@ def seal_and_package(
 
     if sign and result.success:
         signer = GpgSigner()
+        signature_path = None
         if signer.is_available() and signer.has_secret_key():
             signature_path = signer.sign_file(manifest_path)
-            if signature_path is None:
-                result.warnings.append("GPG signing failed - manifest not signed")
-        else:
-            result.warnings.append("GPG not available or no secret key - manifest not signed")
+        if signature_path is None:
+            message = "GPG signing failed or unavailable - manifest not signed"
+            if strict:
+                result.success = False
+                result.errors.append(message)
+                if result.seal_report.errors is not result.errors:
+                    result.seal_report.errors.append(message)
+                result.seal_report.status = "failed"
+                result.manifest_sealed["status"] = "seal_failed"
+                _write_json(manifest_path, result.manifest_sealed)
+            else:
+                result.warnings.append(message)
+                if result.seal_report.warnings is not result.warnings:
+                    result.seal_report.warnings.append(message)
+            _write_json(report_path, result.seal_report.to_dict())
 
     if output_zip and result.success:
         _create_bundle_zip(export_dir, output_zip)
