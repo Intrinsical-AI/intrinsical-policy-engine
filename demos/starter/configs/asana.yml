@@ -1,0 +1,7 @@
+uid_namespace: starter-demo
+profiles:
+  - starter_smoke
+filesystem: {}
+asana:
+  base_url: https://asana.example.test/api/1.0
+  project_gid: "100000000000001"

@@ -1,0 +1,10 @@
+taxonomy:
+- id: process.topic.intake
+  title: Record the intake
+  description: Synthetic process topic for technical authoring practice.
+- id: process.topic.review
+  title: Document the review
+  description: Synthetic process topic for technical authoring practice.
+- id: process.topic.approval
+  title: Record the signoff
+  description: Synthetic process topic for technical authoring practice.

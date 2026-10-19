@@ -1,0 +1,4 @@
+uid_namespace: starter-demo
+profiles:
+  - starter_smoke
+filesystem: {}

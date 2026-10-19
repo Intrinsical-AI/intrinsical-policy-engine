@@ -1,0 +1,25 @@
+subject_profile:
+  default_name: Synthetic process item
+routing:
+  default_route: process.idle
+  rules:
+  - id: process.route_hold
+    when:
+      has: process.owner_missing
+    route: process.hold
+  - id: process.route_signoff
+    when:
+      has: process.approval_requested
+    route: process.signoff
+  - id: process.route_review
+    when:
+      has: process.review_requested
+    route: process.review
+  - id: process.route_intake
+    when:
+      has: process.submitted
+    route: process.intake
+metrics:
+  default_score: 0.0
+  default_source: process.mock
+  signals: []

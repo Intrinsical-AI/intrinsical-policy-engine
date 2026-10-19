@@ -1,35 +1,40 @@
 # Security Policy
 
-## Scope
+## Scope and reporting
 
-This repository contains the public Intrinsical Policy Engine core and an
-educational starter pack. It does not include regulatory framework packs,
-commercial templates, or generated real-world outputs. See
-[BOUNDARIES.md](BOUNDARIES.md).
+This repository contains the public engine library and CLI, an educational
+starter, and an independent process mock with synthetic evidence.
+See [BOUNDARIES.md](BOUNDARIES.md) for its publication boundary.
 
-## Reporting a Vulnerability
+Report engine vulnerabilities to Pablo P.C. using the contact channel stated in
+the repository profile or an applicable Order Form. Avoid public GitHub issues
+for security-sensitive reports.
 
-To report a security vulnerability in the engine, please contact Pablo P.C.
-using the contact channel stated in the repository profile or any applicable
-Order Form. Do not open a public GitHub issue for security-sensitive reports.
+## Security model
 
-## Security Model
+Inputs may contain sensitive answers and identity metadata. Review authored
+packs and templates, and intentionally choose whether to retain raw input with
+`--include-raw-input`. Review generated artifacts before sharing them or sending
+them to a delivery tool. The API exporters create offline records and replace
+every configured HTTP header value with `<redacted>`, including values under
+custom header names. Deliverers supply actual headers separately. Supplied
+evidence bytes are preserved and require their own confidentiality review.
 
-- Input answers may contain sensitive or confidential information. Do not
-  include raw confidential answers in exported artifacts unless you intend
-  to retain them.
-- Review all generated artifacts before sharing them externally.
-- Sealing and fingerprinting verify package integrity, not legal correctness
-  or regulatory acceptance.
-- No automated decision from this engine replaces human review.
+Sealing verifies the snapshot checksum inventory and signs it with GPG by
+default. Explicit `--no-sign` seals are unsigned. Neither a checksum nor a
+signature proves policy correctness, evidence truth, or external acceptance.
+Snapshots use format version 1 and require identical trace content in the summary
+and separate trace file. Checksums remain the original baseline; sealing never
+repairs or regenerates them after drift.
 
-## Supported Versions
+The supported matrix is Linux with Python 3.11 and 3.12. Publication requires
+exclusive `renameat2` support. See the [security and limitations guide](docs/SECURITY_AND_LIMITATIONS.md)
+for trust boundaries and the [signing runbook](docs/CLI_REFERENCE.md#signing-and-recovery)
+for key setup, verification, and interrupted-run handling.
 
-Security fixes are applied to the current published version only. Prior
-versions are not patched.
+## Supported versions and disclosure
 
-## Disclosure
-
-Confirmed vulnerabilities will be disclosed in release notes after a fix
-is available. No CVE assignment process is currently in place for this
-project.
+Security fixes target the current published major version. Earlier majors are
+not maintained. Confirmed vulnerabilities are disclosed in release notes after
+a fix is available. The project does not currently operate a CVE assignment
+process.

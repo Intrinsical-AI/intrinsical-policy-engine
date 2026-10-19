@@ -1,29 +1,71 @@
-# Starter Export
+# Start the control review
 
-This export was generated from the public Intrinsical Policy Engine starter
-pack.
+This is an educational export from **{{ framework.name }}** (`{{ framework.version }}`).
+Start with the [review overview](README.md), then inspect the work below.
 
-## What This Contains
+## Why work was selected
 
-- A neutral control-review example.
-- A deterministic trace of answers, flags, selected actions, and evidence links.
-- Integrity metadata and checksums for the generated files.
+The starter selects a control review when `starter.needs_review` is present.
+Automation or sensitive-input flags derive that review flag. A declared owner
+alone does not select that work.
 
-## What This Does Not Contain
-
-- Regulatory coverage.
-- Commercial policy calibration.
-- Sector-specific assessment logic.
-- Any guarantee that the workflow is compliant with a law, standard, or contract.
-
-## Selected Action
-
-{% for action in actions_meta | default([]) %}
-- `{{ action.id | default(action.get("id", "")) }}`: {{ action.title | default(action.get("title", "")) }}
+Final flags for this assessment:
+{% for flag in flags %}
+- `{{ flag }}`
 {% else %}
-- No action was selected.
+- No flags are present.
 {% endfor %}
 
-Use this export as a technical authoring example only. Review and validate any
-real framework pack with qualified domain, security, and legal reviewers before
-enterprise use.
+The [assessment summary](_metadata/summary.json) records these flags, the selected
+actions, and their outcome. The [trace](_metadata/trace.json) records which
+rules contributed. User metadata and raw answer values are redacted by default.
+
+## Selected work
+
+{% for action in actions_meta %}
+### {{ action.title }}
+
+`{{ action.id }}` · {{ action.priority }} priority
+
+{{ action.description or "Review the action and its supporting evidence." }}
+
+{% if action.id in due_hints %}
+Assigned deadline: **{{ due_hints[action.id] }}**.
+{% else %}
+No deadline is assigned for this action. Agree a review date with its owner.
+{% endif %}
+
+{% for path in actions_evidence_map.get(action.id, []) %}
+- Required evidence location: `evidence/{{ path }}`
+{% else %}
+- No evidence location is declared for this action.
+{% endfor %}
+{% else %}
+No action was selected. Review the input and final flags before deciding whether
+further work is needed.
+{% endfor %}
+
+## Review checklist
+
+1. Confirm that the final flags describe the workflow being reviewed.
+2. Confirm that each selected action has an owner and an agreed completion date.
+3. Check the [evidence manifest](_metadata/evidence_manifest.json): every declared
+   requirement needs supporting evidence. A generated API request or backlog row
+   is a task description, not a substitute for that evidence.
+4. Read the actual evidence and the
+   [quality results](_metadata/evidence_quality.json). A quality pass checks
+   document structure; reviewers still need to judge accuracy and relevance.
+5. Compare the snapshot fingerprint below and preserve the
+   [file inventory](CHECKSUMS.sha256) when sharing this export.
+
+Assessment fingerprint: `{{ plan.hash }}`
+
+{% if due_hints %}
+The [calendar](compliance.ics) contains the assigned deadlines. Review them before import.
+{% else %}
+No calendar is generated because this assessment has no assigned deadlines.
+{% endif %}
+
+After resolving missing requirements, create a fresh export and verify it with
+`ipe seal --export-dir . --no-sign --strict` from that export's directory.
+Read the [legal notice](LEGAL_NOTICE.md) for the scope and limits of this example.

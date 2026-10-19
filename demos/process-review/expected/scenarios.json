@@ -1,0 +1,680 @@
+[
+  {
+    "id": "review-answers",
+    "input": {
+      "answers": {
+        "process.submitted": "yes",
+        "process.review": "yes",
+        "process.owner": "assigned",
+        "process.approval": "no"
+      }
+    },
+    "expected": {
+      "flags": [
+        "process.intake_required",
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.review_required",
+        "process.submitted"
+      ],
+      "actions": [
+        "process.intake",
+        "process.review"
+      ],
+      "outcome": [
+        "process.review_pending"
+      ],
+      "risk_tier": "process.review",
+      "outcome_axes": {
+        "risk_tier": "process.review",
+        "roles": [
+          "process.coordinator"
+        ],
+        "regimes": [
+          "process.mock"
+        ],
+        "blocked": false
+      },
+      "routing": {
+        "route": "process.review",
+        "rule_id": "process.route_review",
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-02-01",
+        "process.review_due": "2030-02-06",
+        "process.approval_due": "2030-02-09"
+      },
+      "due_hints": {
+        "process.intake": "2030-02-01",
+        "process.review": "2030-02-06"
+      },
+      "emitted_flags": [
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.submitted"
+      ],
+      "derived_flags": [
+        "process.intake_required",
+        "process.review_required"
+      ],
+      "derivation_ids": [
+        "process.derive_intake",
+        "process.derive_review"
+      ],
+      "stop": null,
+      "actions_evidence_map": {
+        "process.intake": [
+          "process/intake.md"
+        ],
+        "process.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_evidence_map": {
+        "process.topic.intake": [
+          "process/intake.md"
+        ],
+        "process.topic.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_overlay": {
+        "process.topic.intake": [
+          "process.intake"
+        ],
+        "process.topic.review": [
+          "process.review"
+        ]
+      }
+    },
+    "evidence": "evidence/complete",
+    "equivalent_input": "inputs/review.flags.json",
+    "input_file": "inputs/review.answers.json"
+  },
+  {
+    "id": "review-flags",
+    "input": {
+      "flags": [
+        "process.submitted",
+        "process.review_requested",
+        "process.owner_assigned"
+      ]
+    },
+    "expected": {
+      "flags": [
+        "process.intake_required",
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.review_required",
+        "process.submitted"
+      ],
+      "actions": [
+        "process.intake",
+        "process.review"
+      ],
+      "outcome": [
+        "process.review_pending"
+      ],
+      "risk_tier": "process.review",
+      "outcome_axes": {
+        "risk_tier": "process.review",
+        "roles": [
+          "process.coordinator"
+        ],
+        "regimes": [
+          "process.mock"
+        ],
+        "blocked": false
+      },
+      "routing": {
+        "route": "process.review",
+        "rule_id": "process.route_review",
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-02-01",
+        "process.review_due": "2030-02-06",
+        "process.approval_due": "2030-02-09"
+      },
+      "due_hints": {
+        "process.intake": "2030-02-01",
+        "process.review": "2030-02-06"
+      },
+      "emitted_flags": [
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.submitted"
+      ],
+      "derived_flags": [
+        "process.intake_required",
+        "process.review_required"
+      ],
+      "derivation_ids": [
+        "process.derive_intake",
+        "process.derive_review"
+      ],
+      "stop": null,
+      "actions_evidence_map": {
+        "process.intake": [
+          "process/intake.md"
+        ],
+        "process.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_evidence_map": {
+        "process.topic.intake": [
+          "process/intake.md"
+        ],
+        "process.topic.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_overlay": {
+        "process.topic.intake": [
+          "process.intake"
+        ],
+        "process.topic.review": [
+          "process.review"
+        ]
+      }
+    },
+    "evidence": "evidence/complete",
+    "input_file": "inputs/review.flags.json"
+  },
+  {
+    "id": "approval",
+    "input": {
+      "answers": {
+        "process.submitted": "yes",
+        "process.review": "yes",
+        "process.owner": "assigned",
+        "process.approval": "yes"
+      }
+    },
+    "expected": {
+      "flags": [
+        "process.approval_requested",
+        "process.approval_required",
+        "process.intake_required",
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.review_required",
+        "process.submitted"
+      ],
+      "actions": [
+        "process.intake",
+        "process.review",
+        "process.approval"
+      ],
+      "outcome": [
+        "process.ready_for_signoff"
+      ],
+      "risk_tier": "process.approval",
+      "outcome_axes": {
+        "risk_tier": "process.approval",
+        "roles": [
+          "process.coordinator"
+        ],
+        "regimes": [
+          "process.mock"
+        ],
+        "blocked": false
+      },
+      "routing": {
+        "route": "process.signoff",
+        "rule_id": "process.route_signoff",
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-02-01",
+        "process.review_due": "2030-02-06",
+        "process.approval_due": "2030-02-09"
+      },
+      "due_hints": {
+        "process.intake": "2030-02-01",
+        "process.review": "2030-02-06",
+        "process.approval": "2030-02-09"
+      },
+      "emitted_flags": [
+        "process.approval_requested",
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.submitted"
+      ],
+      "derived_flags": [
+        "process.approval_required",
+        "process.intake_required",
+        "process.review_required"
+      ],
+      "derivation_ids": [
+        "process.derive_intake",
+        "process.derive_review",
+        "process.derive_approval"
+      ],
+      "stop": null,
+      "actions_evidence_map": {
+        "process.intake": [
+          "process/intake.md"
+        ],
+        "process.review": [
+          "process/review.md"
+        ],
+        "process.approval": [
+          "process/approval.md"
+        ]
+      },
+      "articles_evidence_map": {
+        "process.topic.intake": [
+          "process/intake.md"
+        ],
+        "process.topic.review": [
+          "process/review.md"
+        ],
+        "process.topic.approval": [
+          "process/approval.md"
+        ]
+      },
+      "articles_overlay": {
+        "process.topic.intake": [
+          "process.intake"
+        ],
+        "process.topic.review": [
+          "process.review"
+        ],
+        "process.topic.approval": [
+          "process.approval"
+        ]
+      }
+    },
+    "evidence": "evidence/complete",
+    "input_file": "inputs/approval.answers.json"
+  },
+  {
+    "id": "intake-only",
+    "input": {
+      "answers": {
+        "process.submitted": "yes",
+        "process.review": "no",
+        "process.owner": "assigned"
+      }
+    },
+    "expected": {
+      "flags": [
+        "process.intake_required",
+        "process.owner_assigned",
+        "process.submitted"
+      ],
+      "actions": [
+        "process.intake"
+      ],
+      "outcome": [
+        "process.intake_only"
+      ],
+      "risk_tier": "process.intake",
+      "outcome_axes": {
+        "risk_tier": "process.intake",
+        "roles": [
+          "process.coordinator"
+        ],
+        "regimes": [
+          "process.mock"
+        ],
+        "blocked": false
+      },
+      "routing": {
+        "route": "process.intake",
+        "rule_id": "process.route_intake",
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-02-01",
+        "process.review_due": "2030-02-06",
+        "process.approval_due": "2030-02-09"
+      },
+      "due_hints": {
+        "process.intake": "2030-02-01"
+      },
+      "emitted_flags": [
+        "process.owner_assigned",
+        "process.submitted"
+      ],
+      "derived_flags": [
+        "process.intake_required"
+      ],
+      "derivation_ids": [
+        "process.derive_intake"
+      ],
+      "stop": null,
+      "actions_evidence_map": {
+        "process.intake": [
+          "process/intake.md"
+        ]
+      },
+      "articles_evidence_map": {
+        "process.topic.intake": [
+          "process/intake.md"
+        ]
+      },
+      "articles_overlay": {
+        "process.topic.intake": [
+          "process.intake"
+        ]
+      }
+    },
+    "evidence": "evidence/complete",
+    "input_file": "inputs/intake.answers.json"
+  },
+  {
+    "id": "idle",
+    "input": {
+      "answers": {
+        "process.submitted": "no"
+      }
+    },
+    "expected": {
+      "flags": [],
+      "actions": [],
+      "outcome": [],
+      "risk_tier": null,
+      "outcome_axes": {
+        "risk_tier": null,
+        "roles": [],
+        "regimes": [],
+        "blocked": false
+      },
+      "routing": {
+        "route": "process.idle",
+        "rule_id": null,
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-02-01",
+        "process.review_due": "2030-02-06",
+        "process.approval_due": "2030-02-09"
+      },
+      "due_hints": {},
+      "emitted_flags": [],
+      "derived_flags": [],
+      "derivation_ids": [],
+      "stop": null,
+      "actions_evidence_map": {},
+      "articles_evidence_map": {},
+      "articles_overlay": {}
+    },
+    "evidence": "evidence/complete",
+    "input_file": "inputs/idle.answers.json"
+  },
+  {
+    "id": "owner-missing",
+    "input": {
+      "answers": {
+        "process.submitted": "yes",
+        "process.review": "yes",
+        "process.owner": "missing"
+      }
+    },
+    "expected": {
+      "flags": [
+        "process.intake_required",
+        "process.owner_missing",
+        "process.review_requested",
+        "process.review_required",
+        "process.submitted"
+      ],
+      "actions": [],
+      "outcome": [
+        "process.blocked"
+      ],
+      "risk_tier": null,
+      "outcome_axes": {
+        "risk_tier": null,
+        "roles": [],
+        "regimes": [],
+        "blocked": true
+      },
+      "routing": {
+        "route": "process.hold",
+        "rule_id": "process.route_hold",
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-02-01",
+        "process.review_due": "2030-02-06",
+        "process.approval_due": "2030-02-09"
+      },
+      "due_hints": {},
+      "emitted_flags": [
+        "process.owner_missing",
+        "process.review_requested",
+        "process.submitted"
+      ],
+      "derived_flags": [
+        "process.intake_required",
+        "process.review_required"
+      ],
+      "derivation_ids": [
+        "process.derive_intake",
+        "process.derive_review"
+      ],
+      "stop": {
+        "stop_id": "process.stop_owner_missing",
+        "outcome": "process.blocked"
+      },
+      "actions_evidence_map": {},
+      "articles_evidence_map": {},
+      "articles_overlay": {}
+    },
+    "evidence": "evidence/complete",
+    "input_file": "inputs/owner-missing.answers.json",
+    "export_error": "CI-001"
+  },
+  {
+    "id": "inactive-question",
+    "input": {
+      "answers": {
+        "process.submitted": "no",
+        "process.review": "yes"
+      }
+    },
+    "input_file": "inputs/inactive-question.answers.json",
+    "error": "inactive question"
+  },
+  {
+    "id": "invalid-option",
+    "input": {
+      "answers": {
+        "process.submitted": "maybe"
+      }
+    },
+    "input_file": "inputs/invalid-option.answers.json",
+    "error": "invalid option"
+  },
+  {
+    "id": "missing-evidence",
+    "input": {
+      "answers": {
+        "process.submitted": "yes",
+        "process.review": "yes",
+        "process.owner": "assigned",
+        "process.approval": "no"
+      }
+    },
+    "expected": {
+      "flags": [
+        "process.intake_required",
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.review_required",
+        "process.submitted"
+      ],
+      "actions": [
+        "process.intake",
+        "process.review"
+      ],
+      "outcome": [
+        "process.review_pending"
+      ],
+      "risk_tier": "process.review",
+      "outcome_axes": {
+        "risk_tier": "process.review",
+        "roles": [
+          "process.coordinator"
+        ],
+        "regimes": [
+          "process.mock"
+        ],
+        "blocked": false
+      },
+      "routing": {
+        "route": "process.review",
+        "rule_id": "process.route_review",
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-02-01",
+        "process.review_due": "2030-02-06",
+        "process.approval_due": "2030-02-09"
+      },
+      "due_hints": {
+        "process.intake": "2030-02-01",
+        "process.review": "2030-02-06"
+      },
+      "emitted_flags": [
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.submitted"
+      ],
+      "derived_flags": [
+        "process.intake_required",
+        "process.review_required"
+      ],
+      "derivation_ids": [
+        "process.derive_intake",
+        "process.derive_review"
+      ],
+      "stop": null,
+      "actions_evidence_map": {
+        "process.intake": [
+          "process/intake.md"
+        ],
+        "process.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_evidence_map": {
+        "process.topic.intake": [
+          "process/intake.md"
+        ],
+        "process.topic.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_overlay": {
+        "process.topic.intake": [
+          "process.intake"
+        ],
+        "process.topic.review": [
+          "process.review"
+        ]
+      }
+    },
+    "evidence": "evidence/intake-only",
+    "input_file": "inputs/review.answers.json",
+    "export_error": "process/review.md"
+  },
+  {
+    "id": "date-override",
+    "input": {
+      "answers": {
+        "process.submitted": "yes",
+        "process.review": "yes",
+        "process.owner": "assigned",
+        "process.approval": "no"
+      }
+    },
+    "expected": {
+      "flags": [
+        "process.intake_required",
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.review_required",
+        "process.submitted"
+      ],
+      "actions": [
+        "process.intake",
+        "process.review"
+      ],
+      "outcome": [
+        "process.review_pending"
+      ],
+      "risk_tier": "process.review",
+      "outcome_axes": {
+        "risk_tier": "process.review",
+        "roles": [
+          "process.coordinator"
+        ],
+        "regimes": [
+          "process.mock"
+        ],
+        "blocked": false
+      },
+      "routing": {
+        "route": "process.review",
+        "rule_id": "process.route_review",
+        "excluded_actions": []
+      },
+      "calendar": {
+        "process.intake_due": "2030-03-01",
+        "process.review_due": "2030-03-06",
+        "process.approval_due": "2030-03-09"
+      },
+      "due_hints": {
+        "process.intake": "2030-03-01",
+        "process.review": "2030-03-06"
+      },
+      "emitted_flags": [
+        "process.owner_assigned",
+        "process.review_requested",
+        "process.submitted"
+      ],
+      "derived_flags": [
+        "process.intake_required",
+        "process.review_required"
+      ],
+      "derivation_ids": [
+        "process.derive_intake",
+        "process.derive_review"
+      ],
+      "stop": null,
+      "actions_evidence_map": {
+        "process.intake": [
+          "process/intake.md"
+        ],
+        "process.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_evidence_map": {
+        "process.topic.intake": [
+          "process/intake.md"
+        ],
+        "process.topic.review": [
+          "process/review.md"
+        ]
+      },
+      "articles_overlay": {
+        "process.topic.intake": [
+          "process.intake"
+        ],
+        "process.topic.review": [
+          "process.review"
+        ]
+      }
+    },
+    "evidence": "evidence/complete",
+    "base_date": "2030-02-27",
+    "input_file": "inputs/review.answers.json"
+  }
+]

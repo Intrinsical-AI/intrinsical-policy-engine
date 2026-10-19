@@ -1,21 +1,70 @@
-# Starter Export
+# {{ framework.name }} review export
 
-This export was generated from the public starter pack.
+Use this snapshot to review the selected work and its supporting evidence.
+The starter pack demonstrates one control-review workflow; it does not cover
+regulatory requirements or certify a production system.
 
-## Outcome
+## Assessment at a glance
 
-- Outcome: `{{ outcome | default("pending") }}`
-- Selected actions: {{ actions | default([]) | length }}
+- Pack: `{{ framework.id }}` · version `{{ framework.version }}`
+- Outcome: {% if outcome %}{{ outcome | join(", ") }}{% else %}No outcome selected{% endif %}
+- Review tier: {% if risk_tier is not none %}`{{ risk_tier }}`{% else %}Not assigned{% endif %}
+- Selected actions: {{ actions | length }}
+- Assessment fingerprint: `{{ plan.hash }}`
 
-## Actions
+The fingerprint identifies the assessed conclusions. The
+[file inventory](CHECKSUMS.sha256) separately records the delivered bytes.
+Neither establishes that an answer, rule, or review is correct.
 
-{% for action in actions_meta | default([]) %}
-- `{{ action.id | default(action.get("id", "")) }}`: {{ action.title | default(action.get("title", "")) }}
+## Work to review
+
+{% for action in actions_meta %}
+### {{ action.title }} · `{{ action.id }}`
+
+{{ action.description or "Review the action and its supporting evidence." }}
+
+- Priority: {{ action.priority }}
+- Deadline: {% if action.id in due_hints %}{{ due_hints[action.id] }}{% else %}Not assigned by this pack{% endif %}
+- Evidence requirements:
+{% for path in actions_evidence_map.get(action.id, []) %}
+  - `evidence/{{ path }}`
 {% else %}
-- No actions selected.
+  - No evidence path declared.
+{% endfor %}
+{% else %}
+No action was selected. Check that the supplied flags represent the workflow
+before interpreting this as an absence of review work.
 {% endfor %}
 
-## Limits
+{% for split in backlog_config.splits %}
+- [{{ split.description or split.id }}](backlogs/{{ split.filename }})
+{% endfor %}
 
-This starter output is educational only. It is not legal advice, not official
-guidance, and not a compliance certification.
+## Evidence and dates
+
+Check the [evidence manifest](_metadata/evidence_manifest.json) for the files
+actually included and any missing requirement, then review the
+[evidence quality results](_metadata/evidence_quality.json). Declared paths
+above identify required locations; a path alone does not prove a file was supplied.
+
+{% if due_hints %}
+Review the assigned dates before importing the [calendar](compliance.ics).
+{% else %}
+This assessment has no assigned deadlines, so no calendar file is generated.
+The starter pack leaves scheduling to the reviewer; it has no implicit current-date deadline.
+{% endif %}
+
+## Next steps
+
+1. Compare the final flags and selected actions in the
+   [assessment summary](_metadata/summary.json) with the workflow you intended to assess.
+2. Inspect every required evidence document for relevant, accurate observations.
+   The included example is synthetic; replace it with your own reviewed material
+   before using a real workflow.
+3. Resolve missing evidence and dates, then create a fresh export from explicit
+   input and evidence sources. Existing exports are preserved.
+4. From this export directory, run `ipe seal --export-dir . --no-sign --strict`
+   to verify its file inventory and evidence requirements. This verifies the snapshot,
+   rather than approving its contents.
+
+Read the [legal notice](LEGAL_NOTICE.md) before using or sharing this output.

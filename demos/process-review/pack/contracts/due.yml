@@ -1,0 +1,16 @@
+rules:
+- id: process.due_intake
+  ids:
+  - process.intake
+  calendar_keys:
+  - process.intake_due
+- id: process.due_review
+  ids:
+  - process.review
+  calendar_keys:
+  - process.review_due
+- id: process.due_approval
+  ids:
+  - process.approval
+  calendar_keys:
+  - process.approval_due

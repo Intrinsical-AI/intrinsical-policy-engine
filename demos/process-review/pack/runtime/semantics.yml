@@ -1,0 +1,22 @@
+framework_id: process.mock
+roles:
+- process.coordinator
+tiers:
+- process.intake
+- process.review
+- process.approval
+regimes:
+- process.mock
+routes:
+- process.idle
+- process.intake
+- process.review
+- process.signoff
+- process.hold
+outcomes:
+- process.intake_only
+- process.review_pending
+- process.ready_for_signoff
+- process.blocked
+blocked_outcomes:
+- process.blocked

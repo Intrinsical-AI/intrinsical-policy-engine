@@ -1,3 +1,0 @@
-{% for path, meta in audit.files | default({}) | dictsort -%}
-{{ meta.sha256 }}  {{ path }}
-{% endfor -%}

@@ -1,0 +1,8 @@
+flags:
+  - starter.automated_decision
+  - starter.sensitive_data
+  - starter.owner_assigned
+system:
+  name: Example workflow
+owner:
+  name: Example owner

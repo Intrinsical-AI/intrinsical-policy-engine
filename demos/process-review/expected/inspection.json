@@ -1,0 +1,46 @@
+{
+  "framework_id": "process.mock",
+  "calendar": {
+    "base_date": "2030-01-30",
+    "calendar": {
+      "process.intake_due": "T+2d",
+      "process.review_due": "T+7d",
+      "process.approval_due": "T+10d"
+    }
+  },
+  "rules": {
+    "derivation": [
+      {"id": "process.derive_intake", "when": {"has": "process.submitted"}, "set_flags": ["process.intake_required"]},
+      {"id": "process.derive_review", "when": {"has": "process.review_requested"}, "set_flags": ["process.review_required"]},
+      {"id": "process.derive_approval", "when": {"has": "process.approval_requested"}, "set_flags": ["process.approval_required"]}
+    ],
+    "stop": [
+      {"id": "process.stop_owner_missing", "when": {"has": "process.owner_missing"}, "outcome": "process.blocked"}
+    ],
+    "role": [
+      {"id": "process.coordinator_role", "when": {"has": "process.submitted"}, "roles": ["process.coordinator"]}
+    ],
+    "tier": [
+      {"id": "process.stage_approval", "priority": 30, "when": {"has": "process.approval_required"}, "output": {"tier": "process.approval", "regimes": ["process.mock"]}},
+      {"id": "process.stage_review", "priority": 20, "when": {"has": "process.review_required"}, "output": {"tier": "process.review", "regimes": ["process.mock"]}},
+      {"id": "process.stage_intake", "priority": 10, "when": {"has": "process.intake_required"}, "output": {"tier": "process.intake", "regimes": ["process.mock"]}}
+    ],
+    "outcome": [
+      {"id": "process.outcome_signoff", "when": {"has": "process.approval_required"}, "outcome": "process.ready_for_signoff"},
+      {"id": "process.outcome_review", "when": {"all": [{"has": "process.review_required"}, {"not": {"has": "process.approval_required"}}]}, "outcome": "process.review_pending"},
+      {"id": "process.outcome_intake", "when": {"all": [{"has": "process.intake_required"}, {"not": {"has": "process.review_required"}}]}, "outcome": "process.intake_only"}
+    ],
+    "routing": [
+      {"id": "process.route_hold", "when": {"has": "process.owner_missing"}, "route": "process.hold", "exclude_actions": []},
+      {"id": "process.route_signoff", "when": {"has": "process.approval_requested"}, "route": "process.signoff", "exclude_actions": []},
+      {"id": "process.route_review", "when": {"has": "process.review_requested"}, "route": "process.review", "exclude_actions": []},
+      {"id": "process.route_intake", "when": {"has": "process.submitted"}, "route": "process.intake", "exclude_actions": []}
+    ],
+    "due": [
+      {"id": "process.due_intake", "ids": ["process.intake"], "prefixes": [], "priority": 0, "calendar_keys": ["process.intake_due"]},
+      {"id": "process.due_review", "ids": ["process.review"], "prefixes": [], "priority": 0, "calendar_keys": ["process.review_due"]},
+      {"id": "process.due_approval", "ids": ["process.approval"], "prefixes": [], "priority": 0, "calendar_keys": ["process.approval_due"]}
+    ],
+    "metric": []
+  }
+}

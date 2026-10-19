@@ -1,0 +1,39 @@
+actions:
+- id: process.intake
+  title: Record the intake
+  description: Record the submitted item, its coordinator and the intended review
+    path.
+  applies_to: any
+  priority: low
+  when:
+    has: process.intake_required
+  articles:
+  - process.topic.intake
+  evidence:
+  - process/intake.md
+  requires_evidence: true
+- id: process.review
+  title: Document the review
+  description: Record the checked inputs, observed results and unresolved follow-up
+    items.
+  applies_to: any
+  priority: medium
+  when:
+    has: process.review_required
+  articles:
+  - process.topic.review
+  evidence:
+  - process/review.md
+  requires_evidence: true
+- id: process.approval
+  title: Record the signoff
+  description: Record the synthetic signoff decision and the limits of that decision.
+  applies_to: any
+  priority: high
+  when:
+    has: process.approval_required
+  articles:
+  - process.topic.approval
+  evidence:
+  - process/approval.md
+  requires_evidence: true

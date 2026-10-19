@@ -1,0 +1,3862 @@
+{
+  "schema": "ipe.delivery-plan/1",
+  "recorded_at": "2026-10-19T00:24:10.648886+00:00",
+  "scope": "Complete original six-month plan traceability; engineering evidence, proposed organization and external acceptance remain distinct.",
+  "original_plan": {
+    "capture": "out/implementation-validation-20261018/review/original-plan.txt",
+    "sha256": "ed036b7b7573e5cacfe7f71727479f7d04e89f8d008af0a6e1901ac06cf23e4c",
+    "captured_content": "Approved proposal content only; clause line numbering is preserved.",
+    "substantive_lines": [
+      2,
+      251
+    ],
+    "operative_clauses": 142,
+    "coverage_method": "Every original bullet and substantive table row plus the explicitly enumerated operative paragraphs has a stable source-line requirement."
+  },
+  "fidelity": {
+    "calendar_weeks_proposed": 26,
+    "elapsed_26_weeks_claimed": false,
+    "hired_team_claimed": false,
+    "original_scope_reduced_to_completed_work": false,
+    "original_pre_goal_wip_baseline_available": false,
+    "current_green_suites_do_not_prove_original_red_baselines": true,
+    "current_summary_is_not_reissued_by_this_document": true
+  },
+  "user_adaptation": {
+    "instruction": "Proceso EU AI Act, mock simple sin acoplar, tenemos el framework completo definido en otro sitio",
+    "technical_pack": "demos/process-review",
+    "complete_framework_imported": false,
+    "domain_or_pilot_acceptance_substituted_by_mock": false
+  },
+  "roles": {
+    "D1": "Core/contracts/architecture",
+    "D2": "Evidence/privacy/integrity",
+    "D3": "CLI/distribution/release",
+    "D4": "Packs/integrations/pilots",
+    "D5": "Optional fifth developer; no actual staffing claimed",
+    "D5_OR_D2": "Optional scaling/automation role; D2 covers engineering work if no fifth developer",
+    "PRODUCT": "Unassigned product decision role",
+    "DOMAIN": "Unassigned independent domain expert",
+    "QA": "Unassigned independent acceptance role",
+    "DOCS": "Unassigned authoring/onboarding role",
+    "SECURITY": "Unassigned independent security reviewer"
+  },
+  "capacity": {
+    "four_developers": {
+      "nominal_person_months": 24,
+      "estimated_committable_person_months": [
+        17,
+        18
+      ]
+    },
+    "five_developers": {
+      "nominal_person_months": 30,
+      "estimated_committable_person_months": [
+        21,
+        23
+      ]
+    },
+    "planned_utilization_percent": [
+      70,
+      75
+    ],
+    "actual_resource_commitments": null,
+    "actual_sprints_or_cross_area_reviews_claimed": false
+  },
+  "requirements": [
+    {
+      "id": "PLAN-L002",
+      "original_line": 2,
+      "clause": "Propongo **un plan base para 4 desarrolladores, ampliable a 5, durante 26 semanas**, orientado a entregar un motor mantenible, contratos coherentes, un pack operativo y validación mediante pilotos.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L004",
+      "original_line": 4,
+      "clause": "**Los ocho bugs y la limpieza detectada deberían resolverse durante las primeras 4–6 semanas.** Los seis meses completos se justifican por la consolidación del producto, la autoría de packs y su aceptación en condiciones reales. Son estimaciones iniciales que revisaría al terminar el primer mes.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L006",
+      "original_line": 6,
+      "clause": "Asumo dedicación completa de los desarrolladores, disponibilidad parcial de especialistas y continuidad del enfoque actual: **librería Python, CLI, packs y exportaciones verificables**.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "SCOPE"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SCOPE": "locally_documented"
+      }
+    },
+    {
+      "id": "PLAN-L010",
+      "original_line": 10,
+      "clause": "- Una versión estable con contratos de entrada, evaluación y salida definidos.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L011",
+      "original_line": 11,
+      "clause": "- Los ocho fallos reproducidos corregidos y cubiertos por regresiones.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "ORIGINAL-REGRESSIONS",
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ORIGINAL-REGRESSIONS": "locally_verified_historical_reference",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L012",
+      "original_line": 12,
+      "clause": "- Una única frontera de validación para uso programático y YAML.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L013",
+      "original_line": 13,
+      "clause": "- Evidencias y snapshots con garantías comprobadas de integridad y privacidad.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "QUALITY-PRIVACY",
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "QUALITY-PRIVACY": "locally_verified_at_recorded_revision",
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L014",
+      "original_line": 14,
+      "clause": "- Un pack operativo revisado por su responsable de dominio.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "DOMAIN-PACK",
+        "TECHNICAL-MOCK"
+      ],
+      "owner_role": "DOMAIN",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOMAIN-PACK": "pending_external_acceptance",
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L015",
+      "original_line": 15,
+      "clause": "- Un piloto completo aceptado; objetivo de dos si existe disponibilidad.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L016",
+      "original_line": 16,
+      "clause": "- Instalación, autoría, evaluación, exportación y sellado ejecutables siguiendo la documentación.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "DOCUMENTATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOCUMENTATION": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L017",
+      "original_line": 17,
+      "clause": "- Releases automatizadas desde artefactos instalados, con soporte y límites explícitos.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "RELEASE-AUTOMATION",
+        "LOCAL-ARTIFACTS",
+        "HANDOVER"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_preparation_verified_external_acceptance_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "RELEASE-AUTOMATION": "locally_verified_prepared",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision",
+        "HANDOVER": "locally_verified_prepared"
+      }
+    },
+    {
+      "id": "PLAN-L018",
+      "original_line": 18,
+      "clause": "- Con cinco desarrolladores: capacidad adicional para **una integración real o un segundo pack**, según lo aprendido.",
+      "phase": "outcomes_and_assumptions",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred"
+      }
+    },
+    {
+      "id": "PLAN-L022",
+      "original_line": 22,
+      "clause": "Cada área tendría un responsable y un revisor habitual de otra área. Las pruebas y la documentación formarían parte de cada entrega.",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L026",
+      "original_line": 26,
+      "clause": "| **D1 — Referente técnico / core** | Contratos, compilación, semántica, API Python y decisiones arquitectónicas | Completa |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L027",
+      "original_line": 27,
+      "clause": "| **D2 — Evidencia e integridad** | Calidad de evidencia, snapshots, privacidad, IO, sellado y regresiones adversariales | Completa |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L028",
+      "original_line": 28,
+      "clause": "| **D3 — CLI y entrega** | CLI, diagnósticos, packaging, CI, aceptación instalada y documentación ejecutable | Completa |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L029",
+      "original_line": 29,
+      "clause": "| **D4 — Packs e integraciones** | Autoría, exporters, casos representativos y acompañamiento de pilotos | Completa |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L030",
+      "original_line": 30,
+      "clause": "| **D5 — Opcional** | Automatización avanzada, rendimiento e integración real; libera a D4 para packs y pilotos | Completa |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L032",
+      "original_line": 32,
+      "clause": "Planificaría aproximadamente el **70–75 % de la capacidad nominal**. El resto absorbe revisiones, coordinación, incidencias, aprendizaje y disponibilidad.",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L036",
+      "original_line": 36,
+      "clause": "| 4 desarrolladores | 24 persona-meses | 17–18 persona-meses |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L037",
+      "original_line": 37,
+      "clause": "| 5 desarrolladores | 30 persona-meses | 21–23 persona-meses |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L039",
+      "original_line": 39,
+      "clause": "El quinto desarrollador aumenta el paralelismo. La entrega principal debe seguir siendo viable con cuatro.",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L043",
+      "original_line": 43,
+      "clause": "Su disponibilidad necesita quedar comprometida desde el inicio.",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L047",
+      "original_line": 47,
+      "clause": "| **Responsable de producto** | 0,2–0,3 | Prioridades, alcance, selección de pilotos y decisiones de continuidad |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L048",
+      "original_line": 48,
+      "clause": "| **Especialista del dominio** | 0,2–0,4 | Semántica del pack, escenarios esperados y aceptación del contenido |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L049",
+      "original_line": 49,
+      "clause": "| **QA independiente** | 0,3–0,5 | Exploración, pruebas negativas, usabilidad y aceptación de candidatos |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L050",
+      "original_line": 50,
+      "clause": "| **Documentación / experiencia de autoría** | 0,1–0,2 | Onboarding, ejemplos y corrección de fricciones observadas |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L051",
+      "original_line": 51,
+      "clause": "| **Infraestructura / release** | 0,1–0,2 | CI, artefactos, secretos de prueba y proceso de publicación |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L052",
+      "original_line": 52,
+      "clause": "| **Seguridad independiente** | 7–10 jornadas repartidas | Revisión temprana de fronteras, revisión del candidato y retest |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L053",
+      "original_line": 53,
+      "clause": "| **Participantes de piloto** | Sesiones acordadas | Ejecutar tareas reales y aceptar resultados |",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L055",
+      "original_line": 55,
+      "clause": "Algunas funciones pueden recaer en la misma persona. La aceptación del contenido del pack debe tener un responsable experto distinto del autor técnico.",
+      "phase": "team_and_capacity",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L059",
+      "original_line": 59,
+      "clause": "- CI Linux y matriz de Python acordada.",
+      "phase": "resources",
+      "gate_ids": [
+        "CI-CONFIGURATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CI-CONFIGURATION": "locally_verified_configuration_remote_pending"
+      }
+    },
+    {
+      "id": "PLAN-L060",
+      "original_line": 60,
+      "clause": "- Entornos efímeros de instalación de wheel y sdist.",
+      "phase": "resources",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L061",
+      "original_line": 61,
+      "clause": "- Almacenamiento de artefactos, fixtures y recibos de validación.",
+      "phase": "resources",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L062",
+      "original_line": 62,
+      "clause": "- Claves GPG exclusivamente de prueba.",
+      "phase": "resources",
+      "gate_ids": [
+        "SIGNING-RECOVERY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D3",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SIGNING-RECOVERY": "locally_documented_and_tested"
+      }
+    },
+    {
+      "id": "PLAN-L063",
+      "original_line": 63,
+      "clause": "- Cuentas sandbox del proveedor si se activa una integración real.",
+      "phase": "resources",
+      "gate_ids": [
+        "LIVE-CONNECTOR"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "conditional_not_selected",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LIVE-CONNECTOR": "conditional_not_selected"
+      }
+    },
+    {
+      "id": "PLAN-L064",
+      "original_line": 64,
+      "clause": "- Seguimiento común de requisitos, decisiones, defectos y aceptaciones.",
+      "phase": "resources",
+      "gate_ids": [
+        "TRACKING"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TRACKING": "locally_documented"
+      }
+    },
+    {
+      "id": "PLAN-L072",
+      "original_line": 72,
+      "clause": "- Inventariar el WIP actual y dividirlo en entregas revisables.",
+      "phase": "month_1",
+      "gate_ids": [
+        "WIP-REVIEW"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "locally_recorded_review_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "WIP-REVIEW": "locally_recorded_review_pending"
+      }
+    },
+    {
+      "id": "PLAN-L073",
+      "original_line": 73,
+      "clause": "- Convertir los ocho hallazgos en regresiones reproducibles.",
+      "phase": "month_1",
+      "gate_ids": [
+        "ORIGINAL-REGRESSIONS",
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ORIGINAL-REGRESSIONS": "locally_verified_historical_reference",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L074",
+      "original_line": 74,
+      "clause": "- Corregir primero credenciales exportadas y clasificación de evidencia.",
+      "phase": "month_1",
+      "gate_ids": [
+        "QUALITY-PRIVACY",
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "QUALITY-PRIVACY": "locally_verified_at_recorded_revision",
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L075",
+      "original_line": 75,
+      "clause": "- Cerrar las decisiones de contrato:",
+      "phase": "month_1",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L076",
+      "original_line": 76,
+      "clause": "- Semántica definitiva de selección de acciones.",
+      "phase": "month_1",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L077",
+      "original_line": 77,
+      "clause": "- Frontera compartida de compilación.",
+      "phase": "month_1",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L078",
+      "original_line": 78,
+      "clause": "- Significado de evidencia `ready`.",
+      "phase": "month_1",
+      "gate_ids": [
+        "QUALITY-PRIVACY",
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "QUALITY-PRIVACY": "locally_verified_at_recorded_revision",
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L079",
+      "original_line": 79,
+      "clause": "- Soporte inicial de plataformas.",
+      "phase": "month_1",
+      "gate_ids": [
+        "CI-CONFIGURATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CI-CONFIGURATION": "locally_verified_configuration_remote_pending"
+      }
+    },
+    {
+      "id": "PLAN-L080",
+      "original_line": 80,
+      "clause": "- Contrato de metadatos y contexto de plantillas.",
+      "phase": "month_1",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L084",
+      "original_line": 84,
+      "clause": "- Corregir fechas, configuración anidada y append JSONL.",
+      "phase": "month_1",
+      "gate_ids": [
+        "CONTRACTS",
+        "QUALITY-PRIVACY"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision",
+        "QUALITY-PRIVACY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L085",
+      "original_line": 85,
+      "clause": "- Eliminar duplicación de versiones e invariantes divergentes.",
+      "phase": "month_1",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L086",
+      "original_line": 86,
+      "clause": "- Actualizar documentación y ejemplos afectados.",
+      "phase": "month_1",
+      "gate_ids": [
+        "DOCUMENTATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOCUMENTATION": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L087",
+      "original_line": 87,
+      "clause": "- Preparar la primera entrega interna instalable.",
+      "phase": "month_1",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L088",
+      "original_line": 88,
+      "clause": "- Identificar el caso de uso del pack operativo y su responsable.",
+      "phase": "month_1",
+      "gate_ids": [
+        "DOMAIN-PACK",
+        "TECHNICAL-MOCK"
+      ],
+      "owner_role": "DOMAIN",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOMAIN-PACK": "pending_external_acceptance",
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L090",
+      "original_line": 90,
+      "clause": "**Responsables:** D1 y D2; D3 asegura aceptación instalada; D4 prepara el caso operativo.",
+      "phase": "month_1",
+      "gate_ids": [
+        "STAFFING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "STAFFING": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L092",
+      "original_line": 92,
+      "clause": "**Salida verificable:** los ocho defectos tienen pruebas que fallan sobre el estado auditado y pasan tras la corrección. Las comprobaciones existentes y los flujos instalados permanecen verdes.",
+      "phase": "month_1",
+      "gate_ids": [
+        "ORIGINAL-REGRESSIONS",
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ORIGINAL-REGRESSIONS": "locally_verified_historical_reference",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L098",
+      "original_line": 98,
+      "clause": "- Unificar validación programática y YAML.",
+      "phase": "month_2",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L099",
+      "original_line": 99,
+      "clause": "- Mover colección y comprobación de evidencia fuera de CLI.",
+      "phase": "month_2",
+      "gate_ids": [
+        "ARCHITECTURE",
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ARCHITECTURE": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L100",
+      "original_line": 100,
+      "clause": "- Mantener configuración tipada hasta los exporters.",
+      "phase": "month_2",
+      "gate_ids": [
+        "ARCHITECTURE",
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ARCHITECTURE": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L101",
+      "original_line": 101,
+      "clause": "- Resolver la redundancia de `packs.add_actions`.",
+      "phase": "month_2",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L102",
+      "original_line": 102,
+      "clause": "- Definir un inventario de salidas seleccionado antes del render.",
+      "phase": "month_2",
+      "gate_ids": [
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L103",
+      "original_line": 103,
+      "clause": "- Distinguir colisiones internas de destinos externos ocupados.",
+      "phase": "month_2",
+      "gate_ids": [
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L107",
+      "original_line": 107,
+      "clause": "- Retirar código, campos y dependencias sin uso comprobado.",
+      "phase": "month_2",
+      "gate_ids": [
+        "CLEANUP",
+        "WIP-REVIEW"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "locally_recorded_review_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CLEANUP": "locally_verified_at_recorded_revision",
+        "WIP-REVIEW": "locally_recorded_review_pending"
+      }
+    },
+    {
+      "id": "PLAN-L108",
+      "original_line": 108,
+      "clause": "- Consolidar namespace y empaquetado.",
+      "phase": "month_2",
+      "gate_ids": [
+        "ARCHITECTURE",
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ARCHITECTURE": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L109",
+      "original_line": 109,
+      "clause": "- Publicar especificación y esquemas derivados de los modelos.",
+      "phase": "month_2",
+      "gate_ids": [
+        "SCHEMAS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SCHEMAS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L110",
+      "original_line": 110,
+      "clause": "- Documentar orden del cuestionario, prioridades, fechas y estados sin coincidencia.",
+      "phase": "month_2",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L111",
+      "original_line": 111,
+      "clause": "- Ejecutar onboarding con personas ajenas al desarrollo.",
+      "phase": "month_2",
+      "gate_ids": [
+        "ONBOARDING"
+      ],
+      "owner_role": "DOCS",
+      "reviewer_role": "QA",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ONBOARDING": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L112",
+      "original_line": 112,
+      "clause": "- Confirmar participantes, acceso y criterios del piloto.",
+      "phase": "month_2",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT",
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred",
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L114",
+      "original_line": 114,
+      "clause": "**Salida verificable:** un mismo contrato inválido falla coherentemente por ambas vías; los ejemplos documentados se ejecutan en CI; el artefacto instalado contiene únicamente la superficie acordada.",
+      "phase": "month_2",
+      "gate_ids": [
+        "CONTRACTS",
+        "DOCUMENTATION",
+        "LOCAL-ARTIFACTS",
+        "CI-CONFIGURATION"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision",
+        "DOCUMENTATION": "locally_verified_at_recorded_revision",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision",
+        "CI-CONFIGURATION": "locally_verified_configuration_remote_pending"
+      }
+    },
+    {
+      "id": "PLAN-L116",
+      "original_line": 116,
+      "clause": "**Decisión al terminar la semana 8:** concretar qué ampliación merece capacidad. Si aún no existe un caso operativo con responsable y usuarios disponibles, reducir o reasignar capacidad antes de ampliar funcionalidades.",
+      "phase": "month_2",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT",
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred",
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L122",
+      "original_line": 122,
+      "clause": "- Construir un pack acotado junto al especialista.",
+      "phase": "month_3",
+      "gate_ids": [
+        "DOMAIN-PACK",
+        "TECHNICAL-MOCK"
+      ],
+      "owner_role": "DOMAIN",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOMAIN-PACK": "pending_external_acceptance",
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L123",
+      "original_line": 123,
+      "clause": "- Crear escenarios con resultados esperados independientes de la implementación.",
+      "phase": "month_3",
+      "gate_ids": [
+        "TECHNICAL-MOCK",
+        "CONTRACTS"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L124",
+      "original_line": 124,
+      "clause": "- Cubrir casos normales, negativos y de frontera.",
+      "phase": "month_3",
+      "gate_ids": [
+        "TECHNICAL-MOCK",
+        "CONTRACTS"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L125",
+      "original_line": 125,
+      "clause": "- Completar las explicaciones de `inspect` donde la autoría revele carencias.",
+      "phase": "month_3",
+      "gate_ids": [
+        "DOCUMENTATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOCUMENTATION": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L126",
+      "original_line": 126,
+      "clause": "- Medir tiempos, memoria y tamaños admitidos sobre fixtures representativas.",
+      "phase": "month_3",
+      "gate_ids": [
+        "PERF-MEASUREMENT",
+        "REAL-VOLUME-EXPANSION"
+      ],
+      "owner_role": "D5_OR_D2",
+      "reviewer_role": "D3",
+      "status": "conditional_trigger_evidence_missing",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PERF-MEASUREMENT": "locally_measured_with_tradeoffs",
+        "REAL-VOLUME-EXPANSION": "conditional_evidence_missing"
+      }
+    },
+    {
+      "id": "PLAN-L130",
+      "original_line": 130,
+      "clause": "- Ejecutar el primer piloto acompañado.",
+      "phase": "month_3",
+      "gate_ids": [
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L131",
+      "original_line": 131,
+      "clause": "- Registrar bloqueos de instalación, autoría, diagnóstico y exportación.",
+      "phase": "month_3",
+      "gate_ids": [
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L132",
+      "original_line": 132,
+      "clause": "- Convertir defectos del piloto en regresiones.",
+      "phase": "month_3",
+      "gate_ids": [
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L133",
+      "original_line": 133,
+      "clause": "- Revisar el contenido y la suficiencia de los escenarios con su responsable.",
+      "phase": "month_3",
+      "gate_ids": [
+        "DOMAIN-PACK",
+        "TECHNICAL-MOCK"
+      ],
+      "owner_role": "DOMAIN",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOMAIN-PACK": "pending_external_acceptance",
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L135",
+      "original_line": 135,
+      "clause": "**Salida verificable:** un recorrido completo desde entrada original hasta snapshot sellado, con resultados esperados revisados y recibos reproducibles.",
+      "phase": "month_3",
+      "gate_ids": [
+        "TECHNICAL-MOCK",
+        "CONTRACTS"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L137",
+      "original_line": 137,
+      "clause": "El starter conserva su función introductoria; el pack operativo tiene criterios propios de aceptación.",
+      "phase": "month_3",
+      "gate_ids": [
+        "TECHNICAL-MOCK",
+        "CONTRACTS"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L145",
+      "original_line": 145,
+      "clause": "- Segundo ciclo de piloto.",
+      "phase": "month_4",
+      "gate_ids": [
+        "PILOT-TWO"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-TWO": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L146",
+      "original_line": 146,
+      "clause": "- Conformance entre evaluación, inspección y exportación.",
+      "phase": "month_4",
+      "gate_ids": [
+        "TECHNICAL-MOCK",
+        "CONTRACTS"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L147",
+      "original_line": 147,
+      "clause": "- Pruebas de precedencia, derivaciones, stops, routing, fechas y perfiles.",
+      "phase": "month_4",
+      "gate_ids": [
+        "TECHNICAL-MOCK",
+        "CONTRACTS"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L148",
+      "original_line": 148,
+      "clause": "- Recuperación ante errores y repetición de ejecuciones.",
+      "phase": "month_4",
+      "gate_ids": [
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L149",
+      "original_line": 149,
+      "clause": "- Ajustes de autoría basados en problemas observados.",
+      "phase": "month_4",
+      "gate_ids": [
+        "PILOT-TWO"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-TWO": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L151",
+      "original_line": 151,
+      "clause": "Elegiría **una ampliación principal**:",
+      "phase": "month_4",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred"
+      }
+    },
+    {
+      "id": "PLAN-L155",
+      "original_line": 155,
+      "clause": "| **Integración real con un proveedor** | Piloto que la necesite, acceso sandbox y responsable de aceptación |",
+      "phase": "month_4",
+      "gate_ids": [
+        "LIVE-CONNECTOR"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "conditional_not_selected",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LIVE-CONNECTOR": "conditional_not_selected"
+      }
+    },
+    {
+      "id": "PLAN-L156",
+      "original_line": 156,
+      "clause": "| **Segundo pack operativo** | Dominio y escenarios suficientemente distintos para validar reutilización |",
+      "phase": "month_4",
+      "gate_ids": [
+        "SECOND-OPERATIONAL-PACK"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "DOMAIN",
+      "status": "conditional_not_selected",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SECOND-OPERATIONAL-PACK": "conditional_not_selected"
+      }
+    },
+    {
+      "id": "PLAN-L157",
+      "original_line": 157,
+      "clause": "| **Mayor robustez y rendimiento** | Volumen representativo que demuestre un límite actual |",
+      "phase": "month_4",
+      "gate_ids": [
+        "REAL-VOLUME-EXPANSION"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D5",
+      "status": "conditional_trigger_evidence_missing",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "REAL-VOLUME-EXPANSION": "conditional_evidence_missing"
+      }
+    },
+    {
+      "id": "PLAN-L159",
+      "original_line": 159,
+      "clause": "La integración real incluiría credenciales externas al artefacto, timeouts, reintentos acotados, tratamiento de duplicados y recibos de entrega separados del snapshot de evaluación.",
+      "phase": "month_4",
+      "gate_ids": [
+        "LIVE-CONNECTOR"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "conditional_not_selected",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LIVE-CONNECTOR": "conditional_not_selected"
+      }
+    },
+    {
+      "id": "PLAN-L161",
+      "original_line": 161,
+      "clause": "**Salida verificable:** ampliación aceptada contra su caso concreto. Generar payloads offline sigue siendo una aceptación diferente de ejecutar correctamente contra el proveedor.",
+      "phase": "month_4",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT",
+        "LIVE-CONNECTOR",
+        "SECOND-OPERATIONAL-PACK",
+        "REAL-VOLUME-EXPANSION"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "conditional_trigger_evidence_missing",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred",
+        "LIVE-CONNECTOR": "conditional_not_selected",
+        "SECOND-OPERATIONAL-PACK": "conditional_not_selected",
+        "REAL-VOLUME-EXPANSION": "conditional_evidence_missing"
+      }
+    },
+    {
+      "id": "PLAN-L167",
+      "original_line": 167,
+      "clause": "- Pruebas basadas en propiedades y fuzzing acotado de parsers, rutas y contratos.",
+      "phase": "month_5",
+      "gate_ids": [
+        "ROBUSTNESS",
+        "INDEPENDENT-SECURITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ROBUSTNESS": "locally_verified_at_recorded_revision",
+        "INDEPENDENT-SECURITY": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L168",
+      "original_line": 168,
+      "clause": "- Concurrencia, interrupciones y fallos de publicación.",
+      "phase": "month_5",
+      "gate_ids": [
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L169",
+      "original_line": 169,
+      "clause": "- Regresiones de rendimiento contra la referencia medida.",
+      "phase": "month_5",
+      "gate_ids": [
+        "PERF-MEASUREMENT",
+        "PERF-DISPOSITION"
+      ],
+      "owner_role": "D5_OR_D2",
+      "reviewer_role": "D3",
+      "status": "local_evidence_recorded_external_decision_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PERF-MEASUREMENT": "locally_measured_with_tradeoffs",
+        "PERF-DISPOSITION": "documented_pending_external_decision"
+      }
+    },
+    {
+      "id": "PLAN-L170",
+      "original_line": 170,
+      "clause": "- Revisión independiente de privacidad, evidencia, IO y sellado.",
+      "phase": "month_5",
+      "gate_ids": [
+        "INDEPENDENT-SECURITY"
+      ],
+      "owner_role": "SECURITY",
+      "reviewer_role": "D2",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "INDEPENDENT-SECURITY": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L171",
+      "original_line": 171,
+      "clause": "- Ensayo completo de release en la matriz comprometida.",
+      "phase": "month_5",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L172",
+      "original_line": 172,
+      "clause": "- Corrección y retest de los hallazgos.",
+      "phase": "month_5",
+      "gate_ids": [
+        "ROBUSTNESS",
+        "INDEPENDENT-SECURITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ROBUSTNESS": "locally_verified_at_recorded_revision",
+        "INDEPENDENT-SECURITY": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L173",
+      "original_line": 173,
+      "clause": "- Preparación de procedimientos de firma, verificación y diagnóstico.",
+      "phase": "month_5",
+      "gate_ids": [
+        "SIGNING-RECOVERY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D3",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SIGNING-RECOVERY": "locally_documented_and_tested"
+      }
+    },
+    {
+      "id": "PLAN-L175",
+      "original_line": 175,
+      "clause": "**Salida verificable:** candidato instalable con corpus adversarial reproducible, límites publicados y hallazgos de revisión resueltos o explícitamente delimitados.",
+      "phase": "month_5",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS",
+        "ROBUSTNESS",
+        "INDEPENDENT-SECURITY"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision",
+        "ROBUSTNESS": "locally_verified_at_recorded_revision",
+        "INDEPENDENT-SECURITY": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L177",
+      "original_line": 177,
+      "clause": "La auditoría de seguridad debe llegar después de estabilizar las fronteras principales, con revisión temprana suficiente para evitar decisiones costosas.",
+      "phase": "month_5",
+      "gate_ids": [
+        "INDEPENDENT-SECURITY"
+      ],
+      "owner_role": "SECURITY",
+      "reviewer_role": "D2",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "INDEPENDENT-SECURITY": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L183",
+      "original_line": 183,
+      "clause": "- Congelar funcionalidades del candidato.",
+      "phase": "month_6",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS",
+        "WIP-REVIEW"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "locally_recorded_review_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision",
+        "WIP-REVIEW": "locally_recorded_review_pending"
+      }
+    },
+    {
+      "id": "PLAN-L184",
+      "original_line": 184,
+      "clause": "- Completar aceptaciones del piloto.",
+      "phase": "month_6",
+      "gate_ids": [
+        "PILOT-ONE",
+        "PILOT-TWO"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-ONE": "pending_external_acceptance",
+        "PILOT-TWO": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L185",
+      "original_line": 185,
+      "clause": "- Revisar documentación, ejemplos, strings y configuración contra el comportamiento final.",
+      "phase": "month_6",
+      "gate_ids": [
+        "DOCUMENTATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOCUMENTATION": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L186",
+      "original_line": 186,
+      "clause": "- Retirar superficies experimentales abandonadas.",
+      "phase": "month_6",
+      "gate_ids": [
+        "CLEANUP",
+        "WIP-REVIEW"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "locally_recorded_review_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CLEANUP": "locally_verified_at_recorded_revision",
+        "WIP-REVIEW": "locally_recorded_review_pending"
+      }
+    },
+    {
+      "id": "PLAN-L190",
+      "original_line": 190,
+      "clause": "- Ensayar instalación y actualización desde cero.",
+      "phase": "month_6",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS",
+        "UPGRADE-REHEARSAL"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_preparation_verified_external_acceptance_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision",
+        "UPGRADE-REHEARSAL": "locally_verified_prepared"
+      }
+    },
+    {
+      "id": "PLAN-L191",
+      "original_line": 191,
+      "clause": "- Ejecutar el proceso completo de release en CI remoto.",
+      "phase": "month_6",
+      "gate_ids": [
+        "RELEASE-AUTOMATION",
+        "REMOTE-RELEASE"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "RELEASE-AUTOMATION": "locally_verified_prepared",
+        "REMOTE-RELEASE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L192",
+      "original_line": 192,
+      "clause": "- Verificar hashes, versiones, procedencia y contenido de los artefactos.",
+      "phase": "month_6",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L193",
+      "original_line": 193,
+      "clause": "- Repetir onboarding sin asistencia directa del desarrollador responsable.",
+      "phase": "month_6",
+      "gate_ids": [
+        "ONBOARDING"
+      ],
+      "owner_role": "DOCS",
+      "reviewer_role": "QA",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ONBOARDING": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L197",
+      "original_line": 197,
+      "clause": "- Margen para correcciones de aceptación y retest.",
+      "phase": "month_6",
+      "gate_ids": [
+        "SPRINT-REVIEWS",
+        "INDEPENDENT-SECURITY",
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SPRINT-REVIEWS": "proposed_process_not_claimed_executed",
+        "INDEPENDENT-SECURITY": "pending_external_acceptance",
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L198",
+      "original_line": 198,
+      "clause": "- Publicación si se cumplen los criterios.",
+      "phase": "month_6",
+      "gate_ids": [
+        "PUBLICATION"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D3",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PUBLICATION": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L199",
+      "original_line": 199,
+      "clause": "- Transferencia de mantenimiento y soporte.",
+      "phase": "month_6",
+      "gate_ids": [
+        "HANDOVER",
+        "MAINTAINER-ACCEPTANCE"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "HANDOVER": "locally_verified_prepared",
+        "MAINTAINER-ACCEPTANCE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L200",
+      "original_line": 200,
+      "clause": "- Backlog posterior construido a partir de uso observado.",
+      "phase": "month_6",
+      "gate_ids": [
+        "USAGE-BACKLOG"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "USAGE-BACKLOG": "pending_external_input"
+      }
+    },
+    {
+      "id": "PLAN-L202",
+      "original_line": 202,
+      "clause": "**Salida verificable:** versión aceptada y mantenible, o candidato con bloqueos identificados y responsables concretos. La publicación no se da por conseguida mediante comprobaciones locales.",
+      "phase": "month_6",
+      "gate_ids": [
+        "HANDOVER",
+        "LOCAL-ARTIFACTS",
+        "PUBLICATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "HANDOVER": "locally_verified_prepared",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision",
+        "PUBLICATION": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L206",
+      "original_line": 206,
+      "clause": "Los fijaría durante las primeras dos semanas y los mantendría visibles durante todo el proyecto.",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "TRACKING"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "TRACKING": "locally_documented"
+      }
+    },
+    {
+      "id": "PLAN-L210",
+      "original_line": 210,
+      "clause": "| **Defectos auditados** | Los ocho cerrados con regresiones que demuestran el fallo original |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "ORIGINAL-REGRESSIONS",
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ORIGINAL-REGRESSIONS": "locally_verified_historical_reference",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L211",
+      "original_line": 211,
+      "clause": "| **Contratos** | Validación equivalente entre YAML y construcción programática |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L212",
+      "original_line": 212,
+      "clause": "| **Privacidad** | Canarios de credenciales ausentes de artefactos y logs; opt-in de datos originales respetado |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "QUALITY-PRIVACY",
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "QUALITY-PRIVACY": "locally_verified_at_recorded_revision",
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L213",
+      "original_line": 213,
+      "clause": "| **Evidencia** | Bytes suministrados preservados; contenido vacío o malformado rechazado según contrato |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "QUALITY-PRIVACY",
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "QUALITY-PRIVACY": "locally_verified_at_recorded_revision",
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L214",
+      "original_line": 214,
+      "clause": "| **Publicación** | Ningún fallo probado publica una salida incompleta como válida |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L215",
+      "original_line": 215,
+      "clause": "| **Integridad** | Modificaciones, adiciones y borrados detectados; sellado sin recalcular silenciosamente la baseline |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "OUTPUT-INTEGRITY"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "OUTPUT-INTEGRITY": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L216",
+      "original_line": 216,
+      "clause": "| **Documentación** | Todos los ejemplos ejecutables comprobados automáticamente |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "DOCUMENTATION"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOCUMENTATION": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L217",
+      "original_line": 217,
+      "clause": "| **Distribución** | Wheel y sdist aceptados desde entornos limpios en la matriz acordada |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L218",
+      "original_line": 218,
+      "clause": "| **Autoría** | Usuarios nuevos completan el recorrido introductorio sin consultar código |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "ONBOARDING"
+      ],
+      "owner_role": "DOCS",
+      "reviewer_role": "QA",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ONBOARDING": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L219",
+      "original_line": 219,
+      "clause": "| **Pack operativo** | Escenarios y resultados aceptados por su responsable de dominio |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "DOMAIN-PACK",
+        "TECHNICAL-MOCK"
+      ],
+      "owner_role": "DOMAIN",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOMAIN-PACK": "pending_external_acceptance",
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L220",
+      "original_line": 220,
+      "clause": "| **Integración real** | Ejecuciones en sandbox y aceptación del proveedor, cuando forme parte del alcance |",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "LIVE-CONNECTOR"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "conditional_not_selected",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LIVE-CONNECTOR": "conditional_not_selected"
+      }
+    },
+    {
+      "id": "PLAN-L222",
+      "original_line": 222,
+      "clause": "La cobertura puede mantener un suelo próximo al **90 %**, tras la limpieza. No usaría el número de pruebas ni el porcentaje como sustitutos de los escenarios de aceptación.",
+      "phase": "acceptance_criteria",
+      "gate_ids": [
+        "ROBUSTNESS",
+        "LOCAL-ARTIFACTS"
+      ],
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ROBUSTNESS": "locally_verified_at_recorded_revision",
+        "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L226",
+      "original_line": 226,
+      "clause": "Con **cuatro** comprometería:",
+      "phase": "team_scope",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L228",
+      "original_line": 228,
+      "clause": "- Core, contratos, evidencia y CLI consolidados.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "ARCHITECTURE",
+        "CONTRACTS"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ARCHITECTURE": "locally_verified_at_recorded_revision",
+        "CONTRACTS": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L229",
+      "original_line": 229,
+      "clause": "- Un pack operativo.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "DOMAIN-PACK",
+        "TECHNICAL-MOCK"
+      ],
+      "owner_role": "DOMAIN",
+      "reviewer_role": "D4",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "DOMAIN-PACK": "pending_external_acceptance",
+        "TECHNICAL-MOCK": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L230",
+      "original_line": 230,
+      "clause": "- Un piloto completo y un segundo ciclo de validación.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "PILOT-TWO"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "PILOT-TWO": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L231",
+      "original_line": 231,
+      "clause": "- Exporters offline actuales.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "ARCHITECTURE"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "ARCHITECTURE": "locally_verified_at_recorded_revision"
+      }
+    },
+    {
+      "id": "PLAN-L232",
+      "original_line": 232,
+      "clause": "- Release y mantenimiento preparados.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "RELEASE-AUTOMATION",
+        "HANDOVER"
+      ],
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "status": "local_preparation_verified_external_acceptance_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "RELEASE-AUTOMATION": "locally_verified_prepared",
+        "HANDOVER": "locally_verified_prepared"
+      }
+    },
+    {
+      "id": "PLAN-L234",
+      "original_line": 234,
+      "clause": "Con **cinco**, añadiría capacidad para:",
+      "phase": "team_scope",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L236",
+      "original_line": 236,
+      "clause": "- Una integración real **o** un segundo pack.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred"
+      }
+    },
+    {
+      "id": "PLAN-L237",
+      "original_line": 237,
+      "clause": "- Mayor paralelismo en automatización y pilotos.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred"
+      }
+    },
+    {
+      "id": "PLAN-L238",
+      "original_line": 238,
+      "clause": "- Menor concentración de conocimiento y más revisión cruzada.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L240",
+      "original_line": 240,
+      "clause": "Recortaría primero ampliaciones y pilotos simultáneos si aparecen retrasos. Mantendría las garantías de integridad, privacidad y validación instalada dentro de la entrega base.",
+      "phase": "team_scope",
+      "gate_ids": [
+        "CAPACITY"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CAPACITY": "proposed_not_staffed"
+      }
+    },
+    {
+      "id": "PLAN-L244",
+      "original_line": 244,
+      "clause": "- **Contratos breaking:** concentrarlos en los meses 1–2. Actualizar conjuntamente código, packs y ejemplos internos; retirar aliases sin consumidores comprobados.",
+      "phase": "scope_and_operating_constraints",
+      "gate_ids": [
+        "CLEANUP",
+        "WIP-REVIEW"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "locally_recorded_review_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "CLEANUP": "locally_verified_at_recorded_revision",
+        "WIP-REVIEW": "locally_recorded_review_pending"
+      }
+    },
+    {
+      "id": "PLAN-L245",
+      "original_line": 245,
+      "clause": "- **Especialista indisponible:** reducir el alcance del pack y resolver su disponibilidad; el equipo técnico no debe inventar la semántica.",
+      "phase": "scope_and_operating_constraints",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT",
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred",
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L246",
+      "original_line": 246,
+      "clause": "- **Pilotos sin participantes:** activar la revisión de capacidad de la semana 8.",
+      "phase": "scope_and_operating_constraints",
+      "gate_ids": [
+        "EXPANSION-CHECKPOINT",
+        "PILOT-ONE"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "pending_external_acceptance_or_input",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "EXPANSION-CHECKPOINT": "locally_recorded_expansion_deferred",
+        "PILOT-ONE": "pending_external_acceptance"
+      }
+    },
+    {
+      "id": "PLAN-L247",
+      "original_line": 247,
+      "clause": "- **Integración bloqueada:** realizar una prueba técnica acotada antes de comprometer su desarrollo completo.",
+      "phase": "scope_and_operating_constraints",
+      "gate_ids": [
+        "LIVE-CONNECTOR"
+      ],
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "status": "conditional_not_selected",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "LIVE-CONNECTOR": "conditional_not_selected"
+      }
+    },
+    {
+      "id": "PLAN-L248",
+      "original_line": 248,
+      "clause": "- **WIP extenso:** integración por cambios pequeños, con responsabilidad clara y sin mezclar limpieza mecánica con cambios semánticos.",
+      "phase": "scope_and_operating_constraints",
+      "gate_ids": [
+        "WIP-REVIEW"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "locally_recorded_review_pending",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "WIP-REVIEW": "locally_recorded_review_pending"
+      }
+    },
+    {
+      "id": "PLAN-L249",
+      "original_line": 249,
+      "clause": "- **Crecimiento de producto:** UI, SaaS, multiusuario, editor visual y ejecución distribuida quedan fuera del alcance inicial; requieren una necesidad demostrada y nueva estimación.",
+      "phase": "scope_and_operating_constraints",
+      "gate_ids": [
+        "SCOPE"
+      ],
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "status": "local_evidence_recorded_with_gate_scope_limits",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SCOPE": "locally_documented"
+      }
+    },
+    {
+      "id": "PLAN-L251",
+      "original_line": 251,
+      "clause": "Trabajaría en sprints de dos semanas, con demostración ejecutable al cierre y un máximo de dos o tres iniciativas transversales abiertas. Cada entrega incluiría comportamiento, pruebas, documentación afectada y evidencia de aceptación.",
+      "phase": "scope_and_operating_constraints",
+      "gate_ids": [
+        "SPRINT-REVIEWS",
+        "WIP-REVIEW",
+        "TRACKING"
+      ],
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "status": "proposed_organization_not_claimed_executed",
+      "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
+      "linked_gate_statuses": {
+        "SPRINT-REVIEWS": "proposed_process_not_claimed_executed",
+        "WIP-REVIEW": "locally_recorded_review_pending",
+        "TRACKING": "locally_documented"
+      }
+    }
+  ],
+  "gates": [
+    {
+      "id": "SCOPE",
+      "status": "locally_documented",
+      "description": "Python library, CLI, packs and verifiable offline exports; excluded product surfaces remain excluded.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "BOUNDARIES.md",
+        "README.md",
+        "pyproject.toml"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "STAFFING",
+      "status": "proposed_not_staffed",
+      "description": "Proposed four-developer team and optional fifth role; staffing, availability and elapsed calendar are not established.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "required_evidence": [
+        "Named resource commitments, actual capacity and independent reviewers; no names or hiring are inferred."
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "CAPACITY",
+      "status": "proposed_not_staffed",
+      "description": "Plan 70-75 percent of nominal capacity, review estimates and retain the four-developer base scope.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": []
+    },
+    {
+      "id": "WIP-REVIEW",
+      "status": "locally_recorded_review_pending",
+      "description": "Capture HEAD, current dirty state and files; propose dependent review groups without staging, commits or attribution of pre-existing changes.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "out/implementation-validation-20261018/review/wip-inventory.json",
+        "out/implementation-validation-20261018/review/review-groups.json"
+      ],
+      "required_evidence": [
+        "A consistent captured inventory and review grouping; actual reviews and integration remain separate."
+      ],
+      "depends_on": [
+        "TRACKING"
+      ]
+    },
+    {
+      "id": "TRACKING",
+      "status": "locally_documented",
+      "description": "Trace original clauses to gates, decisions, dependencies, evidence and explicit pending acceptance.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "docs/delivery-plan.json",
+        "docs/implementation-status.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "ORIGINAL-REGRESSIONS",
+      "status": "locally_verified_historical_reference",
+      "description": "Map all eight original findings to current green regressions without substituting additional later findings.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "tests/unit/test_api_configuration_regressions.py",
+        "tests/unit/test_evidence_quality_regressions.py",
+        "tests/unit/test_domain_contract_regressions.py",
+        "tests/unit/test_contract_compilation.py",
+        "tests/unit/test_logging_ux.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "required_evidence": [
+        "Original audited-state failing receipts or an explicitly identified historical reproduction for each finding; current green suites alone do not prove the prior failure."
+      ],
+      "baseline_before_goal_reconstructed": false,
+      "depends_on": [
+        "CONTRACTS",
+        "QUALITY-PRIVACY"
+      ],
+      "historical_reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+      "original_dirty_audited_state_reconstructed": false
+    },
+    {
+      "id": "CONTRACTS",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Shared typed and semantic validation, explicit action selection, questionnaire order, dates, unmatched states and metadata contracts.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "docs/POLICY_SCHEMA.md",
+        "src/intrinsical_policy_engine/domain/services/contract_validation.py",
+        "tests/unit/test_contract_compilation.py",
+        "tests/unit/test_domain_contract_regressions.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "ARCHITECTURE",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Application evidence logic outside CLI; typed target settings retained through providers; one proper package namespace.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "src/intrinsical_policy_engine/app/evidence.py",
+        "pyproject.toml",
+        "tests/unit/test_export_contracts_review.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json",
+        "src/intrinsical_policy_engine/py.typed",
+        "scripts/check_installed_artifact.py",
+        "tests/unit/test_release_candidate.py",
+        "tests/unit/test_installed_acceptance_contract.py",
+        "out/implementation-validation-20261019/typing-consumer/regression.json",
+        "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "QUALITY-PRIVACY",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Ready content derives from bytes, all offline header values are redacted, and original input opt-in remains explicit.",
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "docs/SECURITY_AND_LIMITATIONS.md",
+        "tests/unit/test_evidence_quality_regressions.py",
+        "tests/unit/test_api_configuration_regressions.py",
+        "tests/unit/test_structured_evidence_workflow.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "OUTPUT-INTEGRITY",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Preflight selected outputs; preserve bytes and closed inventory; reject drift and partial publication.",
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "tests/unit/test_output_preflight.py",
+        "tests/unit/test_output_integrity.py",
+        "tests/unit/test_integrity_boundaries.py",
+        "tests/unit/test_io_safety.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "CLEANUP",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Retired aliases/surfaces removed with coordinated internal pack/example updates; keep mechanical and semantic review concerns explicit.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "CHANGELOG.md",
+        "BOUNDARIES.md",
+        "scripts/check_installed_artifact.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "SCHEMAS",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Publish deterministic structural schemas with explicit semantic-validation limitations.",
+      "owner_role": "D1",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "scripts/export_schemas.py",
+        "docs/schemas/index.json",
+        "tests/unit/test_schema_exports.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "DOCUMENTATION",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Execute or explicitly delegate documented examples; align supported CLI, configuration, authoring and recovery contracts.",
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "docs/CLI_REFERENCE.md",
+        "docs/WRITE_YOUR_FIRST_PACK.md",
+        "scripts/check_documented_examples.py",
+        "out/implementation-validation-20261018/documented-examples-receipt.json",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019/docs-full/documented-examples.json",
+        "out/implementation-validation-20261019-typed/summary.json",
+        "out/implementation-validation-20261019-typed/docs-full/documented-examples.json"
+      ],
+      "depends_on": [],
+      "full_execution": {
+        "receipt": "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
+        "sha256": "3b370f899ec75ea21573dac2dc26dda5a1d7d4cb12f50390ff9210e49c7a4192",
+        "python": "3.12",
+        "registered_executable_blocks": 18,
+        "completed_executable_blocks": 18,
+        "scope": "all_registered_blocks",
+        "original_and_copied_sources_verified_unchanged": true,
+        "independent_human_onboarding_claimed": false
+      }
+    },
+    {
+      "id": "TECHNICAL-MOCK",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Independent synthetic process mock with manually authored expected outcomes and installed conformance; no legal or operational-pack acceptance.",
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "demos/process-review/README.md",
+        "demos/process-review/expected/scenarios.json",
+        "tests/smoke/test_process_review_mock.py",
+        "scripts/check_conformance.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": [
+        "CONTRACTS",
+        "OUTPUT-INTEGRITY"
+      ]
+    },
+    {
+      "id": "DOMAIN-PACK",
+      "status": "pending_external_acceptance",
+      "description": "Real framework and domain-approved operational pack live in the separate framework project; this repository supplies only the user-authorized mock.",
+      "owner_role": "DOMAIN",
+      "reviewer_role": "D4",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "required_evidence": [
+        "Framework owner and independent domain expert approve real policy content and its scenario corpus."
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "PILOT-ONE",
+      "status": "pending_external_acceptance",
+      "description": "Run the first real accompanied pilot, record friction and convert reproduced issues to regressions.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": []
+    },
+    {
+      "id": "PILOT-TWO",
+      "status": "pending_external_acceptance",
+      "description": "Run a second validation cycle and, if participants exist, a second accepted pilot.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "DOMAIN",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": []
+    },
+    {
+      "id": "ONBOARDING",
+      "status": "pending_external_acceptance",
+      "description": "People outside development complete authoring and later repeat onboarding without developer assistance.",
+      "owner_role": "DOCS",
+      "reviewer_role": "QA",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": []
+    },
+    {
+      "id": "EXPANSION-CHECKPOINT",
+      "status": "locally_recorded_expansion_deferred",
+      "description": "Do not activate live connector, second operational pack or real-volume performance expansion without its stated evidence.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "docs/delivery-plan.json",
+        "demos/process-review/README.md"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "LIVE-CONNECTOR",
+      "status": "conditional_not_selected",
+      "description": "If selected: provider sandbox need/access/owner, external credentials, bounded retries/timeouts, duplicate handling and distinct delivery receipts.",
+      "owner_role": "D4",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": [
+        "EXPANSION-CHECKPOINT"
+      ]
+    },
+    {
+      "id": "SECOND-OPERATIONAL-PACK",
+      "status": "conditional_not_selected",
+      "description": "Activate only with sufficiently different domain scenarios and expert acceptance.",
+      "owner_role": "D4",
+      "reviewer_role": "DOMAIN",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": [
+        "EXPANSION-CHECKPOINT"
+      ]
+    },
+    {
+      "id": "REAL-VOLUME-EXPANSION",
+      "status": "conditional_evidence_missing",
+      "description": "Synthetic benchmarks do not establish real volume, buyer need or accepted production capacity.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D5",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "scripts/benchmark_engine.py"
+      ],
+      "depends_on": [
+        "EXPANSION-CHECKPOINT"
+      ]
+    },
+    {
+      "id": "ROBUSTNESS",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Bounded property/fuzz cases, adversarial parser graphs and concurrent/failed publication checks.",
+      "owner_role": "D2",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "tests/unit/test_parser_fuzz.py",
+        "tests/unit/test_property_invariants.py",
+        "tests/unit/test_structured_evidence_workflow.py",
+        "tests/unit/test_io_safety.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "tests/unit/test_process_publication.py",
+        "src/intrinsical_policy_engine/app/cli/commands/inspection.py",
+        "tests/unit/test_inspection_catalog.py",
+        "demos/process-review/expected/inspection.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": [],
+      "process_and_inspection_scope": {
+        "real_process_checks": [
+          "SIGKILL before publication and lock reuse",
+          "Two competing processes publish exactly one complete winner"
+        ],
+        "catalog_rule_records": 18,
+        "calendar_catalog_included": true,
+        "ambiguous_rule_ids_require_family": true,
+        "evidence_scope": "Both final interpreter suites and the installed 47-command conformance cells; no capacity or fault-recovery SLA is inferred."
+      }
+    },
+    {
+      "id": "PERF-MEASUREMENT",
+      "status": "locally_measured_with_tradeoffs",
+      "description": "Comparable controlled baseline/current runs preserve inputs, semantic plans and evidence hashes while exposing time and allocation tradeoffs.",
+      "owner_role": "D5_OR_D2",
+      "reviewer_role": "D3",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "tests/unit/test_scaling_boundaries.py",
+        "tests/unit/test_benchmark_engine.py",
+        "out/implementation-validation-20261018/performance/final-analysis-repeats3.json",
+        "out/implementation-validation-20261018/performance/final-manifest.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "PERF-DISPOSITION",
+      "status": "documented_pending_external_decision",
+      "description": "Strict exploratory zero-slowdown comparison failed; retain failures and require explicit disposition before claiming that performance gate accepted.",
+      "owner_role": "D1",
+      "reviewer_role": "D3",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "out/implementation-validation-20261018/performance/final-current-repeats3.json",
+        "out/implementation-validation-20261019/performance-disposition.json",
+        "out/implementation-validation-20261019-typed/performance-disposition.json"
+      ],
+      "zero_slowdown_gate_passed": false,
+      "production_slo": null,
+      "required_evidence": [
+        "Written disposition of small-workload regressions, memory tradeoff and any future target; no invented production SLO or tolerance expansion to turn old failures green."
+      ],
+      "depends_on": [
+        "PERF-MEASUREMENT"
+      ],
+      "external_acceptance_status": "pending"
+    },
+    {
+      "id": "INDEPENDENT-SECURITY",
+      "status": "pending_external_acceptance",
+      "description": "Separate reviewer evaluates final privacy, evidence, IO and sealing boundaries and records findings/disposition/retest.",
+      "owner_role": "SECURITY",
+      "reviewer_role": "D2",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": []
+    },
+    {
+      "id": "LOCAL-ARTIFACTS",
+      "status": "locally_verified_at_recorded_revision",
+      "description": "Final wheel and sdist installed outside checkout on Linux Python 3.11 and 3.12 with hashes, content checks and scenario receipts.",
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261018/artifacts.json",
+        "scripts/check_installed_artifact.py",
+        "scripts/check_conformance.py",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019/artifacts.json",
+        "out/implementation-validation-20261019/installed/3.11-wheel/acceptance-metadata.json",
+        "out/implementation-validation-20261019/installed/3.11-sdist/acceptance-metadata.json",
+        "out/implementation-validation-20261019/installed/3.12-wheel/acceptance-metadata.json",
+        "out/implementation-validation-20261019/installed/3.12-sdist/acceptance-metadata.json",
+        "out/implementation-validation-20261019/installed/3.11-wheel/conformance.json",
+        "out/implementation-validation-20261019/installed/3.11-sdist/conformance.json",
+        "out/implementation-validation-20261019/installed/3.12-wheel/conformance.json",
+        "out/implementation-validation-20261019/installed/3.12-sdist/conformance.json",
+        "out/implementation-validation-20261019-typed/summary.json",
+        "out/implementation-validation-20261019-typed/candidate.json",
+        "out/implementation-validation-20261019-typed/artifacts.json",
+        "out/implementation-validation-20261019-typed/installed/3.11-wheel/acceptance-metadata.json",
+        "out/implementation-validation-20261019-typed/installed/3.11-sdist/acceptance-metadata.json",
+        "out/implementation-validation-20261019-typed/installed/3.12-wheel/acceptance-metadata.json",
+        "out/implementation-validation-20261019-typed/installed/3.12-sdist/acceptance-metadata.json",
+        "out/implementation-validation-20261019-typed/installed/3.11-wheel/conformance.json",
+        "out/implementation-validation-20261019-typed/installed/3.11-sdist/conformance.json",
+        "out/implementation-validation-20261019-typed/installed/3.12-wheel/conformance.json",
+        "out/implementation-validation-20261019-typed/installed/3.12-sdist/conformance.json",
+        "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json"
+      ],
+      "depends_on": [],
+      "installed_matrix": [
+        {
+          "environment": "3.11-wheel",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.11-wheel"
+        },
+        {
+          "environment": "3.11-sdist",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.11-sdist"
+        },
+        {
+          "environment": "3.12-wheel",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.12-wheel"
+        },
+        {
+          "environment": "3.12-sdist",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.12-sdist"
+        }
+      ]
+    },
+    {
+      "id": "SIGNING-RECOVERY",
+      "status": "locally_documented_and_tested",
+      "description": "Disposable test signing and explicit verification/recovery procedures; managed release-key acceptance remains separate.",
+      "owner_role": "D2",
+      "reviewer_role": "D3",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "docs/CLI_REFERENCE.md",
+        "tests/unit/test_integrity_boundaries.py",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "depends_on": []
+    },
+    {
+      "id": "CI-CONFIGURATION",
+      "status": "locally_verified_configuration_remote_pending",
+      "description": "Configured Linux interpreter matrix, correctness/schema/lock checks and failure-receipt retention; execution at remote revision remains external.",
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        ".github/workflows/ci.yml",
+        ".pre-commit-config.yaml",
+        "out/implementation-validation-20261018/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "scripts/release_candidate.py",
+        "tests/unit/test_release_candidate.py",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019/ci-configuration.json",
+        "out/implementation-validation-20261019-typed/summary.json",
+        "out/implementation-validation-20261019-typed/candidate.json",
+        "out/implementation-validation-20261019-typed/ci-configuration.json"
+      ],
+      "depends_on": [],
+      "remote_execution_status": "not_run",
+      "build_once_installed_matrix": "One distribution pair is downloaded by both Python cells and bound by the candidate aggregator; local execution does not claim remote CI."
+    },
+    {
+      "id": "RELEASE-AUTOMATION",
+      "status": "locally_verified_prepared",
+      "description": "Prepare reviewable release-candidate automation and retain distributions together with their installed acceptance evidence.",
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "out/implementation-validation-20261019/candidate.json",
+        "scripts/release_candidate.py",
+        "tests/unit/test_release_candidate.py",
+        ".github/workflows/ci.yml",
+        "out/implementation-validation-20261019-typed/candidate.json"
+      ],
+      "required_evidence": [
+        "Release/candidate workflow or script, local configuration checks and artifact handover receipt; publication remains gated separately."
+      ],
+      "depends_on": [
+        "LOCAL-ARTIFACTS",
+        "CI-CONFIGURATION"
+      ],
+      "external_acceptance_status": "pending"
+    },
+    {
+      "id": "UPGRADE-REHEARSAL",
+      "status": "locally_verified_prepared",
+      "description": "Exercise installation and update, or document and verify the explicit clean-reinstallation policy justified by the breaking boundary.",
+      "owner_role": "D3",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "out/implementation-validation-20261019/upgrade/verification.json",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019-typed/upgrade/verification.json",
+        "out/implementation-validation-20261019-typed/candidate.json"
+      ],
+      "required_evidence": [
+        "An actual update or clean-reinstall rehearsal with artifact hashes and rejection/recreation policy for old packs/snapshots."
+      ],
+      "depends_on": [
+        "LOCAL-ARTIFACTS",
+        "CONTRACTS"
+      ],
+      "external_acceptance_status": "pending",
+      "scope_limits": {
+        "legacy_reference": "v2.0.1-public.0",
+        "tested_cells": [
+          "3.11-wheel",
+          "3.12-sdist"
+        ],
+        "policy_or_snapshot_migration_claimed": false,
+        "unused_previous_dependencies_removed": false,
+        "exact_final_archive_bytes_installed": true
+      }
+    },
+    {
+      "id": "HANDOVER",
+      "status": "locally_verified_prepared",
+      "description": "Prepare maintenance/support responsibilities, operational handover and an honest known-issues/backlog artifact.",
+      "owner_role": "D3",
+      "reviewer_role": "D4",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [
+        "out/implementation-validation-20261019/handover.json",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019-typed/handover.json",
+        "out/implementation-validation-20261019-typed/candidate.json"
+      ],
+      "required_evidence": [
+        "Maintenance/release/support handover artifact and source-bound candidate receipt. No actual maintainer acceptance is inferred."
+      ],
+      "depends_on": [
+        "TRACKING",
+        "LOCAL-ARTIFACTS",
+        "UPGRADE-REHEARSAL"
+      ],
+      "external_acceptance_status": "pending"
+    },
+    {
+      "id": "MAINTAINER-ACCEPTANCE",
+      "status": "pending_external_acceptance",
+      "description": "An identified maintainer accepts responsibility and transfer; proposed role names alone do not establish this.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D3",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": [
+        "HANDOVER"
+      ]
+    },
+    {
+      "id": "USAGE-BACKLOG",
+      "status": "pending_external_input",
+      "description": "Build the post-release product backlog from actual observed use; synthetic scenarios and engineering findings are labeled separately.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D4",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": []
+    },
+    {
+      "id": "REMOTE-RELEASE",
+      "status": "pending_external_acceptance",
+      "description": "Actual remote release process and CI for the accepted revision, with owner approval.",
+      "owner_role": "D3",
+      "reviewer_role": "PRODUCT",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": [
+        "RELEASE-AUTOMATION",
+        "UPGRADE-REHEARSAL",
+        "HANDOVER"
+      ]
+    },
+    {
+      "id": "PUBLICATION",
+      "status": "pending_external_acceptance",
+      "description": "Publish only after applicable acceptance gates and record the actual publication receipt.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D3",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": [
+        "REMOTE-RELEASE",
+        "INDEPENDENT-SECURITY",
+        "DOMAIN-PACK",
+        "PILOT-ONE",
+        "ONBOARDING"
+      ]
+    },
+    {
+      "id": "SPRINT-REVIEWS",
+      "status": "proposed_process_not_claimed_executed",
+      "description": "Two-week demonstrations, limited work in progress and cross-area review are proposed operating practice, not invented completed sprints.",
+      "owner_role": "PRODUCT",
+      "reviewer_role": "D1",
+      "assigned_person": null,
+      "human_acceptance_claimed": false,
+      "evidence": [],
+      "depends_on": []
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D-ACTION-SELECTION",
+      "status": "adopted_in_current_implementation",
+      "decision": "Each action.when controls selection once in catalogue order; retire packs.add_actions.",
+      "rationale": "Remove duplicate activation semantics while all internal packs and examples change together.",
+      "evidence": [
+        "src/intrinsical_policy_engine/domain/services/rule_engine.py",
+        "tests/unit/test_domain_contract_regressions.py",
+        "docs/POLICY_SCHEMA.md"
+      ],
+      "gate_ids": [
+        "CONTRACTS",
+        "CLEANUP"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-VALIDATION",
+      "status": "adopted_in_current_implementation",
+      "decision": "Pydantic structure plus shared domain semantic validation applies to YAML compilation and Python assessment.",
+      "rationale": "Reject incompatible engine requirements, unsafe paths and broken references at both supported boundaries.",
+      "evidence": [
+        "src/intrinsical_policy_engine/domain/services/contract_validation.py",
+        "tests/unit/test_contract_compilation.py"
+      ],
+      "gate_ids": [
+        "CONTRACTS"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-READY",
+      "status": "adopted_in_current_implementation",
+      "decision": "Evidence readiness uses actual meaningful content, strict CSV parsing and data rows, and Markdown body without front matter.",
+      "rationale": "Metadata claims and blank/null wrappers do not establish usable evidence; these heuristics do not certify policy correctness.",
+      "evidence": [
+        "src/intrinsical_policy_engine/adapters/quality/engine.py",
+        "tests/unit/test_evidence_quality_regressions.py",
+        "docs/SECURITY_AND_LIMITATIONS.md"
+      ],
+      "gate_ids": [
+        "QUALITY-PRIVACY"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-PLATFORMS",
+      "status": "adopted_in_current_implementation",
+      "decision": "Accept Linux Python 3.11 and 3.12 with exclusive renameat2 publication; other platforms are unaccepted.",
+      "rationale": "State the actually implemented atomic-publication dependency and measured interpreter matrix.",
+      "evidence": [
+        "docs/CLI_REFERENCE.md",
+        ".github/workflows/ci.yml",
+        "out/implementation-validation-20261018/summary.json"
+      ],
+      "gate_ids": [
+        "CI-CONFIGURATION",
+        "LOCAL-ARTIFACTS"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-METADATA",
+      "status": "adopted_in_current_implementation",
+      "decision": "Opt-in original inputs; default semantic input hash; preserve supplied evidence bytes and validate the larger snapshot metadata envelope separately.",
+      "rationale": "Avoid credential/input disclosure and prevent writer/seal disagreement on valid generated metadata.",
+      "evidence": [
+        "src/intrinsical_policy_engine/domain/snapshot_contract.py",
+        "src/intrinsical_policy_engine/app/export/artifacts.py",
+        "docs/POLICY_SCHEMA.md",
+        "tests/unit/test_snapshot_contract.py"
+      ],
+      "gate_ids": [
+        "QUALITY-PRIVACY",
+        "OUTPUT-INTEGRITY"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-FORMATS-NAMESPACE",
+      "status": "adopted_in_current_implementation",
+      "decision": "Use pack3/snapshot1 and intrinsical_policy_engine namespace; recreate older packs/snapshots without compatibility aliases.",
+      "rationale": "User explicitly permits breaking simplification and reports no clients or consumers; do not preserve retired contracts merely for hypothetical consumers.",
+      "evidence": [
+        "CHANGELOG.md",
+        "pyproject.toml",
+        "docs/POLICY_SCHEMA.md",
+        "scripts/check_installed_artifact.py"
+      ],
+      "gate_ids": [
+        "CONTRACTS",
+        "ARCHITECTURE",
+        "UPGRADE-REHEARSAL"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-APPLICATION-BOUNDARY",
+      "status": "adopted_in_current_implementation",
+      "decision": "Keep evidence collection/checks in application services and retain typed target configuration until provider rendering.",
+      "rationale": "CLI remains an input/output adapter, avoiding configuration downgrade and application-to-CLI dependencies.",
+      "evidence": [
+        "src/intrinsical_policy_engine/app/evidence.py",
+        "tests/unit/test_export_contracts_review.py"
+      ],
+      "gate_ids": [
+        "ARCHITECTURE"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-OUTPUT-OWNERSHIP",
+      "status": "adopted_in_current_implementation",
+      "decision": "Plan selected output ownership before staging; reserve engine namespaces and never replace an existing destination.",
+      "rationale": "Identify authored collisions accurately and preserve original snapshots and caller files on failures.",
+      "evidence": [
+        "src/intrinsical_policy_engine/app/export/inventory.py",
+        "tests/unit/test_output_preflight.py",
+        "tests/unit/test_integrity_boundaries.py"
+      ],
+      "gate_ids": [
+        "OUTPUT-INTEGRITY"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-OFFLINE-DELIVERY",
+      "status": "adopted_in_current_implementation",
+      "decision": "Existing API integrations generate offline request records with every header value redacted; actual provider delivery is conditional and unselected.",
+      "rationale": "User has not supplied the provider need/access/acceptance required by the plan's expansion gate.",
+      "evidence": [
+        "BOUNDARIES.md",
+        "docs/CLI_REFERENCE.md",
+        "tests/unit/test_api_configuration_regressions.py"
+      ],
+      "gate_ids": [
+        "ARCHITECTURE",
+        "LIVE-CONNECTOR"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-QUESTIONNAIRE",
+      "status": "adopted_in_current_implementation",
+      "decision": "Questions observe earlier emissions; positive derivations run afterwards to a finite least fixed point; namespaces match segments.",
+      "rationale": "Make order and derivation semantics explicit rather than infer special flag names or silently activate unreachable questions.",
+      "evidence": [
+        "docs/POLICY_SCHEMA.md",
+        "tests/unit/test_property_invariants.py",
+        "tests/unit/test_domain_contract_regressions.py"
+      ],
+      "gate_ids": [
+        "CONTRACTS",
+        "ROBUSTNESS"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-USER-MOCK",
+      "status": "adopted_in_current_implementation",
+      "decision": "Use an independent simple EU AI Act process mock without importing or reproducing the complete external framework.",
+      "rationale": "Apply the user's explicit clarification; synthetic workflow checks do not replace domain approval, real pilots or legal review.",
+      "evidence": [
+        "demos/process-review/README.md",
+        "BOUNDARIES.md",
+        "demos/process-review/expected/scenarios.json"
+      ],
+      "gate_ids": [
+        "TECHNICAL-MOCK",
+        "DOMAIN-PACK"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-CANDIDATE-PROVENANCE",
+      "status": "adopted_in_current_implementation",
+      "decision": "Build one pair, test its exact bytes on both interpreters and retain a source-bound candidate. Exclude only the two mutable delivery records from content hashes.",
+      "rationale": "Narrow exclusions avoid recursive acceptance-record hashes while preserving HEAD, Git status and all other visible source files. Candidate preparation never authorizes publication.",
+      "evidence": [
+        "scripts/release_candidate.py",
+        ".github/workflows/ci.yml",
+        "out/implementation-validation-20261019-typed/candidate.json"
+      ],
+      "gate_ids": [
+        "RELEASE-AUTOMATION",
+        "CI-CONFIGURATION"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-HISTORICAL-REFERENCE",
+      "status": "adopted_in_current_implementation",
+      "decision": "Use an identified historical reference to reproduce each original finding with the historical and current native contracts.",
+      "rationale": "The historical commit is evidence of earlier defective behavior; it does not reconstruct the originally audited dirty checkout or claim unchanged tests run against incompatible old APIs.",
+      "evidence": [
+        "out/implementation-validation-20261019/historical-regressions/summary.json"
+      ],
+      "gate_ids": [
+        "ORIGINAL-REGRESSIONS"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-UPGRADE-SCOPE",
+      "status": "adopted_in_current_implementation",
+      "decision": "Verify package replacement and namespace cleanup; retain explicit pack/snapshot recreation and clean-environment guidance.",
+      "rationale": "Actual upgrade checks do not migrate previous policy packs or snapshots and do not remove unrelated leftover dependencies.",
+      "evidence": [
+        "out/implementation-validation-20261019-typed/upgrade/verification.json",
+        "docs/CLI_REFERENCE.md"
+      ],
+      "gate_ids": [
+        "UPGRADE-REHEARSAL",
+        "CONTRACTS"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-PERFORMANCE-EVIDENCE",
+      "status": "adopted_in_current_implementation",
+      "decision": "Retain failed zero-slowdown receipts and original criteria, with external disposition required for the measured tradeoff.",
+      "rationale": "Synthetic improvements, small-workload regressions and allocation overhead are observations, not an accepted production SLO or a retrospectively widened budget.",
+      "evidence": [
+        "out/implementation-validation-20261019-typed/performance-disposition.json"
+      ],
+      "gate_ids": [
+        "PERF-MEASUREMENT",
+        "PERF-DISPOSITION"
+      ],
+      "human_approval_claimed": false
+    },
+    {
+      "id": "D-TYPED-DISTRIBUTION",
+      "status": "adopted_in_current_implementation",
+      "decision": "Ship py.typed explicitly and verify exact marker bytes in both archives, installed origins and representative external type checking.",
+      "rationale": "Without the PEP 561 marker, installed imports degrade to Any and wrong argument types can pass under ignored imports. The four-environment consumer proof is intentionally scoped to one representative function, not a global strict-typing claim.",
+      "evidence": [
+        "src/intrinsical_policy_engine/py.typed",
+        "pyproject.toml",
+        "scripts/check_installed_artifact.py",
+        "tests/unit/test_release_candidate.py",
+        "tests/unit/test_installed_acceptance_contract.py",
+        "out/implementation-validation-20261019/typing-consumer/regression.json",
+        "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json"
+      ],
+      "gate_ids": [
+        "ARCHITECTURE",
+        "LOCAL-ARTIFACTS"
+      ],
+      "human_approval_claimed": false
+    }
+  ],
+  "original_audit_findings": [
+    {
+      "id": "AUDIT-01",
+      "finding": "Custom credential header values leaked into offline exports.",
+      "current_tests": [
+        "tests/unit/test_api_configuration_regressions.py::test_every_offline_header_value_is_withheld_from_all_targets"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-01"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-01"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-01",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "AUDIT-02",
+      "finding": "Malformed CSV quoting could be classified ready.",
+      "current_tests": [
+        "tests/unit/test_evidence_quality_regressions.py::test_malformed_csv_has_a_controlled_error",
+        "tests/unit/test_evidence_quality_regressions.py::test_invalid_evidence_fails_export_ci_and_strict_sealing"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-02"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-02"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-02",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "AUDIT-03",
+      "finding": "Blank CSV data rows could be classified ready.",
+      "current_tests": [
+        "tests/unit/test_evidence_quality_regressions.py::test_empty_csv_rows_cannot_supply_evidence",
+        "tests/unit/test_evidence_quality_regressions.py::test_blank_rows_do_not_inflate_csv_readiness"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-02"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-03"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-03",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "AUDIT-04",
+      "finding": "Markdown front matter closing at EOF could count as evidence body.",
+      "current_tests": [
+        "tests/unit/test_evidence_quality_regressions.py::test_front_matter_without_body_never_grants_readiness"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-03"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-04"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-04",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "AUDIT-05",
+      "finding": "Unbounded relative calendar magnitudes passed lint then overflowed assessment.",
+      "current_tests": [
+        "tests/unit/test_domain_contract_regressions.py::test_impossible_relative_magnitudes_are_compilation_errors",
+        "tests/unit/test_domain_contract_regressions.py::test_calendar_base_overflow_is_checked_at_compile_and_runtime"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-04"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-05"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-05",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "AUDIT-06",
+      "finding": "Programmatic bundles bypassed invariants enforced by YAML compilation.",
+      "current_tests": [
+        "tests/unit/test_domain_contract_regressions.py::test_programmatic_bundle_rejects_an_incompatible_engine",
+        "tests/unit/test_domain_contract_regressions.py::test_programmatic_evidence_paths_are_rejected_before_evaluation",
+        "tests/unit/test_contract_compilation.py::test_direct_typed_bundles_reject_invalid_references_before_evaluation"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-05"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-06"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-06",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "AUDIT-07",
+      "finding": "Nested IDs and HTTP header names/values accepted invalid control or blank input.",
+      "current_tests": [
+        "tests/unit/test_api_configuration_regressions.py::test_invalid_http_headers_fail_configuration",
+        "tests/unit/test_api_configuration_regressions.py::test_empty_or_control_bearing_identifiers_are_rejected"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-06"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-07"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-07",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "AUDIT-08",
+      "finding": "Appending after a complete JSONL record without final newline corrupted the log.",
+      "current_tests": [
+        "tests/unit/test_logging_ux.py::test_append_separates_an_existing_complete_record_without_final_newline"
+      ],
+      "current_green_evidence": "out/implementation-validation-20261018/summary.json",
+      "original_audited_state_red_receipt": null,
+      "original_red_status": "not_recovered_from_the_original_working_state",
+      "initial_wip_reconstructed": false,
+      "pre_alignment_ledger_ids": [
+        "BUG-07"
+      ],
+      "implementation_ledger_ids": [
+        "BUG-08"
+      ],
+      "historical_reproduction": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-08",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    }
+  ],
+  "expansion_checkpoint": {
+    "original_lines": [
+      116,
+      151,
+      155,
+      156,
+      157,
+      161
+    ],
+    "status": "expansion_deferred_until_real_acceptance_inputs_exist",
+    "user_authorized_local_mock": true,
+    "selected_external_expansion": null,
+    "real_operational_volume_evidence": null,
+    "real_owner_or_participants_confirmed": false,
+    "live_connector": "not_selected",
+    "second_operational_pack": "not_selected",
+    "engineering_robustness_work": "Implemented and measured using synthetic fixtures; this does not satisfy the real-volume expansion trigger.",
+    "capacity_action": "Do not expand product scope on the strength of synthetic counts; external resource reassignment requires actual team/product input."
+  },
+  "performance_disposition": {
+    "status": "documented_pending_external_decision",
+    "zero_slowdown_gate_passed": false,
+    "operator_fraction_for_experiment": 0,
+    "production_slo": null,
+    "receipt": "out/implementation-validation-20261018/performance/final-current-repeats3.json",
+    "analysis": "out/implementation-validation-20261018/performance/final-analysis-repeats3.json",
+    "synthetic_observation": "1000-action assessment/evidence medians improve; smaller workloads exceed the strict zero-slowdown tolerance, and indexes add linear Python allocation overhead.",
+    "historical_failures_retained": true,
+    "accepted_tradeoff_claimed": false,
+    "required_next_evidence": "A named release owner must explicitly accept or reject the recorded synthetic time/allocation tradeoffs. The strict zero-slowdown failure and original criteria remain unchanged; no production SLO or accepted budget is inferred.",
+    "measurement_scope": {
+      "engine_source_sha256": "48e1ed75a3bd08768aa7830d9ac31b290dbaf3d3348c9a36a1c50629ad985848",
+      "benchmark_script_sha256": "0b39e0286223670fc347ee870f2a2023bad17ccf9ba244bf3563c413ce3b4d21",
+      "repeats": 3,
+      "inputs_semantic_plan_and_evidence_hashes_equal": true,
+      "candidate_scope": "The measured source fingerprints are authoritative; no wider source coverage or final-candidate benchmark acceptance is inferred."
+    },
+    "synthetic_workloads": [
+      {
+        "action_count": 10,
+        "workload_sha256": "c39398ff99dc400ad3ef61361044f10b5f48bb13a228e865343c0ad3e217f7ed",
+        "median_elapsed_comparisons": {
+          "assessment": {
+            "baseline_median_seconds": 0.00105311,
+            "current_median_seconds": 0.001066735,
+            "passed": false,
+            "ratio": 1.012937869738204
+          },
+          "evidence_collection_and_ci": {
+            "baseline_median_seconds": 0.003242016,
+            "current_median_seconds": 0.002997978,
+            "passed": true,
+            "ratio": 0.9247264664949217
+          }
+        },
+        "allocation_peaks": {
+          "assessment": {
+            "baseline_bytes": 50343,
+            "current_bytes": 50463
+          },
+          "evidence_collection_and_ci": {
+            "baseline_bytes": 12832,
+            "current_bytes": 13098
+          }
+        }
+      },
+      {
+        "action_count": 100,
+        "workload_sha256": "52a24d701bef572296f93459acfcc3ad32d4a808c0b4c229a26b97750ef0bd9c",
+        "median_elapsed_comparisons": {
+          "assessment": {
+            "baseline_median_seconds": 0.009866355,
+            "current_median_seconds": 0.006411242,
+            "passed": true,
+            "ratio": 0.6498085665881675
+          },
+          "evidence_collection_and_ci": {
+            "baseline_median_seconds": 0.030605003,
+            "current_median_seconds": 0.031279428,
+            "passed": false,
+            "ratio": 1.0220364297954814
+          }
+        },
+        "allocation_peaks": {
+          "assessment": {
+            "baseline_bytes": 514701,
+            "current_bytes": 514821
+          },
+          "evidence_collection_and_ci": {
+            "baseline_bytes": 52847,
+            "current_bytes": 77488
+          }
+        }
+      },
+      {
+        "action_count": 1000,
+        "workload_sha256": "6c5555bd628be0e94d46893c76bf122ee565ead113f7d67399dfdb2ad70325a4",
+        "median_elapsed_comparisons": {
+          "assessment": {
+            "baseline_median_seconds": 0.366711461,
+            "current_median_seconds": 0.064448362,
+            "passed": true,
+            "ratio": 0.1757467896537872
+          },
+          "evidence_collection_and_ci": {
+            "baseline_median_seconds": 0.572920791,
+            "current_median_seconds": 0.310869004,
+            "passed": true,
+            "ratio": 0.5426038099566891
+          }
+        },
+        "allocation_peaks": {
+          "assessment": {
+            "baseline_bytes": 4990161,
+            "current_bytes": 4990281
+          },
+          "evidence_collection_and_ci": {
+            "baseline_bytes": 1352857,
+            "current_bytes": 1594994
+          }
+        }
+      }
+    ],
+    "disposition_receipt": "out/implementation-validation-20261019-typed/performance-disposition.json",
+    "disposition_sha256": "95d0cad166f536facb2e3359d198954ed2cac35c7774dbfc31a332e633b9ac6d",
+    "original_criteria_unchanged": true
+  },
+  "review_inventory": {
+    "inventory": "out/implementation-validation-20261018/review/wip-inventory.json",
+    "groups": "out/implementation-validation-20261018/review/review-groups.json",
+    "note": "Inventory includes all current WIP, including changes that predate this goal. It does not attribute all changes to this delivery work."
+  },
+  "existing_validation": {
+    "summary": "out/implementation-validation-20261019-typed/summary.json",
+    "summary_sha256_at_capture": "14d53c87176635029f61cd9c57778b5333c457d97f52ad81ba0a9f024d986368",
+    "scope_note": "Use each receipt's source and artifact hashes. Local checks, prepared handover and historical reproduction do not establish remote execution, publication or human/domain acceptance."
+  },
+  "audit_numbering_note": "BUG-01 through BUG-08 match the original audit, including two distinct CSV findings. ADDITIONAL-ICS identifies the later calendar-export boundary correction. Pre-alignment IDs are historical references only.",
+  "validation_history": [
+    {
+      "summary": "out/implementation-validation-20261018/summary.json",
+      "summary_sha256_at_capture": "afddde267706016205fa94d9185ebb2801bf72a846d7e58365fc4545f5c890d8",
+      "scope_note": "Use the summary's own source hashes. Newly added plan/review/release files require final ledger integration; existing receipts are not silently widened."
+    },
+    {
+      "summary": "out/implementation-validation-20261019/summary.json",
+      "summary_sha256_at_capture": "380006546bb1acb027e62df81599f89ee1cb0323124fa72a52c8ded3ef6113b3",
+      "scope_note": "Use each receipt's source and artifact hashes. Local checks, prepared handover and historical reproduction do not establish remote execution, publication or human/domain acceptance."
+    }
+  ],
+  "latest_local_integration": {
+    "recorded_at": "2026-10-19T00:24:10.648886+00:00",
+    "receipts": {
+      "candidate": {
+        "path": "out/implementation-validation-20261019-typed/candidate.json",
+        "sha256": "076f5d382ace341283252ab57adf8d56db94bdc6915eb67e9264b84e6744a33f",
+        "size": 36808
+      },
+      "documentation": {
+        "path": "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
+        "sha256": "3b370f899ec75ea21573dac2dc26dda5a1d7d4cb12f50390ff9210e49c7a4192",
+        "size": 302375
+      },
+      "upgrade": {
+        "path": "out/implementation-validation-20261019-typed/upgrade/verification.json",
+        "sha256": "802ff5a24d7e1d19de61300e92dcbb45d00fc14e518ab26d25f0008692be127e",
+        "size": 7282
+      },
+      "historical_regressions": {
+        "path": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "size": 9319
+      },
+      "performance_disposition": {
+        "path": "out/implementation-validation-20261019-typed/performance-disposition.json",
+        "sha256": "95d0cad166f536facb2e3359d198954ed2cac35c7774dbfc31a332e633b9ac6d",
+        "size": 3857
+      },
+      "ci_configuration": {
+        "path": "out/implementation-validation-20261019-typed/ci-configuration.json",
+        "sha256": "3a6d7fad5cb3f53b704e122f6169762aa80c95f70c4477c8f19578db2844cbf5",
+        "size": 4304
+      },
+      "typing_consumer": {
+        "path": "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json",
+        "sha256": "5362f22ece7b3b21f267451d8ec631d2c273a0baac307ac0bf59d8f79f2cb511",
+        "size": 8735
+      },
+      "handover": {
+        "path": "out/implementation-validation-20261019-typed/handover.json",
+        "sha256": "70d04656ca76b717eed927c01db5f5b7a28ae68b2c7310c875e14ee0bfe10925",
+        "size": 34866
+      },
+      "summary": {
+        "path": "out/implementation-validation-20261019-typed/summary.json",
+        "sha256": "14d53c87176635029f61cd9c57778b5333c457d97f52ad81ba0a9f024d986368",
+        "size": 40711
+      }
+    },
+    "final_summary_attached": true,
+    "final_summary_integration_pending": false,
+    "remote_ci_run_claimed": false,
+    "publication_authorized": false,
+    "human_acceptance_claimed": false,
+    "original_dirty_audited_state_reconstructed": false
+  }
+}

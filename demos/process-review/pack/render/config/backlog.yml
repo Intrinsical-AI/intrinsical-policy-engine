@@ -1,0 +1,6 @@
+fallback_split_id: process
+splits:
+- id: process
+  filename: process.csv
+  keywords: []
+  description: Synthetic intake, review and signoff work.
