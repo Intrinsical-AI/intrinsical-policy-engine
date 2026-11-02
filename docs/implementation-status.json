@@ -279,7 +279,8 @@
         "tests/unit/test_documented_examples.py",
         "out/implementation-validation-20261019/docs-full/documented-examples.json",
         "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
-        "out/implementation-validation-20261019-typed/remote-verification.json"
+        "out/implementation-validation-20261019-typed/remote-verification.json",
+        "out/stabilization-20261102/accepted-candidate.json"
       ],
       "full_execution": {
         "receipt": "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
@@ -292,26 +293,39 @@
         "independent_human_onboarding_claimed": false
       },
       "remote_candidate": {
-        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "recorded_at": "2026-11-02T20:57:50.107168+00:00",
         "verification": {
-          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
-          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+          "path": "out/stabilization-20261102/accepted-candidate.json",
+          "sha256": "d42775b0af0085a6d794316d1fa54a0af3869768249f4158454f4a11926624ef"
         },
         "run": {
-          "id": 39319125584,
-          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "id": 41517671398,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/41517671398",
           "status": "completed",
           "conclusion": "success"
         },
-        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
-        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "revision": "19b7bc93403751d6ea731d3a513a8fb056ef1c27",
+        "branch": "main",
         "source_files_match_local_candidate": true,
         "artifact_bytes_match_local_build": false,
         "remote_pair_tested_in_four_cells": true,
-        "main_changed": false,
+        "main_changed": true,
         "release_owner_acceptance": "pending",
         "release_publication_performed": false,
-        "human_acceptance_claimed": false
+        "human_acceptance_claimed": false,
+        "publication_authorized": false,
+        "candidate_artifact_id": 13175648767,
+        "candidate_zip_sha256": "77db66fcd4065a44c30e433f6a7e72b793a29da6909436d41ee62c90fe8f6ac3",
+        "open_acceptance": [
+          "Independent human onboarding and mock walkthrough",
+          "Domain-owner acceptance of the scoped process pack",
+          "Independent security review and disposition",
+          "Disposition of synthetic zero-slowdown benchmark failures",
+          "Release owner review and publication decision"
+        ],
+        "explicit_source_pre_commit_passed": true,
+        "source_native_commit_hook_executed": false,
+        "native_commit_hook_installed_for_followup": true
       }
     },
     {
@@ -324,7 +338,8 @@
         "scripts/check_conformance.py",
         "out/implementation-validation-20261019/candidate.json",
         "out/implementation-validation-20261019-typed/candidate.json",
-        "out/implementation-validation-20261019-typed/remote-verification.json"
+        "out/implementation-validation-20261019-typed/remote-verification.json",
+        "out/stabilization-20261102/accepted-candidate.json"
       ],
       "installed_matrix": [
         {
@@ -357,26 +372,39 @@
         }
       ],
       "remote_candidate": {
-        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "recorded_at": "2026-11-02T20:57:50.107168+00:00",
         "verification": {
-          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
-          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+          "path": "out/stabilization-20261102/accepted-candidate.json",
+          "sha256": "d42775b0af0085a6d794316d1fa54a0af3869768249f4158454f4a11926624ef"
         },
         "run": {
-          "id": 39319125584,
-          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "id": 41517671398,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/41517671398",
           "status": "completed",
           "conclusion": "success"
         },
-        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
-        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "revision": "19b7bc93403751d6ea731d3a513a8fb056ef1c27",
+        "branch": "main",
         "source_files_match_local_candidate": true,
         "artifact_bytes_match_local_build": false,
         "remote_pair_tested_in_four_cells": true,
-        "main_changed": false,
+        "main_changed": true,
         "release_owner_acceptance": "pending",
         "release_publication_performed": false,
-        "human_acceptance_claimed": false
+        "human_acceptance_claimed": false,
+        "publication_authorized": false,
+        "candidate_artifact_id": 13175648767,
+        "candidate_zip_sha256": "77db66fcd4065a44c30e433f6a7e72b793a29da6909436d41ee62c90fe8f6ac3",
+        "open_acceptance": [
+          "Independent human onboarding and mock walkthrough",
+          "Domain-owner acceptance of the scoped process pack",
+          "Independent security review and disposition",
+          "Disposition of synthetic zero-slowdown benchmark failures",
+          "Release owner review and publication decision"
+        ],
+        "explicit_source_pre_commit_passed": true,
+        "source_native_commit_hook_executed": false,
+        "native_commit_hook_installed_for_followup": true
       }
     },
     {
@@ -392,31 +420,45 @@
         "out/implementation-validation-20261019/ci-configuration.json",
         "out/implementation-validation-20261019-typed/candidate.json",
         "out/implementation-validation-20261019-typed/ci-configuration.json",
-        "out/implementation-validation-20261019-typed/remote-verification.json"
+        "out/implementation-validation-20261019-typed/remote-verification.json",
+        "out/stabilization-20261102/accepted-candidate.json"
       ],
       "remote_execution_status": "passed",
       "release_pipeline": "build_once_then_test_matrix_then_reviewable_candidate",
       "remote_candidate": {
-        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "recorded_at": "2026-11-02T20:57:50.107168+00:00",
         "verification": {
-          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
-          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+          "path": "out/stabilization-20261102/accepted-candidate.json",
+          "sha256": "d42775b0af0085a6d794316d1fa54a0af3869768249f4158454f4a11926624ef"
         },
         "run": {
-          "id": 39319125584,
-          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "id": 41517671398,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/41517671398",
           "status": "completed",
           "conclusion": "success"
         },
-        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
-        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "revision": "19b7bc93403751d6ea731d3a513a8fb056ef1c27",
+        "branch": "main",
         "source_files_match_local_candidate": true,
         "artifact_bytes_match_local_build": false,
         "remote_pair_tested_in_four_cells": true,
-        "main_changed": false,
+        "main_changed": true,
         "release_owner_acceptance": "pending",
         "release_publication_performed": false,
-        "human_acceptance_claimed": false
+        "human_acceptance_claimed": false,
+        "publication_authorized": false,
+        "candidate_artifact_id": 13175648767,
+        "candidate_zip_sha256": "77db66fcd4065a44c30e433f6a7e72b793a29da6909436d41ee62c90fe8f6ac3",
+        "open_acceptance": [
+          "Independent human onboarding and mock walkthrough",
+          "Domain-owner acceptance of the scoped process pack",
+          "Independent security review and disposition",
+          "Disposition of synthetic zero-slowdown benchmark failures",
+          "Release owner review and publication decision"
+        ],
+        "explicit_source_pre_commit_passed": true,
+        "source_native_commit_hook_executed": false,
+        "native_commit_hook_installed_for_followup": true
       }
     },
     {
@@ -446,7 +488,8 @@
         ".github/workflows/ci.yml",
         "out/implementation-validation-20261019/candidate.json",
         "out/implementation-validation-20261019-typed/candidate.json",
-        "out/implementation-validation-20261019-typed/remote-verification.json"
+        "out/implementation-validation-20261019-typed/remote-verification.json",
+        "out/stabilization-20261102/accepted-candidate.json"
       ],
       "external_acceptance_status": "pending",
       "gate_ids": [
@@ -455,26 +498,39 @@
         "CI-CONFIGURATION"
       ],
       "remote_candidate": {
-        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "recorded_at": "2026-11-02T20:57:50.107168+00:00",
         "verification": {
-          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
-          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+          "path": "out/stabilization-20261102/accepted-candidate.json",
+          "sha256": "d42775b0af0085a6d794316d1fa54a0af3869768249f4158454f4a11926624ef"
         },
         "run": {
-          "id": 39319125584,
-          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "id": 41517671398,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/41517671398",
           "status": "completed",
           "conclusion": "success"
         },
-        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
-        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "revision": "19b7bc93403751d6ea731d3a513a8fb056ef1c27",
+        "branch": "main",
         "source_files_match_local_candidate": true,
         "artifact_bytes_match_local_build": false,
         "remote_pair_tested_in_four_cells": true,
-        "main_changed": false,
+        "main_changed": true,
         "release_owner_acceptance": "pending",
         "release_publication_performed": false,
-        "human_acceptance_claimed": false
+        "human_acceptance_claimed": false,
+        "publication_authorized": false,
+        "candidate_artifact_id": 13175648767,
+        "candidate_zip_sha256": "77db66fcd4065a44c30e433f6a7e72b793a29da6909436d41ee62c90fe8f6ac3",
+        "open_acceptance": [
+          "Independent human onboarding and mock walkthrough",
+          "Domain-owner acceptance of the scoped process pack",
+          "Independent security review and disposition",
+          "Disposition of synthetic zero-slowdown benchmark failures",
+          "Release owner review and publication decision"
+        ],
+        "explicit_source_pre_commit_passed": true,
+        "source_native_commit_hook_executed": false,
+        "native_commit_hook_installed_for_followup": true
       }
     },
     {
@@ -558,26 +614,39 @@
       "required_evidence": "Actual remote CI for the accepted revision, release owner approval and publication receipt. No commit, push or publication is inferred from local validation.",
       "remote_ci_status": "passed",
       "remote_candidate": {
-        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "recorded_at": "2026-11-02T20:57:50.107168+00:00",
         "verification": {
-          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
-          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+          "path": "out/stabilization-20261102/accepted-candidate.json",
+          "sha256": "d42775b0af0085a6d794316d1fa54a0af3869768249f4158454f4a11926624ef"
         },
         "run": {
-          "id": 39319125584,
-          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "id": 41517671398,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/41517671398",
           "status": "completed",
           "conclusion": "success"
         },
-        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
-        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "revision": "19b7bc93403751d6ea731d3a513a8fb056ef1c27",
+        "branch": "main",
         "source_files_match_local_candidate": true,
         "artifact_bytes_match_local_build": false,
         "remote_pair_tested_in_four_cells": true,
-        "main_changed": false,
+        "main_changed": true,
         "release_owner_acceptance": "pending",
         "release_publication_performed": false,
-        "human_acceptance_claimed": false
+        "human_acceptance_claimed": false,
+        "publication_authorized": false,
+        "candidate_artifact_id": 13175648767,
+        "candidate_zip_sha256": "77db66fcd4065a44c30e433f6a7e72b793a29da6909436d41ee62c90fe8f6ac3",
+        "open_acceptance": [
+          "Independent human onboarding and mock walkthrough",
+          "Domain-owner acceptance of the scoped process pack",
+          "Independent security review and disposition",
+          "Disposition of synthetic zero-slowdown benchmark failures",
+          "Release owner review and publication decision"
+        ],
+        "explicit_source_pre_commit_passed": true,
+        "source_native_commit_hook_executed": false,
+        "native_commit_hook_installed_for_followup": true
       },
       "release_owner_acceptance": "pending",
       "release_publication_status": "pending"
@@ -671,25 +740,62 @@
     "original_dirty_audited_state_reconstructed": false
   },
   "latest_remote_validation": {
-    "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+    "recorded_at": "2026-11-02T20:57:50.107168+00:00",
     "verification": {
-      "path": "out/implementation-validation-20261019-typed/remote-verification.json",
-      "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+      "path": "out/stabilization-20261102/accepted-candidate.json",
+      "sha256": "d42775b0af0085a6d794316d1fa54a0af3869768249f4158454f4a11926624ef"
     },
     "run": {
-      "id": 39319125584,
-      "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+      "id": 41517671398,
+      "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/41517671398",
       "status": "completed",
       "conclusion": "success"
     },
-    "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
-    "branch": "codex/ipe-v3-candidate-20261019-typed",
+    "revision": "19b7bc93403751d6ea731d3a513a8fb056ef1c27",
+    "branch": "main",
     "source_files_match_local_candidate": true,
     "artifact_bytes_match_local_build": false,
     "remote_pair_tested_in_four_cells": true,
-    "main_changed": false,
+    "main_changed": true,
     "release_owner_acceptance": "pending",
     "release_publication_performed": false,
-    "human_acceptance_claimed": false
-  }
+    "human_acceptance_claimed": false,
+    "publication_authorized": false,
+    "candidate_artifact_id": 13175648767,
+    "candidate_zip_sha256": "77db66fcd4065a44c30e433f6a7e72b793a29da6909436d41ee62c90fe8f6ac3",
+    "open_acceptance": [
+      "Independent human onboarding and mock walkthrough",
+      "Domain-owner acceptance of the scoped process pack",
+      "Independent security review and disposition",
+      "Disposition of synthetic zero-slowdown benchmark failures",
+      "Release owner review and publication decision"
+    ],
+    "explicit_source_pre_commit_passed": true,
+    "source_native_commit_hook_executed": false,
+    "native_commit_hook_installed_for_followup": true
+  },
+  "remote_validation_history": [
+    {
+      "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+      "verification": {
+        "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+        "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+      },
+      "run": {
+        "id": 39319125584,
+        "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+      "branch": "codex/ipe-v3-candidate-20261019-typed",
+      "source_files_match_local_candidate": true,
+      "artifact_bytes_match_local_build": false,
+      "remote_pair_tested_in_four_cells": true,
+      "main_changed": false,
+      "release_owner_acceptance": "pending",
+      "release_publication_performed": false,
+      "human_acceptance_claimed": false
+    }
+  ]
 }
