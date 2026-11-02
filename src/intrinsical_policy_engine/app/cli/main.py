@@ -13,13 +13,11 @@ from jinja2 import TemplateError
 from yaml import YAMLError
 
 from intrinsical_policy_engine.adapters.logging import FsLogger
+from intrinsical_policy_engine.app.cli.commands import core
 from intrinsical_policy_engine.app.cli.diagnostics import format_error
 from intrinsical_policy_engine.app.config.paths import normalize_log_jsonl_path
 from intrinsical_policy_engine.common.constants import CANONICAL_ENGINE_VERSION
 from intrinsical_policy_engine.domain.exceptions import ContractValidationError, EngineError
-
-# Version for --version flag
-__version__ = CANONICAL_ENGINE_VERSION
 
 
 def _logger(args: argparse.Namespace) -> FsLogger | None:
@@ -117,37 +115,18 @@ For more information, see: https://github.com/Intrinsical-AI/intrinsical-policy-
     parser.add_argument(
         "--version",
         action="version",
-        version=f"%(prog)s {__version__}",
+        version=f"%(prog)s {CANONICAL_ENGINE_VERSION}",
     )
-
-    # Create subparsers
     subparsers = parser.add_subparsers(
         dest="command",
         title="commands",
         description="Available commands (use '<command> --help' for details)",
         metavar="<command>",
     )
-
-    # Register all command groups with lazy loading
-    from intrinsical_policy_engine.app.cli.commands import register_all_commands
-
-    register_all_commands(subparsers)
-
-    # Parse arguments
+    core.register(subparsers)
     args = parser.parse_args()
-
-    # If no command given, show help
     if not args.command:
         parser.print_help()
         return 0
-
-    # Execute all commands through the same diagnostics and logging lifecycle.
-    if not hasattr(args, "handler"):
-        sys.stderr.write(f"Error: Command '{args.command}' has no handler implementation\n")
-        return 1
-
+    # Every subcommand sets a handler and runs through the same diagnostics and logging.
     return _run(args)
-
-
-if __name__ == "__main__":
-    sys.exit(main())

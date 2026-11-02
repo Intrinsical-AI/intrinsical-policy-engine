@@ -27,7 +27,7 @@
     {
       "file": "bundle-profiles.schema.json",
       "model": "intrinsical_policy_engine.domain.bundles.models.BundleProfilesContract",
-      "sha256": "22048f186dde49461086c1106c2fe73a48a9fc93fe25bfa54078385f46f68aca"
+      "sha256": "eaccc5c9cacbecba76e57aeeb4216e83439e24666ba55520a87097488bb0279c"
     },
     {
       "file": "calendar.schema.json",

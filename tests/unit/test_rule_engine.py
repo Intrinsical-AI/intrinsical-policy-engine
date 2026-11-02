@@ -7,7 +7,11 @@ from pydantic import ValidationError
 
 from intrinsical_policy_engine.domain.conditions import Condition, evaluate_condition
 from intrinsical_policy_engine.domain.contract_models import RulesContract
-from intrinsical_policy_engine.domain.services.derivation_closure import derive
+from intrinsical_policy_engine.domain.services.derivation_closure import derive_with_trace
+
+
+def closure(flags, rules):
+    return derive_with_trace(set(flags), rules).final_flags
 
 
 @pytest.mark.parametrize(
@@ -33,8 +37,8 @@ def test_positive_cycles_need_a_seed_and_do_not_depend_on_order():
     ]
     for ordered in (rules, list(reversed(rules))):
         contract = RulesContract.model_validate({"derivations": ordered})
-        assert derive(set(), contract) == set()
-        assert derive({"a"}, contract) == {"a", "b"}
+        assert closure(set(), contract) == set()
+        assert closure({"a"}, contract) == {"a", "b"}
 
 
 def test_long_chain_converges_without_an_arbitrary_iteration_cap():
@@ -42,7 +46,7 @@ def test_long_chain_converges_without_an_arbitrary_iteration_cap():
         {"id": f"d{i}", "when": {"has": f"f{i}"}, "set_flags": [f"f{i + 1}"]} for i in range(130)
     ]
     contract = RulesContract.model_validate({"derivations": list(reversed(rules))})
-    assert derive({"f0"}, contract) == {f"f{i}" for i in range(131)}
+    assert closure({"f0"}, contract) == {f"f{i}" for i in range(131)}
 
 
 def test_not_is_rejected_only_in_derivations():

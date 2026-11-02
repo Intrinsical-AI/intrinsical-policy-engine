@@ -14,21 +14,14 @@ from intrinsical_policy_engine.adapters.export.base.exporters.base_api_exporter 
     BaseApiExporter,
 )
 from intrinsical_policy_engine.adapters.export.base.models.export_config import (
-    ApiExportConfig,
     ExportSettings,
     FilesystemExportConfig,
 )
-from intrinsical_policy_engine.adapters.export.base.models.registry import (
-    OfflineExporter,
-    get_exporter,
-)
+from intrinsical_policy_engine.adapters.export.base.models.registry import API_EXPORTERS
 from intrinsical_policy_engine.adapters.export.filesystem.filesystem_exporter import (
     FilesystemExporter,
 )
 from intrinsical_policy_engine.adapters.logging import StructuredLogger
-from intrinsical_policy_engine.adapters.quality.bundle_evidence_validator import (
-    BundleEvidenceValidator,
-)
 from intrinsical_policy_engine.adapters.quality.engine import QualityEngine
 from intrinsical_policy_engine.app.evidence import EvidenceSnapshot, check_ci
 from intrinsical_policy_engine.app.export.artifacts import write_assessment, write_json
@@ -36,6 +29,7 @@ from intrinsical_policy_engine.app.export.inventory import plan_outputs
 from intrinsical_policy_engine.app.export.projection import project_plan
 from intrinsical_policy_engine.common.output_safety import fresh_output
 from intrinsical_policy_engine.common.package_integrity import write_checksums
+from intrinsical_policy_engine.domain.bundles.coverage import profile_coverage
 from intrinsical_policy_engine.domain.bundles.models import BundleProfile
 from intrinsical_policy_engine.domain.services.evidence_requirements import (
     missing_evidence_requirements,
@@ -77,18 +71,14 @@ def _configured_exporters(
     pack: CompiledPack,
     profiles: dict[str, BundleProfile],
     logger: StructuredLogger | None,
-) -> dict[str, OfflineExporter]:
-    exporters: dict[str, OfflineExporter] = {}
+) -> dict[str, FilesystemExporter | BaseApiExporter[Any]]:
+    exporters: dict[str, FilesystemExporter | BaseApiExporter[Any]] = {}
     for target in targets:
         config = settings.for_target(target)
-        exporter = get_exporter(target)
-        if isinstance(exporter, FilesystemExporter) and isinstance(config, FilesystemExportConfig):
-            exporter.setup(logger=logger, config={"compiled_pack": pack, "profiles": profiles})
-        elif isinstance(exporter, BaseApiExporter) and isinstance(config, ApiExportConfig):
-            exporter.setup(logger=logger, config=config)
+        if isinstance(config, FilesystemExportConfig):
+            exporters[target] = FilesystemExporter(pack, profiles)
         else:
-            raise ValueError(f"Configuration and exporter do not agree: {target}")
-        exporters[target] = exporter
+            exporters[target] = API_EXPORTERS[target](config, logger)
     return exporters
 
 
@@ -118,14 +108,10 @@ def export_plan(
         if unknown:
             raise ValueError(f"Unknown profiles: {', '.join(sorted(unknown))}")
         profiles = {key: profiles[key] for key in settings.profiles}
-    coverage = BundleEvidenceValidator().validate_coverage(profiles, plan)
     if check_ci_enabled:
-        problems = check_ci(plan, evidence)
-        if "filesystem" in targets and coverage.has_critical_gaps():
-            problems.append(
-                f"CI-004: profile coverage missing actions={sorted(coverage.missing_actions)} "
-                f"evidences={sorted(coverage.missing_evidences)}"
-            )
+        # Profiles only produce output, and therefore coverage, for filesystem export.
+        coverage = profile_coverage(profiles, plan) if "filesystem" in targets else None
+        problems = check_ci(plan, evidence, coverage)
         if problems:
             raise ValueError("\n".join(problems))
     projected = project_plan(plan, include_raw_input=include_raw_input)
@@ -161,8 +147,7 @@ def export_plan(
             target for target in targets if target != "filesystem"
         ]
         for target in ordered:
-            exporter = exporters[target]
-            exporter.export(projected, str(pack.layout.templates_dir), str(staging))
+            exporters[target].export(projected, staging)
         actual = {
             path.relative_to(staging).as_posix() for path in staging.rglob("*") if path.is_file()
         }

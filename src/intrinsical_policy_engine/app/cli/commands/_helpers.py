@@ -11,6 +11,7 @@ from pathlib import Path
 from yaml import YAMLError
 
 from intrinsical_policy_engine.adapters.contracts.yaml.yaml_contract_adapter import (
+    CompiledPack,
     YamlContractsAdapter,
 )
 from intrinsical_policy_engine.adapters.logging import StructuredLogger
@@ -31,7 +32,8 @@ def report_warnings(problems: Sequence[Problem], logger: StructuredLogger | None
         )
 
 
-def load_inputs(args: Namespace):
+def load_inputs(args: Namespace) -> tuple[CompiledPack, dict, str]:
+    """Return the compiled pack, the validated raw input and its source SHA-256."""
     pack = YamlContractsAdapter().compile(args.contracts)
     if args.strict and pack.problems:
         raise ContractValidationError(
@@ -46,5 +48,4 @@ def load_inputs(args: Namespace):
         AssessmentInput.model_validate(raw)
     except (OSError, ValueError, UnicodeError, YAMLError) as exc:
         raise DocumentError("Input", args.answers, exc) from exc
-    logger = args.logger
-    return pack, raw, logger, hashlib.sha256(data).hexdigest()
+    return pack, raw, hashlib.sha256(data).hexdigest()

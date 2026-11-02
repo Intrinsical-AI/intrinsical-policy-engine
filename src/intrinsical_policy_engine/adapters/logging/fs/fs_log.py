@@ -110,37 +110,10 @@ class FsLogger:
             ) from error
 
     def info(self, event: str, extra: dict[str, Any] | None = None) -> None:
-        """Log an INFO-level record.
-
-        Args:
-            event: Event name/identifier string.
-            extra: Optional dictionary with additional context data.
-        """
         self._write("INFO", event, extra)
 
     def warning(self, event: str, extra: dict[str, Any] | None = None) -> None:
-        """Log a WARNING-level record.
-
-        Args:
-            event: Event name/identifier string.
-            extra: Optional dictionary with additional context data.
-        """
         self._write("WARNING", event, extra)
 
     def error(self, event: str, extra: dict[str, Any] | None = None) -> None:
-        """Log an ERROR-level record.
-
-        Args:
-            event: Event name/identifier string.
-            extra: Optional dictionary with additional context data.
-        """
         self._write("ERROR", event, extra)
-
-    def debug(self, event: str, extra: dict[str, Any] | None = None) -> None:
-        """Log a DEBUG-level record.
-
-        Args:
-            event: Event name/identifier string.
-            extra: Optional dictionary with additional context data.
-        """
-        self._write("DEBUG", event, extra)

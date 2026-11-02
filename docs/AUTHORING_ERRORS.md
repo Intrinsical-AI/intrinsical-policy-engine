@@ -14,9 +14,11 @@ Conditions are single-operator YAML mappings. Use only `has`, `any_prefix`,
 flags, actions, evidence paths, and profile nodes are declared. `ipe lint`
 validates these references and templates together.
 
-Set action selection on `action.when`. `rules.packs`, `add_actions`, a separate
-`ContractBundle.version`, and `reference_files` are removed contracts, without
-aliases. The pack version belongs to `manifest.yml`.
+Set action selection on `action.when`. The pack version belongs to `manifest.yml`.
+
+For delivery coverage, use `trace_back_to.actions` for action IDs and
+`trace_back_to.articles` for article IDs. Evidence file paths belong in action
+`evidence` or `evidence_map`; they are not article references.
 
 ## Rule does not fire
 

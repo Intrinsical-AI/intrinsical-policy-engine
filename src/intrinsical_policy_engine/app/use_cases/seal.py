@@ -8,7 +8,6 @@ import hashlib
 import os
 import tempfile
 import zipfile
-from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -35,7 +34,6 @@ from intrinsical_policy_engine.domain.services.evidence_requirements import (
 from intrinsical_policy_engine.domain.services.seal_service import (
     SealFileSnapshot,
     SealInput,
-    SealReport,
     SealResult,
     seal_export,
 )
@@ -141,8 +139,6 @@ def _snapshot(export_dir: Path, expected: dict[str, str], quality_engine: Qualit
         metadata.get("_metadata/summary.json"), metadata.get("_metadata/trace.json")
     )
     return SealInput(
-        export_root=str(export_dir),
-        export_exists=True,
         existing_checksums=expected,
         files=tuple(SealFileSnapshot(rel, digest) for rel, digest in actual.items()),
         quality_issues=tuple(issues),
@@ -152,17 +148,9 @@ def _snapshot(export_dir: Path, expected: dict[str, str], quality_engine: Qualit
 
 def _failed(message: str, result: SealResult | None = None) -> SealResult:
     if result is None:
-        errors = [message]
-        return SealResult(
-            success=False,
-            seal_report=SealReport("failed", datetime.now(UTC).isoformat(), 0, errors=errors),
-            errors=errors,
-        )
+        return SealResult(success=False, errors=[message])
     result.success = False
     result.errors.append(message)
-    if result.seal_report.errors is not result.errors:
-        result.seal_report.errors.append(message)
-    result.seal_report.status = "failed"
     return result
 
 

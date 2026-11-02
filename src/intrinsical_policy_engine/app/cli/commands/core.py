@@ -13,16 +13,14 @@ from pathlib import Path
 from yaml import YAMLError
 
 from intrinsical_policy_engine.adapters.contracts.yaml.yaml_contract_adapter import (
+    CompiledPack,
     YamlContractsAdapter,
 )
 from intrinsical_policy_engine.adapters.export.base.models.export_config import ExportSettings
-from intrinsical_policy_engine.adapters.quality.bundle_evidence_validator import (
-    BundleEvidenceValidator,
-)
 from intrinsical_policy_engine.app.cli.commands._helpers import load_inputs, report_warnings
 from intrinsical_policy_engine.app.cli.commands.inspection import inspected_item, rule_groups
 from intrinsical_policy_engine.app.cli.diagnostics import DocumentError
-from intrinsical_policy_engine.app.evidence import check_ci, collect_evidence
+from intrinsical_policy_engine.app.evidence import EvidenceSnapshot, check_ci, collect_evidence
 from intrinsical_policy_engine.app.export.artifacts import write_assessment
 from intrinsical_policy_engine.app.export.orchestrator import export_plan
 from intrinsical_policy_engine.app.export.projection import project_plan
@@ -31,6 +29,7 @@ from intrinsical_policy_engine.common.document_io import read_document
 from intrinsical_policy_engine.common.hashing import compute_framework_pack_hashes
 from intrinsical_policy_engine.common.output_safety import fresh_output
 from intrinsical_policy_engine.common.package_integrity import write_checksums
+from intrinsical_policy_engine.domain.bundles.coverage import profile_coverage
 from intrinsical_policy_engine.domain.contract_models import canonical_date
 from intrinsical_policy_engine.domain.services.assess_service import assess_from_bundle
 
@@ -177,10 +176,12 @@ def _lint(args: Namespace) -> int:
     return int(failed)
 
 
-def _assessment(args: Namespace, settings: ExportSettings | None = None):
+def _assessment(
+    args: Namespace, settings: ExportSettings | None = None
+) -> tuple[CompiledPack, dict, EvidenceSnapshot]:
     if args.base_date is not None:
         canonical_date(args.base_date)
-    pack, raw, logger, source_hash = load_inputs(args)
+    pack, raw, source_hash = load_inputs(args)
     if settings is not None and settings.profiles is not None:
         unknown = set(settings.profiles) - set(pack.bundle_profiles)
         if unknown:
@@ -189,7 +190,7 @@ def _assessment(args: Namespace, settings: ExportSettings | None = None):
     plan = assess_from_bundle(
         pack.bundle,
         raw,
-        logger=logger,
+        logger=args.logger,
         include_full_trace=True,
         base_date=args.base_date,
         framework_pack_hashes=hashes,
@@ -197,16 +198,13 @@ def _assessment(args: Namespace, settings: ExportSettings | None = None):
     )
     plan["trace"]["answers_raw"]["source_file_sha256"] = source_hash
     evidence = collect_evidence(plan, Path(args.evidence_dir) if args.evidence_dir else None)
-    return pack, plan, evidence, logger
+    return pack, plan, evidence
 
 
 def _assess(args: Namespace) -> int:
-    pack, plan, evidence, _logger = _assessment(args)
+    pack, plan, evidence = _assessment(args)
     if args.check_ci:
-        problems = check_ci(plan, evidence)
-        coverage = BundleEvidenceValidator().validate_coverage(pack.bundle_profiles, plan)
-        if coverage.has_critical_gaps():
-            problems.append("CI-004: selected profiles have incomplete action/evidence coverage")
+        problems = check_ci(plan, evidence, profile_coverage(pack.bundle_profiles, plan))
         if problems:
             raise ValueError("\n".join(problems))
     with fresh_output(Path(args.out)) as staging:
@@ -235,7 +233,7 @@ def _export(args: Namespace) -> int:
         settings.for_target(target)
     if len(args.target) != len(set(args.target)):
         raise ValueError("Duplicate export targets")
-    pack, plan, evidence, logger = _assessment(args, settings)
+    pack, plan, evidence = _assessment(args, settings)
     result = export_plan(
         plan=plan,
         pack=pack,
@@ -246,7 +244,7 @@ def _export(args: Namespace) -> int:
         include_raw_input=args.include_raw_input,
         check_ci_enabled=args.check_ci,
         strict=args.strict,
-        logger=logger,
+        logger=args.logger,
     )
     print(f"Export written: {result.outdir} ({result.files} files)")
     print(f"Selected actions: {len(plan['actions'])}; targets: {', '.join(result.targets)}")
@@ -267,7 +265,7 @@ def _seal(args: Namespace) -> int:
         sys.stderr.write(f"Warning: {warning}\n")
     if result.warnings and args.logger is not None:
         args.logger.warning("seal.warnings", {"count": len(result.warnings)})
-    print(f"Seal verified: {result.seal_report.files_validated} files")
+    print(f"Seal verified: {result.files_validated} files")
     print(
         f"Signature verified: {result.signature_fingerprint}"
         if result.signature_fingerprint

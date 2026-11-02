@@ -96,7 +96,7 @@ def test_lint_and_load_share_the_same_errors(pack, file, edit):
     problems = adapter.validate_detailed(str(pack))
     assert problems
     with pytest.raises(CompilationError) as failure:
-        adapter.load(str(pack))
+        adapter.compile(str(pack))
     assert [p.to_dict() for p in problems] == failure.value.problems
     assert any(file in p.source for p in problems)
 
@@ -143,7 +143,7 @@ def test_stop_is_terminal_and_has_an_explicit_blocked_status(pack):
         ),
     )
     plan = assess_from_bundle(
-        YamlContractsAdapter().load(str(pack)), {"flags": ["starter.automated_decision"]}
+        YamlContractsAdapter().compile(str(pack)).bundle, {"flags": ["starter.automated_decision"]}
     )
     assert plan["outcome"] == ["denied"]
     assert plan["actions"] == []
@@ -152,7 +152,7 @@ def test_stop_is_terminal_and_has_an_explicit_blocked_status(pack):
 
 
 def test_no_match_and_literal_none_tier_are_distinct(pack):
-    empty = assess_from_bundle(YamlContractsAdapter().load(str(pack)), {"flags": []})
+    empty = assess_from_bundle(YamlContractsAdapter().compile(str(pack)).bundle, {"flags": []})
     assert empty["risk_tier"] is None
     change(pack, "runtime/semantics.yml", lambda d: d["tiers"].append("none"))
     change(
@@ -161,14 +161,14 @@ def test_no_match_and_literal_none_tier_are_distinct(pack):
         lambda d: d["classifiers"]["risk_tiers"][0]["output"].update(tier="none"),
     )
     plan = assess_from_bundle(
-        YamlContractsAdapter().load(str(pack)), {"flags": ["starter.automated_decision"]}
+        YamlContractsAdapter().compile(str(pack)).bundle, {"flags": ["starter.automated_decision"]}
     )
     assert plan["risk_tier"] == "none"
     assert plan["system_profile"]["risk_tier"] == "none"
 
 
 def test_library_rejects_unknown_and_malformed_input(pack):
-    bundle = YamlContractsAdapter().load(str(pack))
+    bundle = YamlContractsAdapter().compile(str(pack)).bundle
     with pytest.raises(AssessmentError, match="unknown flags"):
         assess_from_bundle(bundle, {"flags": ["starter.needs_reveiw"]})
     for bad in (
@@ -214,7 +214,7 @@ def test_library_rejects_unknown_and_malformed_input(pack):
 def test_direct_typed_bundles_reject_invalid_references_before_evaluation(
     pack, monkeypatch, edit, field_path
 ):
-    raw = YamlContractsAdapter().load(str(pack)).model_dump(mode="json")
+    raw = YamlContractsAdapter().compile(str(pack)).bundle.model_dump(mode="json")
     edit(raw)
     bundle = ContractBundle.model_validate(raw)
 
@@ -278,11 +278,11 @@ def test_pack_hash_uses_captured_bytes_after_source_changes(pack):
     before = compute_framework_pack_hashes(compiled.layout)
     (pack / "law/core/actions.yml").write_text("broken: source\n")
     assert compute_framework_pack_hashes(compiled.layout) == before
-    assert compiled.source_bytes["law/core/actions.yml"].startswith(b"actions:")
+    assert compiled.layout.source_bytes["law/core/actions.yml"].startswith(b"actions:")
 
 
 def test_semantic_hash_survives_metadata_redaction(pack):
-    bundle = YamlContractsAdapter().load(str(pack))
+    bundle = YamlContractsAdapter().compile(str(pack)).bundle
     plan = assess_from_bundle(
         bundle, {"flags": ["starter.automated_decision"], "system": {"name": "Private"}}
     )
@@ -303,7 +303,7 @@ def test_semantic_hash_does_not_depend_on_source_formatting_or_trace(pack):
     second_plan = assess_from_bundle(second.bundle, {"flags": ["starter.automated_decision"]})
     second_plan["trace"]["derivations_applied"] = []
     second_plan["trace"]["framework_pack_hash"] = "different-source-fingerprint"
-    assert first.source_bytes != second.source_bytes
+    assert first.layout.source_bytes != second.layout.source_bytes
     assert compute_plan_hash(plan) == compute_plan_hash(second_plan)
 
 
@@ -345,7 +345,7 @@ def test_copy_sources_are_captured_for_export_without_reopening(pack):
     )
     compiled = YamlContractsAdapter().compile(str(pack))
     source.write_bytes(b"changed-after-compilation")
-    assert compiled.source_bytes["delivery/source.txt"] == b"captured-copy"
+    assert compiled.layout.source_bytes["delivery/source.txt"] == b"captured-copy"
 
 
 def test_template_warnings_are_shared_by_compile_and_lint(pack):
@@ -363,7 +363,7 @@ def test_template_syntax_errors_are_load_errors(pack):
     source.write_text("{% if %}")
     adapter = YamlContractsAdapter()
     with pytest.raises(CompilationError):
-        adapter.load(str(pack))
+        adapter.compile(str(pack))
     assert any(problem.code == "TPL_SYNTAX" for problem in adapter.validate_detailed(str(pack)))
 
 
@@ -428,7 +428,7 @@ def test_unrelated_binary_assets_remain_valid_and_captured(pack):
     asset = pack / "render" / "artifacts" / "core" / "image.bin"
     asset.write_bytes(b"\xff\x00\xfe")
     compiled = YamlContractsAdapter().compile(str(pack))
-    assert compiled.source_bytes["render/artifacts/core/image.bin"] == b"\xff\x00\xfe"
+    assert compiled.layout.source_bytes["render/artifacts/core/image.bin"] == b"\xff\x00\xfe"
 
 
 def test_backlog_split_filenames_are_canonical(pack):

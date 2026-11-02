@@ -365,6 +365,3 @@ class ContractBundle(ContractModel):
 
     def get_actions_dict(self) -> dict[str, ActionDefinition]:
         return {action.id: action for action in self.actions.actions}
-
-    def get_action_by_id(self, action_id: str) -> ActionDefinition | None:
-        return self.get_actions_dict().get(action_id)

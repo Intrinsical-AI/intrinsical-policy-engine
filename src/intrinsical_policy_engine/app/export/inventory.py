@@ -6,10 +6,13 @@ from collections.abc import Collection
 from typing import Any
 
 from intrinsical_policy_engine.adapters.contracts.yaml.yaml_contract_adapter import CompiledPack
-from intrinsical_policy_engine.app.config.constants import ICS_FILE
 from intrinsical_policy_engine.domain.bundles.models import BundleProfile
 from intrinsical_policy_engine.domain.bundles.selection import selected_nodes
-from intrinsical_policy_engine.domain.output_inventory import OutputInventory, require_authored_path
+from intrinsical_policy_engine.domain.output_inventory import (
+    ICS_FILE,
+    OutputInventory,
+    require_authored_path,
+)
 from intrinsical_policy_engine.domain.snapshot_contract import REQUIRED_METADATA
 
 
@@ -30,7 +33,7 @@ def _filesystem_outputs(
     prefix = pack.layout.manifest.templates_dir
     for name in ("README.md", "LEGAL_NOTICE.md"):
         template = f"{prefix}/artifacts/core/{name}.j2"
-        if template in pack.source_bytes and name not in inventory.files:
+        if template in pack.layout.source_bytes and name not in inventory.files:
             inventory.add_file(name, f"core template {template}")
     inventory.add_file("_metadata/actions.json", "action metadata")
     for split in pack.backlog_config.splits:

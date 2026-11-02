@@ -48,7 +48,6 @@ class CompiledPack:
     layout: FrameworkLayout
     bundle: ContractBundle
     bundle_profiles: dict[str, BundleProfile]
-    source_bytes: dict[str, bytes]
     backlog_config: BacklogConfig
     context_defaults: dict
     problems: tuple[Problem, ...] = ()
@@ -172,26 +171,13 @@ class YamlContractsAdapter:
             raise CompilationError(problems)
         if backlog is None or context is None:
             raise RuntimeError("compilation invariant violated")
-        return CompiledPack(
-            layout, bundle, profiles, dict(layout.source_bytes), backlog, context, tuple(problems)
-        )
-
-    def load(self, path: str) -> ContractBundle:
-        return self.compile(path).bundle
-
-    def load_bundle_profiles(self, path: str) -> dict[str, BundleProfile]:
-        return self.compile(path).bundle_profiles
+        return CompiledPack(layout, bundle, profiles, backlog, context, tuple(problems))
 
     def validate_detailed(self, path: str) -> list[Problem]:
         try:
             return list(self.compile(path).problems)
         except CompilationError as exc:
             return list(exc.diagnostics)
-
-    def validate(self, path: str) -> list[str]:
-        return [
-            f"[{p.code}] {p.source}:{p.field_path}: {p.msg}" for p in self.validate_detailed(path)
-        ]
 
     @staticmethod
     def _problem_sources(where: str, layout: FrameworkLayout) -> str:

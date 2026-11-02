@@ -40,14 +40,3 @@ def build_subject_profile(
         regimes=tuple(outcome_axes["regimes"]),
         blocked=outcome_axes["blocked"],
     )
-
-
-def subject_profile_from_dict(data: dict) -> SubjectProfile:
-    return SubjectProfile(
-        name=data["name"],
-        framework=data["framework"],
-        risk_tier=data["risk_tier"],
-        roles=tuple(data["roles"]),
-        regimes=tuple(data["regimes"]),
-        blocked=data["blocked"],
-    )

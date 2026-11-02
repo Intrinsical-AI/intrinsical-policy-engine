@@ -2,7 +2,6 @@
 # Copyright 2024-2026 Pablo P.C.
 """The single artifact assembler with strict variables and explicit answers."""
 
-from pathlib import Path
 from typing import Any
 
 from jinja2 import BaseLoader, Environment, TemplateNotFound, pass_context
@@ -31,24 +30,11 @@ class SnapshotTemplateLoader(BaseLoader):
 
 
 class ArtifactAssembler:
-    def __init__(
-        self, templates_dir: Path, *, template_sources: dict[str, bytes] | None = None
-    ) -> None:
-        self._env = create_jinja_env(str(templates_dir))
-        if template_sources is not None:
-            self._env.loader = SnapshotTemplateLoader(template_sources)
-        self._env.globals["fill"] = fill
+    """Render only captured template bytes, never files read after compilation."""
 
-    @property
-    def env(self) -> Environment:
-        return self._env
+    def __init__(self, template_sources: dict[str, bytes]) -> None:
+        self._env = create_jinja_env(SnapshotTemplateLoader(template_sources))
+        self._env.globals["fill"] = fill
 
     def render(self, template_name: str, context: dict[str, Any]) -> str:
         return self._env.get_template(template_name).render(**context)
-
-    def assemble(
-        self, template_name: str, context: dict[str, Any], answers: dict[str, Any] | None = None
-    ) -> str:
-        return self.render(
-            template_name, {**context, **({"answers": answers} if answers is not None else {})}
-        )

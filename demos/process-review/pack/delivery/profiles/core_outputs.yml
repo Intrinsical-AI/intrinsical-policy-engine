@@ -14,7 +14,7 @@ profiles:
         - process.intake
         - process.review
         - process.approval
-        evidences:
+        articles:
         - process.topic.intake
         - process.topic.review
         - process.topic.approval

@@ -54,9 +54,8 @@ def validate_pack_templates(
         name for name in sources if PurePosixPath(name).suffix == ".j2"
     }
     seen: set[str] = set()
-    env = create_jinja_env(".")
     loader = SnapshotTemplateLoader(sources)
-    env.loader = loader
+    env = create_jinja_env(loader)
     env.globals["fill"] = lambda *_args: ""
     known = KNOWN_CONTEXT_KEYS | context_keys
     while pending:

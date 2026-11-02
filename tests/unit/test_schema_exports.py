@@ -80,6 +80,10 @@ def test_structural_schemas_keep_closed_models_and_document_semantic_limits():
         assert schema["additionalProperties"] is False
     manifest = json.loads(artifacts["pack-manifest.schema.json"])
     assert manifest["properties"]["pack_format_version"]["const"] == 3
+    profiles = json.loads(artifacts["bundle-profiles.schema.json"])
+    trace = profiles["$defs"]["TraceBackTo"]
+    assert set(trace["properties"]) == {"actions", "articles"}
+    assert trace["additionalProperties"] is False
     limits = " ".join(json.loads(artifacts["index.json"])["validation_limits"])
     assert "exactly one" in limits
     assert "Python field or model validators" in limits

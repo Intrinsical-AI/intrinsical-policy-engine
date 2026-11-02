@@ -20,12 +20,9 @@ from intrinsical_policy_engine.adapters.export.base.evidence.task_graph import (
     build_task_items,
     stable_uid,
 )
-from intrinsical_policy_engine.adapters.export.base.exporters.base_exporter import BaseExporter
 from intrinsical_policy_engine.adapters.export.base.models.export_config import ExportSettings
 from intrinsical_policy_engine.adapters.export.bundles.bundle_exporter import BundleExporter
-from intrinsical_policy_engine.adapters.quality.bundle_evidence_validator import (
-    BundleEvidenceValidator,
-)
+from intrinsical_policy_engine.adapters.export.filesystem.ics import write_ics
 from intrinsical_policy_engine.adapters.quality.engine import QualityEngine
 from intrinsical_policy_engine.app.config.context import build_artifact_context
 from intrinsical_policy_engine.app.evidence import EvidenceSnapshot
@@ -34,6 +31,7 @@ from intrinsical_policy_engine.app.export.projection import project_plan
 from intrinsical_policy_engine.app.rendering.templating import ArtifactAssembler
 from intrinsical_policy_engine.domain.bundles.context import EvalContext
 from intrinsical_policy_engine.domain.bundles.context_builders import legal_backlog_builder
+from intrinsical_policy_engine.domain.bundles.coverage import profile_coverage
 from intrinsical_policy_engine.domain.bundles.models import BacklogConfig
 from intrinsical_policy_engine.domain.services.assess_service import assess_from_bundle
 from intrinsical_policy_engine.domain.services.integrity import compute_plan_hash
@@ -69,7 +67,7 @@ def leaf(**changes):
         "template": "artifacts/core/variant.md.j2",
         "trace_back_to": {
             "actions": ["STARTER-CONTROL-REVIEW"],
-            "evidences": ["TOPIC-STARTER-CONTROLS"],
+            "articles": ["TOPIC-STARTER-CONTROLS"],
         },
         **changes,
     }
@@ -79,10 +77,10 @@ def assembler(compiled):
     prefix = compiled.layout.templates_dir.relative_to(compiled.layout.framework_dir).as_posix()
     sources = {
         name.removeprefix(prefix + "/"): content
-        for name, content in compiled.source_bytes.items()
+        for name, content in compiled.layout.source_bytes.items()
         if name.startswith(prefix + "/")
     }
-    return ArtifactAssembler(compiled.layout.templates_dir, template_sources=sources)
+    return ArtifactAssembler(sources)
 
 
 def assessed(compiled, **options):
@@ -90,32 +88,40 @@ def assessed(compiled, **options):
 
 
 @pytest.mark.parametrize("enabled", [False, True])
-@pytest.mark.parametrize("guard", ["parent", "profile"])
-def test_renderer_and_coverage_share_parent_and_profile_guards(variation, tmp_path, enabled, guard):
-    nodes = [leaf()]
+@pytest.mark.parametrize("guard", ["node", "parent", "profile"])
+@pytest.mark.parametrize("counts_for_coverage", [False, True])
+def test_renderer_and_coverage_share_selection_and_coverage_opt_out(
+    variation, tmp_path, enabled, guard, counts_for_coverage
+):
+    nodes = [leaf(counts_for_coverage=counts_for_coverage)]
     when = {"has": "variant.enabled"}
     if guard == "parent":
         nodes = [{"id": "parent", "kind": "dir", "name": "nested", "when": when, "children": nodes}]
         profiles(variation, nodes)
-    else:
+    elif guard == "profile":
         profiles(variation, nodes, when=when)
+    else:
+        nodes[0]["when"] = when
+        profiles(variation, nodes)
     compiled = YamlContractsAdapter().compile(str(variation))
     plan = assessed(compiled)
     if enabled:
         plan["flags"].append("variant.enabled")
-    expected = BundleEvidenceValidator().validate_coverage(compiled.bundle_profiles, plan)
+    coverage = profile_coverage(compiled.bundle_profiles, plan)
     context = EvalContext(
         plan=plan, extras=build_artifact_context(plan, defaults=compiled.context_defaults)
     )
     target = tmp_path / "rendered"
     target.mkdir()
-    actual = BundleExporter(assembler(compiled)).export_profile(
+    BundleExporter(assembler(compiled)).export_profile(
         compiled.bundle_profiles["variation"], context, target
     )
-    assert actual.covered_actions == expected.covered_actions
-    assert actual.covered_evidences == expected.covered_evidences
-    assert bool(actual.generated_files) is enabled
-    assert expected.has_critical_gaps() is not enabled
+    rendered = [path for path in target.rglob("*") if path.is_file()]
+    assert bool(rendered) is enabled
+    credited = enabled and counts_for_coverage
+    assert coverage.covered_actions == ({"STARTER-CONTROL-REVIEW"} if credited else set())
+    assert coverage.covered_articles == ({"TOPIC-STARTER-CONTROLS"} if credited else set())
+    assert coverage.has_critical_gaps() is not credited
     if not enabled:
         assert list(target.iterdir()) == []
 
@@ -126,10 +132,10 @@ def test_copy_node_uses_captured_bytes_after_source_changes(variation, tmp_path)
         variation, [{"id": "copy", "kind": "copy", "source": source, "target": "copied-source.bin"}]
     )
     compiled = YamlContractsAdapter().compile(str(variation))
-    captured = compiled.source_bytes[source]
+    captured = compiled.layout.source_bytes[source]
     (variation / source).write_bytes(b"changed after compilation")
     plan = assessed(compiled)
-    context = EvalContext(plan=plan, extras={"source_bytes": compiled.source_bytes})
+    context = EvalContext(plan=plan, extras={"source_bytes": compiled.layout.source_bytes})
     target = tmp_path / "rendered"
     target.mkdir()
     BundleExporter(assembler(compiled)).export_profile(
@@ -410,7 +416,7 @@ def test_explicit_backlog_fallback_keeps_unmatched_actions():
 @pytest.mark.parametrize("due", ["0001-01-01", "2026-11-12", "9999-12-31"])
 def test_calendar_supports_the_full_canonical_date_range(tmp_path, due):
     plan = {"due_hints": {"review": due}, "export_context": {"uid_namespace": "calendar"}}
-    calendar = BaseExporter().export_ics(plan, tmp_path, prodid="calendar regression")
+    calendar = write_ics(plan, tmp_path, prodid="calendar regression")
     assert calendar is not None
     content = calendar.read_bytes().decode("utf-8")
     assert f"DTSTART;VALUE=DATE:{due.replace('-', '')}\r\n" in content

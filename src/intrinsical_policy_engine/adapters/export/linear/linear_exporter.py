@@ -20,14 +20,11 @@ from intrinsical_policy_engine.adapters.export.base.models.shapes import TaskIte
 class LinearExporter(BaseApiExporter[LinearExportConfig]):
     """Translate plan actions into Linear issues."""
 
+    target = "linear"
     config_type = LinearExportConfig
 
-    def get_target_name(self) -> str:
-        """Identifier used when selecting exporters."""
-        return "linear"
-
     def build_request_record(
-        self, item: TaskItem, description: str, cfg: LinearExportConfig, headers: dict[str, str]
+        self, item: TaskItem, cfg: LinearExportConfig, headers: dict[str, str]
     ) -> dict[str, Any]:
         """Build Linear GraphQL API request record."""
         label_ids = map_labels_to_ids(item.labels, cfg.labelIds_by_label, cfg.labelIds)
@@ -40,7 +37,7 @@ class LinearExporter(BaseApiExporter[LinearExportConfig]):
             "variables": {
                 "input": {
                     "title": item.title,
-                    "description": description,
+                    "description": item.description_md,
                     "dueDate": item.due,
                     "labelIds": label_ids,
                     "teamId": cfg.teamId,

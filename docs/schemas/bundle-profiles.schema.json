@@ -249,6 +249,7 @@
     },
     "TraceBackTo": {
       "additionalProperties": false,
+      "description": "Declared action and article IDs credited toward profile coverage.",
       "properties": {
         "actions": {
           "default": [],
@@ -260,14 +261,14 @@
           "title": "Actions",
           "type": "array"
         },
-        "evidences": {
+        "articles": {
           "default": [],
           "items": {
             "minLength": 1,
             "pattern": "^\\S+$",
             "type": "string"
           },
-          "title": "Evidences",
+          "title": "Articles",
           "type": "array"
         }
       },

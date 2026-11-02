@@ -37,8 +37,10 @@ class BacklogConfig(ContractModel):
 
 
 class TraceBackTo(ContractModel):
+    """Declared action and article IDs credited toward profile coverage."""
+
     actions: Strings = ()
-    evidences: Strings = ()
+    articles: Strings = ()
 
 
 class BundleNode(ContractModel):

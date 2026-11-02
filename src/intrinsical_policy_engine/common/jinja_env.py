@@ -4,7 +4,7 @@
 
 from datetime import date, timedelta
 
-from jinja2 import Environment, FileSystemLoader, StrictUndefined, select_autoescape
+from jinja2 import BaseLoader, Environment, StrictUndefined, select_autoescape
 
 from intrinsical_policy_engine.domain.contract_models import canonical_date
 from intrinsical_policy_engine.domain.services.duedate_service import resolve_calendar_date
@@ -27,9 +27,9 @@ def to_bool(value: bool) -> str:
     return "true" if value else "false"
 
 
-def create_jinja_env(templates_dir: str) -> Environment:
+def create_jinja_env(loader: BaseLoader) -> Environment:
     env = Environment(
-        loader=FileSystemLoader(templates_dir),
+        loader=loader,
         undefined=StrictUndefined,
         autoescape=select_autoescape(("html", "xml")),
     )

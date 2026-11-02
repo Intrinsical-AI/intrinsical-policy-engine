@@ -100,7 +100,7 @@ def test_multiple_producers_can_share_an_output_directory():
 def test_optional_regulatory_context_has_a_stable_empty_shape(tmp_path):
     pack = YamlContractsAdapter().compile("frameworks/starter")
     source = "render/artifacts/core/00_START_HERE.md.j2"
-    pack.source_bytes[source] = (
+    pack.layout.source_bytes[source] = (
         b"Warnings: {{ regulatory_warnings | length }}; present: {{ regulatory_meta is not none }}"
     )
     _export(pack, tmp_path / "export")

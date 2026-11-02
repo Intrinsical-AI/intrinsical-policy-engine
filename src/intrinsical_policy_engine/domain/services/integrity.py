@@ -18,7 +18,6 @@ _METADATA = frozenset(
         "approvals",
         "meta",
         "export_context",
-        "audit",
         "assessment_timestamp",
         "snapshot_format_version",
         "plan_hash",

@@ -1,6 +1,6 @@
 {
   "schema": "ipe.delivery-plan/1",
-  "recorded_at": "2026-10-19T00:24:10.648886+00:00",
+  "recorded_at": "2026-10-19T20:32:01.038197+00:00",
   "scope": "Complete original six-month plan traceability; engineering evidence, proposed organization and external acceptance remain distinct.",
   "original_plan": {
     "capture": "out/implementation-validation-20261018/review/original-plan.txt",
@@ -583,7 +583,7 @@
       "status": "local_evidence_recorded_with_gate_scope_limits",
       "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
       "linked_gate_statuses": {
-        "CI-CONFIGURATION": "locally_verified_configuration_remote_pending"
+        "CI-CONFIGURATION": "candidate_revision_verified_locally_and_remotely"
       }
     },
     {
@@ -797,7 +797,7 @@
       "status": "local_evidence_recorded_with_gate_scope_limits",
       "completion_rule": "All applicable linked gates must be satisfied; conditional gates activate only under their documented trigger. This status is derived from linked evidence, not an independent completion claim.",
       "linked_gate_statuses": {
-        "CI-CONFIGURATION": "locally_verified_configuration_remote_pending"
+        "CI-CONFIGURATION": "candidate_revision_verified_locally_and_remotely"
       }
     },
     {
@@ -1155,7 +1155,7 @@
         "CONTRACTS": "locally_verified_at_recorded_revision",
         "DOCUMENTATION": "locally_verified_at_recorded_revision",
         "LOCAL-ARTIFACTS": "locally_verified_at_recorded_revision",
-        "CI-CONFIGURATION": "locally_verified_configuration_remote_pending"
+        "CI-CONFIGURATION": "candidate_revision_verified_locally_and_remotely"
       }
     },
     {
@@ -2508,14 +2508,24 @@
       "human_acceptance_claimed": false,
       "evidence": [
         "out/implementation-validation-20261018/review/wip-inventory.json",
-        "out/implementation-validation-20261018/review/review-groups.json"
+        "out/implementation-validation-20261018/review/review-groups.json",
+        "out/implementation-validation-20261019-typed/prepared-git-candidate.json",
+        "out/implementation-validation-20261019-typed/committed-source-verification.json"
       ],
       "required_evidence": [
         "A consistent captured inventory and review grouping; actual reviews and integration remain separate."
       ],
       "depends_on": [
         "TRACKING"
-      ]
+      ],
+      "isolated_checkpoint": {
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "includes_preexisting_wip": true,
+        "human_review_claimed": false,
+        "merged_into_main": false,
+        "prepared_snapshot": "out/implementation-validation-20261019-typed/prepared-git-candidate.json"
+      }
     },
     {
       "id": "TRACKING",
@@ -2695,7 +2705,8 @@
         "out/implementation-validation-20261019/summary.json",
         "out/implementation-validation-20261019/docs-full/documented-examples.json",
         "out/implementation-validation-20261019-typed/summary.json",
-        "out/implementation-validation-20261019-typed/docs-full/documented-examples.json"
+        "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
       ],
       "depends_on": [],
       "full_execution": {
@@ -2707,6 +2718,12 @@
         "scope": "all_registered_blocks",
         "original_and_copied_sources_verified_unchanged": true,
         "independent_human_onboarding_claimed": false
+      },
+      "remote_full_execution": {
+        "run_id": 39319125584,
+        "python": "3.12",
+        "completed_blocks": 18,
+        "receipt": "out/implementation-validation-20261019-typed/remote/39319125584/receipts/python-3.12/documented-examples.json"
       }
     },
     {
@@ -2951,7 +2968,8 @@
         "out/implementation-validation-20261019-typed/installed/3.11-sdist/conformance.json",
         "out/implementation-validation-20261019-typed/installed/3.12-wheel/conformance.json",
         "out/implementation-validation-20261019-typed/installed/3.12-sdist/conformance.json",
-        "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json"
+        "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
       ],
       "depends_on": [],
       "installed_matrix": [
@@ -3004,8 +3022,8 @@
     },
     {
       "id": "CI-CONFIGURATION",
-      "status": "locally_verified_configuration_remote_pending",
-      "description": "Configured Linux interpreter matrix, correctness/schema/lock checks and failure-receipt retention; execution at remote revision remains external.",
+      "status": "candidate_revision_verified_locally_and_remotely",
+      "description": "Build-once Linux interpreter matrix executed successfully on the isolated candidate revision; final artifacts and all matrix receipts are retained. Human release acceptance remains separate.",
       "owner_role": "D3",
       "reviewer_role": "D1",
       "assigned_person": null,
@@ -3021,11 +3039,34 @@
         "out/implementation-validation-20261019/ci-configuration.json",
         "out/implementation-validation-20261019-typed/summary.json",
         "out/implementation-validation-20261019-typed/candidate.json",
-        "out/implementation-validation-20261019-typed/ci-configuration.json"
+        "out/implementation-validation-20261019-typed/ci-configuration.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
       ],
       "depends_on": [],
-      "remote_execution_status": "not_run",
-      "build_once_installed_matrix": "One distribution pair is downloaded by both Python cells and bound by the candidate aggregator; local execution does not claim remote CI."
+      "remote_execution_status": "passed",
+      "build_once_installed_matrix": "One distribution pair is downloaded by both Python cells and bound by the candidate aggregator; local execution does not claim remote CI.",
+      "remote_candidate": {
+        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "verification": {
+          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+        },
+        "run": {
+          "id": 39319125584,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "source_files_match_local_candidate": true,
+        "artifact_bytes_match_local_build": false,
+        "remote_pair_tested_in_four_cells": true,
+        "main_changed": false,
+        "release_owner_acceptance": "pending",
+        "release_publication_performed": false,
+        "human_acceptance_claimed": false
+      }
     },
     {
       "id": "RELEASE-AUTOMATION",
@@ -3040,7 +3081,8 @@
         "scripts/release_candidate.py",
         "tests/unit/test_release_candidate.py",
         ".github/workflows/ci.yml",
-        "out/implementation-validation-20261019-typed/candidate.json"
+        "out/implementation-validation-20261019-typed/candidate.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
       ],
       "required_evidence": [
         "Release/candidate workflow or script, local configuration checks and artifact handover receipt; publication remains gated separately."
@@ -3096,7 +3138,8 @@
         "out/implementation-validation-20261019/handover.json",
         "out/implementation-validation-20261019/candidate.json",
         "out/implementation-validation-20261019-typed/handover.json",
-        "out/implementation-validation-20261019-typed/candidate.json"
+        "out/implementation-validation-20261019-typed/candidate.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
       ],
       "required_evidence": [
         "Maintenance/release/support handover artifact and source-bound candidate receipt. No actual maintainer acceptance is inferred."
@@ -3140,12 +3183,38 @@
       "reviewer_role": "PRODUCT",
       "assigned_person": null,
       "human_acceptance_claimed": false,
-      "evidence": [],
+      "evidence": [
+        "out/implementation-validation-20261019-typed/remote-verification.json"
+      ],
       "depends_on": [
         "RELEASE-AUTOMATION",
         "UPGRADE-REHEARSAL",
         "HANDOVER"
-      ]
+      ],
+      "remote_ci_status": "passed",
+      "remote_candidate": {
+        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "verification": {
+          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+        },
+        "run": {
+          "id": 39319125584,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "source_files_match_local_candidate": true,
+        "artifact_bytes_match_local_build": false,
+        "remote_pair_tested_in_four_cells": true,
+        "main_changed": false,
+        "release_owner_acceptance": "pending",
+        "release_publication_performed": false,
+        "human_acceptance_claimed": false
+      },
+      "required_next_evidence": "Named release owner accepts the intended candidate/revision; actual release publication remains a distinct pending gate."
     },
     {
       "id": "PUBLICATION",
@@ -3858,5 +3927,27 @@
     "publication_authorized": false,
     "human_acceptance_claimed": false,
     "original_dirty_audited_state_reconstructed": false
+  },
+  "latest_remote_validation": {
+    "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+    "verification": {
+      "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+      "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+    },
+    "run": {
+      "id": 39319125584,
+      "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+    "branch": "codex/ipe-v3-candidate-20261019-typed",
+    "source_files_match_local_candidate": true,
+    "artifact_bytes_match_local_build": false,
+    "remote_pair_tested_in_four_cells": true,
+    "main_changed": false,
+    "release_owner_acceptance": "pending",
+    "release_publication_performed": false,
+    "human_acceptance_claimed": false
   }
 }

@@ -7,8 +7,9 @@ from pathlib import PurePosixPath
 
 from intrinsical_policy_engine.domain.snapshot_contract import CONTROL_PATHS, canonical_path
 
+ICS_FILE = "compliance.ics"
 ENGINE_NAMESPACES = frozenset({"_metadata", "evidence", "exports", "backlogs"})
-ENGINE_FILES = CONTROL_PATHS | {"evidence.zip", "compliance.ics"}
+ENGINE_FILES = CONTROL_PATHS | {"evidence.zip", ICS_FILE}
 
 
 class OutputCollisionError(ValueError):

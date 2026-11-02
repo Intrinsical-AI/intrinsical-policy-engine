@@ -285,10 +285,10 @@ class _BundleValidator:
                 node.trace_back_to.actions, self.actions, loc + ".trace_back_to.actions", "action"
             )
             self.refs(
-                node.trace_back_to.evidences,
-                self.actions | self.articles,
-                loc + ".trace_back_to.evidences",
-                "evidence owner",
+                node.trace_back_to.articles,
+                self.articles,
+                loc + ".trace_back_to.articles",
+                "article",
             )
             node_ids.extend(self.validate_nodes(node.children, loc + ".children"))
         return node_ids

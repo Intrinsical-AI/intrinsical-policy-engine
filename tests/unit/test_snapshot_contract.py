@@ -130,7 +130,8 @@ def test_current_snapshot_can_be_sealed_without_rewriting_metadata(tmp_path):
 
 def test_authored_depth_boundary_round_trips_through_summary_and_seal(tmp_path: Path) -> None:
     fixtures = Path(__file__).resolve().parents[2]
-    raw = YamlContractsAdapter().load(str(fixtures / "frameworks/starter")).model_dump(mode="json")
+    bundle = YamlContractsAdapter().compile(str(fixtures / "frameworks/starter")).bundle
+    raw = bundle.model_dump(mode="json")
     condition: dict[str, Any] = {"has": "starter.automated_decision"}
     for _ in range(30):
         condition = {"all": [condition]}

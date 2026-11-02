@@ -16,7 +16,6 @@ class DerivationResult:
     derived_flags: frozenset[str]
     derivations_applied: tuple[dict, ...] = ()
     rules_evaluated: int = 0
-    iterations: int = 0
 
 
 def derive_with_trace(flags: set[str], rules: RulesContract) -> DerivationResult:
@@ -24,9 +23,7 @@ def derive_with_trace(flags: set[str], rules: RulesContract) -> DerivationResult
     pending = list(rules.derivations)
     applied: list[dict] = []
     evaluated = 0
-    iterations = 0
     while pending:
-        iterations += 1
         remaining = []
         additions: set[str] = set()
         for rule in pending:
@@ -47,10 +44,4 @@ def derive_with_trace(flags: set[str], rules: RulesContract) -> DerivationResult
             break
         result.update(additions)
         pending = remaining
-    return DerivationResult(
-        frozenset(result), frozenset(result - flags), tuple(applied), evaluated, iterations
-    )
-
-
-def derive(flags: set[str], rules: RulesContract) -> set[str]:
-    return set(derive_with_trace(flags, rules).final_flags)
+    return DerivationResult(frozenset(result), frozenset(result - flags), tuple(applied), evaluated)

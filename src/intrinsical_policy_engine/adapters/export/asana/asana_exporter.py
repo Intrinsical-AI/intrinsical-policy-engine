@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import csv
+from pathlib import Path
 from typing import Any
 
 from intrinsical_policy_engine.adapters.export.base.evidence.task_graph import build_task_items
@@ -23,14 +24,11 @@ from intrinsical_policy_engine.common.constants import DEFAULT_ENCODING
 class AsanaExporter(BaseApiExporter[AsanaExportConfig]):
     """Translate plan actions into Asana requests and helper CSV files."""
 
+    target = "asana"
     config_type = AsanaExportConfig
 
-    def get_target_name(self) -> str:
-        """Identifier used by the export orchestrator."""
-        return "asana"
-
     def build_request_record(
-        self, item: TaskItem, description: str, cfg: AsanaExportConfig, headers: dict[str, str]
+        self, item: TaskItem, cfg: AsanaExportConfig, headers: dict[str, str]
     ) -> dict[str, Any]:
         """Build Asana API request record."""
         tag_gids = map_labels_to_ids(item.labels, cfg.tag_gids_by_label, cfg.tag_gids)
@@ -38,7 +36,7 @@ class AsanaExporter(BaseApiExporter[AsanaExportConfig]):
         body = {
             "data": {
                 "name": item.title,
-                "notes": description,
+                "notes": item.description_md,
                 "due_on": item.due,
                 "projects": [cfg.project_gid],
                 "tags": tag_gids,
@@ -58,15 +56,15 @@ class AsanaExporter(BaseApiExporter[AsanaExportConfig]):
             uid=item.uid,
         )
 
-    def export(self, plan: dict[str, Any], templates_dir: str, out_dir: str) -> None:
+    def export(self, plan: dict[str, Any], out_dir: Path) -> None:
         """Generate offline requests and the Asana import file."""
         items = build_task_items(plan)
         self._export_items(items, out_dir)
         self._export_csv(items, out_dir)
 
-    def _export_csv(self, items: list[TaskItem], out_dir: str) -> None:
+    def _export_csv(self, items: list[TaskItem], out_dir: Path) -> None:
         """Export Asana-friendly CSV import file."""
-        base = self._ensure_export_dir(out_dir, "asana")
+        base = self._ensure_export_dir(out_dir)
         csv_path = base / "import.csv"
 
         with csv_path.open("x", newline="", encoding=DEFAULT_ENCODING) as cf:
@@ -95,8 +93,6 @@ class AsanaExporter(BaseApiExporter[AsanaExportConfig]):
                 for lbl in it.labels:
                     if lbl.isdigit():
                         tag_names.append(f"Art.{lbl}")
-                    elif lbl.startswith("P") and len(lbl) == 2:
-                        tag_names.append(f"Prioridad:{lbl}")
                     else:
                         tag_names.append(lbl)
 

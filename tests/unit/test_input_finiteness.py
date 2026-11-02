@@ -33,7 +33,7 @@ def test_input_rejects_nested_nonfinite_metadata(section: str, number: float) ->
 
 @pytest.mark.parametrize("number", NONFINITE, ids=NUMBER_IDS)
 def test_library_assessment_rejects_nested_nonfinite_metadata(number: float) -> None:
-    bundle = YamlContractsAdapter().load("frameworks/starter")
+    bundle = YamlContractsAdapter().compile("frameworks/starter").bundle
     raw = {"flags": [], "meta": {"nested": [{"measure": number}]}}
     with pytest.raises(ValidationError, match="finite"):
         assess_from_bundle(bundle, raw, include_full_trace=True)

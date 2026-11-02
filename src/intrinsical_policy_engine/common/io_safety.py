@@ -1,15 +1,12 @@
 # SPDX-License-Identifier: MPL-2.0
 # Copyright 2024-2026 Pablo P.C.
-"""
-I/O safety utilities for atomic writes and concurrency control.
-"""
+"""Platform-native exclusive file locks for cooperating writers."""
 
 import contextlib
 import errno
 import os
 import random
 import stat
-import tempfile
 import time
 from collections.abc import Generator
 from pathlib import Path
@@ -59,35 +56,6 @@ def _unlock(file: BinaryIO) -> None:
     import fcntl
 
     fcntl.flock(file, fcntl.LOCK_UN)
-
-
-def atomic_write_text(path: Path, text: str, encoding: str = "utf-8") -> None:
-    """Write text to a file atomically using a temporary file and os.replace.
-
-    Args:
-        path: Target file path.
-        text: Content to write.
-        encoding: Text encoding (default utf-8).
-    """
-    # Ensure parent directory exists
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    # Create a temp file in the same directory to ensure os.replace works (same filesystem)
-    # delete=False because we want to close it and then rename it.
-    fd, tmp_path = tempfile.mkstemp(dir=path.parent, text=True)
-    try:
-        with os.fdopen(fd, "w", encoding=encoding) as f:
-            f.write(text)
-            f.flush()
-            os.fsync(f.fileno())
-
-        # Atomic replace
-        os.replace(tmp_path, path)
-    except Exception:
-        # Cleanup temp file on failure
-        with contextlib.suppress(OSError):
-            os.unlink(tmp_path)
-        raise
 
 
 @contextlib.contextmanager

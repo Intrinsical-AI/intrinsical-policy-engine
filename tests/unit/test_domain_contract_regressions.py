@@ -45,7 +45,7 @@ def change(root: Path, relative: str, edit) -> None:
 def test_programmatic_evidence_paths_are_rejected_before_evaluation(
     pack, monkeypatch, owner, invalid
 ):
-    raw = YamlContractsAdapter().load(str(pack)).model_dump(mode="json")
+    raw = YamlContractsAdapter().compile(str(pack)).bundle.model_dump(mode="json")
     if owner == "action":
         raw["actions"]["actions"][0]["evidence"] = [invalid]
     else:
@@ -63,7 +63,7 @@ def test_programmatic_evidence_paths_are_rejected_before_evaluation(
 
 
 def test_programmatic_bundle_rejects_an_incompatible_engine(pack, monkeypatch):
-    raw = YamlContractsAdapter().load(str(pack)).model_dump(mode="json")
+    raw = YamlContractsAdapter().compile(str(pack)).bundle.model_dump(mode="json")
     raw["manifest"]["requires_engine"] = ">=9999.0.0"
 
     def evaluation_must_not_run(*_args):
@@ -78,7 +78,7 @@ def test_programmatic_bundle_rejects_an_incompatible_engine(pack, monkeypatch):
 
 
 def test_framework_version_has_one_authoritative_field(pack):
-    bundle = YamlContractsAdapter().load(str(pack))
+    bundle = YamlContractsAdapter().compile(str(pack)).bundle
     raw = bundle.model_dump(mode="json")
     assert "version" not in raw
     raw["version"] = "forged-version"
@@ -89,7 +89,7 @@ def test_framework_version_has_one_authoritative_field(pack):
 
 
 def test_actions_are_selected_once_from_their_own_conditions_in_catalog_order(pack):
-    raw = YamlContractsAdapter().load(str(pack)).model_dump(mode="json")
+    raw = YamlContractsAdapter().compile(str(pack)).bundle.model_dump(mode="json")
     raw["actions"]["actions"] = [
         {"id": "always", "title": "Always", "requires_evidence": False},
         {

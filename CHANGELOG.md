@@ -10,6 +10,11 @@ and distribution versions follow [Semantic Versioning](https://semver.org/).
 
 ### Changed
 
+- Breaking: rename profile `trace_back_to.evidences` to `trace_back_to.articles`,
+  accepting only declared article IDs, without a compatibility alias. Coverage
+  reports use `required_articles`, `covered_articles` and `missing_articles`;
+  the `CI-004` diagnostic now reports `articles=`. Update existing pack profiles
+  to the new field before compiling them with this candidate.
 - Adopt pack format 3 and starter version 0.3.0. Selection belongs to each
   `action.when`; update packs and examples together without compatibility aliases.
 - Install the engine under `intrinsical_policy_engine` from the `src/` layout.
@@ -26,8 +31,18 @@ and distribution versions follow [Semantic Versioning](https://semver.org/).
   of the CLI layer.
 - Document Linux with Python 3.11 and 3.12 as the supported execution matrix;
   exclusive directory publication requires `renameat2` support.
+- Remove unused internal Python surface: `YamlContractsAdapter.load`,
+  `load_bundle_profiles` and `validate` (use `compile()`), the stdlib logger
+  adapter, the unreachable exporter-not-found error, and seal report fields that
+  were never reported. Exporters receive typed configuration at construction.
 
 ### Fixed
+
+- Preserve article labels such as `P1` and `PA` in the Asana CSV instead of
+  relabeling them as priorities.
+- Report each missing evidence requirement once, with its action, in the export
+  manifest; `assess --check-ci` and `export --check-ci` now report the same
+  evidence and coverage problems.
 
 - Redact every configured API header value, including custom names, independently
   of the raw-input opt-in. Validate nested IDs and HTTP header syntax and controls.

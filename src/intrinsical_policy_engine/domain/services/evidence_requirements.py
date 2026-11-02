@@ -10,10 +10,6 @@ from typing import Any
 from intrinsical_policy_engine.domain.snapshot_contract import canonical_path
 
 
-def evidence_path_matches(name: str, requirement: str) -> bool:
-    return name == requirement or name.startswith(requirement + "/")
-
-
 @dataclass
 class _EvidenceIndex:
     """Exact lookup plus a lazily sorted directory index shared by requirements."""

@@ -13,8 +13,10 @@ from hypothesis import strategies as st
 from intrinsical_policy_engine.domain.conditions import Condition, namespace_matches
 from intrinsical_policy_engine.domain.contract_models import Derivation, RulesContract
 from intrinsical_policy_engine.domain.output_inventory import OutputCollisionError, OutputInventory
-from intrinsical_policy_engine.domain.services.derivation_closure import derive
-from intrinsical_policy_engine.domain.services.evidence_requirements import evidence_path_matches
+from intrinsical_policy_engine.domain.services.derivation_closure import derive_with_trace
+from intrinsical_policy_engine.domain.services.evidence_requirements import (
+    missing_evidence_requirements,
+)
 from intrinsical_policy_engine.domain.snapshot_contract import PackageIntegrityError, canonical_path
 
 FINITE_FLAGS = tuple(f"review.f{index}" for index in range(6))
@@ -33,6 +35,10 @@ POSITIVE_CONDITIONS = st.recursive(
 SEGMENT = st.text(alphabet="abcdefghijklmnopqrstuvwxyz0123456789_-", min_size=1, max_size=12)
 PATH = st.lists(SEGMENT, min_size=1, max_size=4).map("/".join)
 PROPERTY_SETTINGS = settings(max_examples=80, deadline=None, derandomize=True, database=None)
+
+
+def closure(flags, rules):
+    return derive_with_trace(set(flags), rules).final_flags
 
 
 @PROPERTY_SETTINGS
@@ -62,7 +68,7 @@ def test_horn_closure_is_the_intersection_of_every_closed_superset(seeds, rules)
                 closed_supersets.append(candidate)
     assert closed_supersets  # The entire finite universe is always closed.
     expected = set.intersection(*closed_supersets)
-    assert derive(seeds, contract) == expected
+    assert closure(seeds, contract) == expected
 
 
 @PROPERTY_SETTINGS
@@ -84,12 +90,12 @@ def test_positive_derivation_closure_is_monotone_idempotent_and_order_independen
         for index, (condition, flags) in enumerate(rules)
     ]
     contract = RulesContract(derivations=tuple(derivations))
-    closed = derive(initial, contract)
+    closed = closure(initial, contract)
     assert initial <= closed <= set(FINITE_FLAGS)
-    assert closed <= derive(initial | extra, contract)
-    assert derive(closed, contract) == closed
+    assert closed <= closure(initial | extra, contract)
+    assert closure(closed, contract) == closed
     ordering.shuffle(derivations)
-    assert derive(initial, RulesContract(derivations=tuple(derivations))) == closed
+    assert closure(initial, RulesContract(derivations=tuple(derivations))) == closed
 
 
 @PROPERTY_SETTINGS
@@ -104,10 +110,15 @@ def test_flag_namespace_matching_respects_segment_boundaries(prefix, child):
 @PROPERTY_SETTINGS
 @given(directory=PATH, child=SEGMENT)
 def test_evidence_attribution_uses_paths_and_not_similar_prefixes(directory, child):
-    assert evidence_path_matches(directory, directory)
-    assert evidence_path_matches(directory + "/" + child, directory)
-    assert not evidence_path_matches(directory + "-backup/" + child, directory)
-    assert not evidence_path_matches(directory + child, directory)
+    plan = {"actions_meta": [{"id": "a", "evidence": [directory]}]}
+
+    def satisfied(name):
+        return missing_evidence_requirements(plan, [name]) == []
+
+    assert satisfied(directory)
+    assert satisfied(directory + "/" + child)
+    assert not satisfied(directory + "-backup/" + child)
+    assert not satisfied(directory + child)
 
 
 @PROPERTY_SETTINGS

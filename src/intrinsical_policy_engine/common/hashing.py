@@ -17,9 +17,7 @@ def hash_files(files: dict[str, bytes]) -> str:
     ).hexdigest()
 
 
-def compute_framework_pack_hashes(
-    layout: FrameworkLayout, *, law_data_hash: str | None = None
-) -> dict[str, str]:
+def compute_framework_pack_hashes(layout: FrameworkLayout) -> dict[str, str]:
     files = layout.source_bytes
 
     def component(prefix: str) -> str:
@@ -38,9 +36,7 @@ def compute_framework_pack_hashes(
     result = {
         "framework_id": layout.manifest.framework_id,
         "framework_version": layout.manifest.version,
-        "law_data_hash": law_data_hash
-        if law_data_hash is not None
-        else hash_files({name: files[name] for name in contract_paths}),
+        "law_data_hash": hash_files({name: files[name] for name in contract_paths}),
         "render_templates_hash": component(layout.manifest.templates_dir),
         "evidence_templates_hash": component(layout.manifest.evidence_templates_dir),
         "bundle_profiles_hash": hash_files({name: files[name] for name in profile_paths}),

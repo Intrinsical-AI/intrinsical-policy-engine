@@ -12,5 +12,5 @@ profiles:
       trace_back_to:
         actions:
         - STARTER-CONTROL-REVIEW
-        evidences:
+        articles:
         - TOPIC-STARTER-CONTROLS

@@ -10,7 +10,7 @@ from intrinsical_policy_engine.domain.services.assess_service import assess_from
 
 
 def test_starter_pack_loads_and_selects_control_review() -> None:
-    bundle = YamlContractsAdapter().load("frameworks/starter")
+    bundle = YamlContractsAdapter().compile("frameworks/starter").bundle
     plan = assess_from_bundle(
         bundle,
         {

@@ -71,14 +71,14 @@ def relations(pack, relation):
             pack,
             "delivery/profiles/core_outputs.yml",
             lambda d: d["profiles"]["starter_smoke"]["nodes"][0]["trace_back_to"][
-                "evidences"
+                "articles"
             ].append(OTHER_ARTICLE),
         )
 
 
 def plan_for(pack):
     return assess_from_bundle(
-        YamlContractsAdapter().load(str(pack)), {"flags": ["starter.automated_decision"]}
+        YamlContractsAdapter().compile(str(pack)).bundle, {"flags": ["starter.automated_decision"]}
     )
 
 
@@ -158,6 +158,39 @@ def test_missing_optional_evidence_is_not_reported_as_a_requirement(tmp_path):
     snapshot = collect_evidence(plan, root)
     assert snapshot.problems == ()
     assert check_ci(plan, snapshot) == []
+
+
+def test_missing_evidence_is_reported_once_and_identically_by_assess_and_export(
+    monkeypatch, pack, tmp_path, capsys
+):
+    empty = tmp_path / "empty-evidence"
+    empty.mkdir()
+    output = tmp_path / "output"
+    assert export(monkeypatch, pack, output, tmp_path, empty) == 0
+    manifest = json.loads((output / "_metadata" / "evidence_manifest.json").read_text())
+    assert manifest["missing"] == [f"Missing evidence: starter/control-review.md (action {ACTION})"]
+    capsys.readouterr()
+    reports = {}
+    for command in ("assess", "export"):
+        code = invoke(
+            monkeypatch,
+            command,
+            "--contracts",
+            pack,
+            "--answers",
+            tmp_path / "answers.json",
+            "--out",
+            tmp_path / f"ci-{command}",
+            "--evidence-dir",
+            empty,
+            "--check-ci",
+        )
+        assert code == 1
+        reports[command] = [
+            line for line in capsys.readouterr().err.splitlines() if line.startswith("  ")
+        ]
+    assert reports["assess"] == reports["export"]
+    assert len(reports["assess"]) == len(set(reports["assess"])) == 2
 
 
 @pytest.mark.parametrize("relation", ["direct", "inverse", "mixed"])

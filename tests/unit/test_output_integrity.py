@@ -189,7 +189,7 @@ def test_lock_cannot_truncate_an_existing_link_target(tmp_path, link):
 
 def test_calendar_uid_depends_on_namespace_and_action_only(tmp_path):
     from intrinsical_policy_engine.adapters.export.base.evidence.task_graph import stable_uid
-    from intrinsical_policy_engine.adapters.export.base.exporters.base_exporter import BaseExporter
+    from intrinsical_policy_engine.adapters.export.filesystem.ics import write_ics
 
     root = tmp_path / "first"
     other = tmp_path / "second"
@@ -200,10 +200,10 @@ def test_calendar_uid_depends_on_namespace_and_action_only(tmp_path):
         "export_context": {"uid_namespace": "Project;with Case"},
         "trace": {"hash": "old"},
     }
-    first = BaseExporter().export_ics(plan, root, prodid=FrameworkPresentation().ics_prodid)
+    first = write_ics(plan, root, prodid=FrameworkPresentation().ics_prodid)
     plan["due_hints"] = {"action.one": "2027-02-01"}
     plan["trace"] = {"hash": "new"}
-    second = BaseExporter().export_ics(plan, other, prodid=FrameworkPresentation().ics_prodid)
+    second = write_ics(plan, other, prodid=FrameworkPresentation().ics_prodid)
     assert first is not None and second is not None
     for path in (first, second):
         unfolded = path.read_bytes().replace(b"\r\n ", b"").decode()
@@ -212,20 +212,20 @@ def test_calendar_uid_depends_on_namespace_and_action_only(tmp_path):
 
 @pytest.mark.parametrize("date", ["2026-1-02", "2026-02-30", "", "not-a-date"])
 def test_calendar_does_not_silently_drop_invalid_dates(tmp_path, date):
-    from intrinsical_policy_engine.adapters.export.base.exporters.base_exporter import BaseExporter
+    from intrinsical_policy_engine.adapters.export.filesystem.ics import write_ics
 
     plan = {"due_hints": {"action.one": date}, "export_context": {"uid_namespace": "project"}}
     with pytest.raises(ValueError):
-        BaseExporter().export_ics(plan, tmp_path, prodid=FrameworkPresentation().ics_prodid)
+        write_ics(plan, tmp_path, prodid=FrameworkPresentation().ics_prodid)
     assert not list(tmp_path.glob("*.ics"))
 
 
 def test_calendar_folding_is_unicode_safe_and_uses_crlf(tmp_path):
-    from intrinsical_policy_engine.adapters.export.base.exporters.base_exporter import BaseExporter
+    from intrinsical_policy_engine.adapters.export.filesystem.ics import write_ics
 
     action = "acción;extrañísima" * 30
     plan = {"due_hints": {action: "2026-12-01"}, "export_context": {"uid_namespace": "project"}}
-    path = BaseExporter().export_ics(plan, tmp_path, prodid=FrameworkPresentation().ics_prodid)
+    path = write_ics(plan, tmp_path, prodid=FrameworkPresentation().ics_prodid)
     assert path is not None
     data = path.read_bytes()
     assert data.endswith(b"\r\n")
@@ -235,11 +235,11 @@ def test_calendar_folding_is_unicode_safe_and_uses_crlf(tmp_path):
 
 
 def test_calendar_uses_configured_prodid_without_property_injection(tmp_path):
-    from intrinsical_policy_engine.adapters.export.base.exporters.base_exporter import BaseExporter
+    from intrinsical_policy_engine.adapters.export.filesystem.ics import write_ics
 
     plan = {"due_hints": {"action": "2026-12-01"}, "export_context": {"uid_namespace": "project"}}
     prodid = "-//Custom Calendar Ñ;" * 12 + "\r\nX-BAD:inject,"
-    path = BaseExporter().export_ics(plan, tmp_path, prodid=prodid)
+    path = write_ics(plan, tmp_path, prodid=prodid)
     assert path is not None
     data = path.read_bytes()
     assert all(len(line) <= 75 for line in data.split(b"\r\n"))

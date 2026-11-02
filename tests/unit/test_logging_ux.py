@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import logging
 import os
 import stat
 from concurrent.futures import ThreadPoolExecutor
@@ -13,7 +12,7 @@ from uuid import UUID
 
 import pytest
 
-from intrinsical_policy_engine.adapters.logging import FsLogger, StdlibLoggerAdapter, adapt_logger
+from intrinsical_policy_engine.adapters.logging import FsLogger
 
 
 def strict_records(path):
@@ -188,37 +187,10 @@ def test_concurrent_invocations_preserve_complete_long_records(tmp_path):
     assert all(record["data"]["payload"] == payload for record in records)
 
 
-@pytest.mark.parametrize("method", ["info", "warning", "error", "debug"])
-def test_stdlib_adapter_keeps_reserved_record_keys_in_data(method):
-    records = []
-
-    class Capture(logging.Handler):
-        def emit(self, record):
-            records.append(record)
-
-    logger = logging.Logger("isolated-structured-test", logging.DEBUG)
-    logger.propagate = False
-    logger.addHandler(Capture())
-    data = {"levelname": "authored", "name": "action", "message": "details", "asctime": "time"}
-    getattr(StdlibLoggerAdapter(logger), method)("domain.event", data)
-    assert len(records) == 1
-    assert records[0].getMessage() == "domain.event"
-    assert records[0].name == "isolated-structured-test"
-    assert records[0].data == data
-
-
-def test_adaptation_preserves_structured_logger_and_wraps_stdlib(tmp_path):
-    logger = FsLogger(tmp_path / "adapted.jsonl")
-    assert adapt_logger(logger) is logger
-    assert isinstance(adapt_logger(logging.Logger("isolated")), StdlibLoggerAdapter)
-    assert adapt_logger(None) is None
-
-
 def test_file_logger_does_not_write_to_console(tmp_path, capsys):
     logger = FsLogger(tmp_path / "silent.jsonl")
     logger.info("info")
     logger.warning("warning")
     logger.error("error")
-    logger.debug("debug")
     captured = capsys.readouterr()
     assert captured.out == captured.err == ""

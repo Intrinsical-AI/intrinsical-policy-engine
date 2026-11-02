@@ -17,11 +17,8 @@ from intrinsical_policy_engine.adapters.export.base.models.shapes import TaskIte
 class JiraExporter(BaseApiExporter[JiraExportConfig]):
     """Materialize Jira issues from plan actions."""
 
+    target = "jira"
     config_type = JiraExportConfig
-
-    def get_target_name(self) -> str:
-        """Identifier used in export CLI/config."""
-        return "jira"
 
     @staticmethod
     def _text_to_adf(text: str) -> dict[str, Any]:
@@ -49,12 +46,12 @@ class JiraExporter(BaseApiExporter[JiraExportConfig]):
         return {"type": "doc", "version": 1, "content": content}
 
     def build_request_record(
-        self, item: TaskItem, description: str, cfg: JiraExportConfig, headers: dict[str, str]
+        self, item: TaskItem, cfg: JiraExportConfig, headers: dict[str, str]
     ) -> dict[str, Any]:
         """Build Jira API request record."""
         fields = {
             "summary": item.title,
-            "description": self._text_to_adf(description),
+            "description": self._text_to_adf(item.description_md),
             "duedate": item.due,
             "labels": item.labels,
             "project": {"key": cfg.project_key},

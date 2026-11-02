@@ -9,9 +9,7 @@ exercise, with no legal fidelity or coupling to the framework kept elsewhere.
 
 Unknown fields are rejected. The manifest is the single owner of the pack
 version; `ContractBundle` has no separate `version`. Use `action.when` for
-selection. The removed `packs` / `add_actions` mechanism and `reference_files`
-are invalid. Copy contracts together when migrating older packs; old fields
-have no compatibility aliases.
+selection.
 
 ## Conditions
 
@@ -158,6 +156,19 @@ are ignored, malformed quoting fails, and cells are limited to 131,072 character
 Markdown front matter contributes no body content, including when its closing
 delimiter is at EOF. See [quality limits](SECURITY_AND_LIMITATIONS.md).
 
+## Profile coverage
+
+Delivery nodes declare action IDs in `trace_back_to.actions` and article IDs in
+`trace_back_to.articles`. Each ID must exist in its own catalog. The `articles`
+field accepts neither evidence paths nor IDs declared only as actions.
+
+Coverage credits selected file and copy nodes whose `counts_for_coverage` is
+true. Directory nodes do not provide coverage; an inactive node, parent, or
+profile excludes its descendants. Every selected action requiring evidence and
+every article in the assessment's article overlay must be covered for
+`--check-ci`. Export checks profile coverage when the filesystem target is
+selected. Missing coverage is reported by `CI-004` as `actions=` and `articles=`.
+
 ## Output and snapshot contract
 
 Pack-authored outputs cannot claim engine namespaces `_metadata`, `evidence`,
@@ -186,8 +197,8 @@ checksums but lacks an export's evidence manifest and copied evidence.
 
 ## Python API
 
-Imports use `intrinsical_policy_engine`, installed from `src/`; the old top-level
-`src` and `scripts` packages are not runtime API. Wheel and source distributions
+Imports use `intrinsical_policy_engine`, installed from `src/`; `scripts` is not
+runtime API. Wheel and source distributions
 include the `py.typed` marker so external type checkers can use the package's
 inline annotations. Static types complement the runtime contract checks below.
 From the synced checkout:

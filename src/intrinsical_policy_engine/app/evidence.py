@@ -9,7 +9,9 @@ from pathlib import Path
 from typing import Any
 
 from intrinsical_policy_engine.adapters.quality.engine import QualityEngine
+from intrinsical_policy_engine.domain.bundles.coverage import CoverageReport
 from intrinsical_policy_engine.domain.services.evidence_requirements import (
+    missing_evidence_requirements,
     ready_evidence_problems,
     required_evidence_by_action,
 )
@@ -35,7 +37,6 @@ def collect_evidence(plan: dict[str, Any], root: Path | None) -> EvidenceSnapsho
     } | required
     files: dict[str, bytes] = {}
     quality: dict[str, str] = {}
-    problems: list[str] = []
     engine = QualityEngine()
     for relative in sorted(expected):
         rel = Path(relative)
@@ -43,24 +44,22 @@ def collect_evidence(plan: dict[str, Any], root: Path | None) -> EvidenceSnapsho
             raise ValueError(f"Unsafe evidence path: {relative}")
         candidate = root / rel
         candidates = sorted(candidate.rglob("*")) if candidate.is_dir() else [candidate]
-        available = False
         for path in candidates:
             if path.is_symlink() or not path.resolve().is_relative_to(root):
                 raise ValueError(f"Unsafe evidence file: {path}")
-            if path.is_dir():
-                continue
             if not path.is_file():
                 continue
             name = path.relative_to(root).as_posix()
             files[name] = path.read_bytes()
             quality[name] = engine.classify_bytes(files[name], path.suffix)
-            available = True
-        if not available and relative in required:
-            problems.append(f"Missing evidence: {relative}")
-    return EvidenceSnapshot(files, quality, tuple(problems), supplied=True)
+    # Same attribution as export and sealing, so every caller reports one message per gap.
+    problems = tuple(missing_evidence_requirements(plan, files))
+    return EvidenceSnapshot(files, quality, problems, supplied=True)
 
 
-def check_ci(plan: dict[str, Any], evidence: EvidenceSnapshot) -> list[str]:
+def check_ci(
+    plan: dict[str, Any], evidence: EvidenceSnapshot, coverage: CoverageReport | None = None
+) -> list[str]:
     problems = list(evidence.problems)
     if not evidence.supplied:
         problems.append("Explicit --evidence-dir is required for --check-ci")
@@ -72,4 +71,9 @@ def check_ci(plan: dict[str, Any], evidence: EvidenceSnapshot) -> list[str]:
     for name, status in evidence.quality.items():
         if status != "ready":
             problems.append(f"CI-003: evidence {name} is {status}")
+    if coverage is not None and coverage.has_critical_gaps():
+        problems.append(
+            f"CI-004: profile coverage missing actions={sorted(coverage.missing_actions)} "
+            f"articles={sorted(coverage.missing_articles)}"
+        )
     return problems
