@@ -1,0 +1,7 @@
+{
+  "flags": [
+    "process.submitted",
+    "process.review_requested",
+    "process.owner_assigned"
+  ]
+}

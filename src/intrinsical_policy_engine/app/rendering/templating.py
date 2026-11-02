@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright 2024-2026 Pablo P.C.
+"""The single artifact assembler with strict variables and explicit answers."""
+
+from typing import Any
+
+from jinja2 import BaseLoader, Environment, TemplateNotFound, pass_context
+
+from intrinsical_policy_engine.common.jinja_env import create_jinja_env
+
+
+@pass_context
+def fill(ctx: dict[str, Any], key: str, default: str | None = None) -> str:
+    value = ctx.get("answers", {}).get(key)
+    if value is not None and value != "":
+        return str(value)
+    if default is not None:
+        return default
+    raise ValueError(f"Missing required template answer: {key}")
+
+
+class SnapshotTemplateLoader(BaseLoader):
+    def __init__(self, sources: dict[str, bytes]) -> None:
+        self.sources = sources
+
+    def get_source(self, environment: Environment, template: str):
+        if template not in self.sources:
+            raise TemplateNotFound(template)
+        return self.sources[template].decode("utf-8"), template, lambda: True
+
+
+class ArtifactAssembler:
+    """Render only captured template bytes, never files read after compilation."""
+
+    def __init__(self, template_sources: dict[str, bytes]) -> None:
+        self._env = create_jinja_env(SnapshotTemplateLoader(template_sources))
+        self._env.globals["fill"] = fill
+
+    def render(self, template_name: str, context: dict[str, Any]) -> str:
+        return self._env.get_template(template_name).render(**context)

@@ -1,0 +1,68 @@
+# {{ framework.name }}
+
+This is a small, invented intake → review → signoff process for technical
+authoring practice. It has no legal fidelity. It neither implements the named
+legislation nor supplies a regulatory assessment. The complete framework is
+defined separately and is not reproduced here. This example was authored from
+the public starter structure; no private framework was copied.
+
+## Assessment at a glance
+
+- Pack: `{{ framework.id }}` · version `{{ framework.version }}`
+- Route: `{{ routing.route }}`
+- Outcome: {% if outcome %}{{ outcome | join(", ") }}{% else %}No work outcome selected{% endif %}
+- Mock stage: {% if risk_tier is not none %}`{{ risk_tier }}`{% else %}Not assigned{% endif %}
+- Paused: {{ outcome_axes.blocked }}
+- Selected actions: {{ actions | length }}
+- Assessment fingerprint: `{{ plan.hash }}`
+
+The engine's tier field labels a process stage in this example. It does not
+classify legal risk. A generated signoff task is work to perform, not approval
+already granted by a reviewer.
+
+## Selected tasks
+
+{% for action in actions_meta %}
+### {{ action.title }} · `{{ action.id }}`
+
+{{ action.description }}
+
+- Example deadline: {{ due_hints.get(action.id, "Not assigned") }}
+{% for path in actions_evidence_map.get(action.id, []) %}
+- Required evidence: `evidence/{{ path }}`
+{% endfor %}
+{% else %}
+No task was selected. An idle input and a stopped input are different cases;
+the outcome and trace distinguish them.
+{% endfor %}
+
+The [backlog](backlogs/process.csv) lists the selected work. The
+[summary](_metadata/summary.json) and [trace](_metadata/trace.json) explain it.
+
+## Evidence and dates
+
+The included records are synthetic fixtures. Read the
+[manifest](_metadata/evidence_manifest.json) and
+[quality results](_metadata/evidence_quality.json), then replace the fixtures
+with reviewed observations for your own process. A content quality pass does
+not establish the truth of a record.
+
+The pack uses a fixed example base date of 2030-01-30 and scheduling offsets of
+two, seven and ten days. `--base-date` overrides the base explicitly. These are
+fictional process dates and have no regulatory meaning.
+
+{% if due_hints %}
+The [calendar](compliance.ics) contains the selected example deadlines.
+{% else %}
+No calendar is generated because no task has an assigned deadline.
+{% endif %}
+
+## Next steps
+
+1. Review the declared flags, questions, selection conditions and stop rule.
+2. Confirm the expected scenario and inspect every supplied record.
+3. Resolve missing records and export to a fresh destination.
+4. Run `ipe seal --export-dir . --no-sign --strict` from the export directory.
+
+Sealing verifies the snapshot; it does not approve the process. Read the
+[scope notice](LEGAL_NOTICE.md) before interpreting or sharing this output.

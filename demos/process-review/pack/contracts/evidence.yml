@@ -1,0 +1,6 @@
+process.topic.intake:
+- path: process/intake.md
+process.topic.review:
+- path: process/review.md
+process.topic.approval:
+- path: process/approval.md

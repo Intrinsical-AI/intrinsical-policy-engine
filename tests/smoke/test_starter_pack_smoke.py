@@ -3,12 +3,14 @@
 
 from pathlib import Path
 
-from src.adapters.contracts.yaml.yaml_contract_adapter import YamlContractsAdapter
-from src.domain.services.assess_service import assess_from_bundle
+from intrinsical_policy_engine.adapters.contracts.yaml.yaml_contract_adapter import (
+    YamlContractsAdapter,
+)
+from intrinsical_policy_engine.domain.services.assess_service import assess_from_bundle
 
 
 def test_starter_pack_loads_and_selects_control_review() -> None:
-    bundle = YamlContractsAdapter().load("frameworks/starter")
+    bundle = YamlContractsAdapter().compile("frameworks/starter").bundle
     plan = assess_from_bundle(
         bundle,
         {

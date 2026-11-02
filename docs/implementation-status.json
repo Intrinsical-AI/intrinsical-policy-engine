@@ -1,0 +1,695 @@
+{
+  "schema": "ipe.implementation-status/1",
+  "updated": "2026-10-19",
+  "scope": "Six-month engine stabilization plan; local implementation and external acceptance are tracked separately.",
+  "process_fixture": {
+    "name": "EU AI Act process mock",
+    "path": "demos/process-review",
+    "independent": true,
+    "private_framework_imported": false,
+    "legal_fidelity_claimed": false,
+    "real_pilot_claimed": false
+  },
+  "local_requirements": [
+    {
+      "id": "BUG-01",
+      "requirement": "Redact every offline request header value.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_api_configuration_regressions.py",
+        "scripts/check_installed_artifact.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-01",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "BUG-02",
+      "requirement": "Reject malformed CSV quoting with a controlled diagnostic.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_evidence_quality_regressions.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-02",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "BUG-03",
+      "requirement": "Reject content-free CSV, including blank headers and rows; count nonblank data rows separately from headers.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_evidence_quality_regressions.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-03",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "BUG-04",
+      "requirement": "Front matter alone never supplies ready Markdown evidence, including EOF and newline variants.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_evidence_quality_regressions.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-04",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "BUG-05",
+      "requirement": "Bound relative calendar arithmetic with contextual validation errors.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_domain_contract_regressions.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-05",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "BUG-06",
+      "requirement": "Apply shared semantic validation to programmatic and authored bundles.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_contract_compilation.py",
+        "tests/unit/test_domain_contract_regressions.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-06",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "BUG-07",
+      "requirement": "Validate HTTP header names, values and nested export configuration fields.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_api_configuration_regressions.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-07",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "BUG-08",
+      "requirement": "Append safely to complete JSONL without a final newline and preserve malformed tails.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_logging_ux.py",
+        "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "out/implementation-validation-20261019/summary.json",
+        "out/implementation-validation-20261019-typed/summary.json"
+      ],
+      "historical_reference_regression": {
+        "reference": "c4e380318d3eab296eecca8750e350de741fedaa",
+        "summary": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "summary_sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "case_id": "AUDIT-08",
+        "historical_defect_reproduced": true,
+        "current_corrected_behavior": true,
+        "original_dirty_audited_state_reconstructed": false,
+        "scope": "Representative behavioral reproductions for all eight original findings, using historical native pack/bundle formats and current native formats where contracts changed. This is not execution of unchanged current tests against historical APIs."
+      }
+    },
+    {
+      "id": "ADDITIONAL-ICS",
+      "requirement": "Export valid calendar dates at both date-range boundaries.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_output_integrity.py"
+      ]
+    },
+    {
+      "id": "CONTRACTS",
+      "requirement": "Use pack format 3, snapshot format 1, action.when selection and no retired compatibility aliases.",
+      "status": "locally_verified",
+      "evidence": [
+        "docs/POLICY_SCHEMA.md",
+        "tests/unit/test_snapshot_contract.py",
+        "tests/unit/test_schema_exports.py",
+        "scripts/export_schemas.py"
+      ]
+    },
+    {
+      "id": "ARCHITECTURE",
+      "requirement": "Install one proper package namespace, keep evidence application logic outside CLI and retain typed target settings.",
+      "status": "locally_verified",
+      "evidence": [
+        "pyproject.toml",
+        "src/intrinsical_policy_engine/app/evidence.py",
+        "tests/unit/test_export_contracts_review.py",
+        "scripts/check_installed_artifact.py",
+        "src/intrinsical_policy_engine/py.typed",
+        "tests/unit/test_release_candidate.py",
+        "tests/unit/test_installed_acceptance_contract.py",
+        "out/implementation-validation-20261019/typing-consumer/regression.json",
+        "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json"
+      ]
+    },
+    {
+      "id": "OUTPUTS",
+      "requirement": "Preflight selected output ownership, publish without replacement and reject snapshot drift before sealing.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_output_preflight.py",
+        "tests/unit/test_output_integrity.py",
+        "tests/unit/test_integrity_boundaries.py"
+      ]
+    },
+    {
+      "id": "MOCK",
+      "requirement": "Exercise intake, review and approval through an independent synthetic process pack and manually authored expected scenarios.",
+      "status": "locally_verified",
+      "evidence": [
+        "demos/process-review/expected/scenarios.json",
+        "tests/smoke/test_process_review_mock.py",
+        "scripts/check_conformance.py"
+      ]
+    },
+    {
+      "id": "ROBUSTNESS",
+      "requirement": "Bound structured parser graphs, reject cyclic aliases and hidden placeholders, and preserve caller files during failures.",
+      "status": "locally_verified",
+      "evidence": [
+        "tests/unit/test_parser_fuzz.py",
+        "tests/unit/test_property_invariants.py",
+        "tests/unit/test_input_finiteness.py",
+        "tests/unit/test_structured_evidence_workflow.py",
+        "tests/unit/test_process_publication.py",
+        "src/intrinsical_policy_engine/app/cli/commands/inspection.py",
+        "tests/unit/test_inspection_catalog.py",
+        "demos/process-review/expected/inspection.json"
+      ]
+    },
+    {
+      "id": "SCALING",
+      "requirement": "Remove repeated whole-registry and evidence scans; measure deterministic workloads with explicit comparable regression budgets.",
+      "status": "locally_verified_with_measured_tradeoffs",
+      "evidence": [
+        "tests/unit/test_scaling_boundaries.py",
+        "tests/unit/test_benchmark_engine.py",
+        "scripts/benchmark_engine.py",
+        "out/implementation-validation-20261019/performance-disposition.json",
+        "out/implementation-validation-20261019-typed/performance-disposition.json"
+      ],
+      "production_slo": null,
+      "zero_slowdown_gate_passed": false,
+      "measurement_receipt": "out/implementation-validation-20261018/performance/final-current-repeats3.json",
+      "disposition_status": "documented_pending_external_decision",
+      "disposition_receipt": "out/implementation-validation-20261019-typed/performance-disposition.json",
+      "accepted_tradeoff_claimed": false
+    },
+    {
+      "id": "DOCUMENTATION",
+      "requirement": "Align examples, generated schemas, CLI/API reference and recovery/release runbooks with the installed contracts.",
+      "status": "locally_verified",
+      "evidence": [
+        "docs/CLI_REFERENCE.md",
+        "scripts/check_documented_examples.py",
+        "tests/unit/test_documented_examples.py",
+        "out/implementation-validation-20261019/docs-full/documented-examples.json",
+        "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
+      ],
+      "full_execution": {
+        "receipt": "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
+        "sha256": "3b370f899ec75ea21573dac2dc26dda5a1d7d4cb12f50390ff9210e49c7a4192",
+        "python": "3.12",
+        "registered_executable_blocks": 18,
+        "completed_executable_blocks": 18,
+        "scope": "all_registered_blocks",
+        "original_and_copied_sources_verified_unchanged": true,
+        "independent_human_onboarding_claimed": false
+      },
+      "remote_candidate": {
+        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "verification": {
+          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+        },
+        "run": {
+          "id": 39319125584,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "source_files_match_local_candidate": true,
+        "artifact_bytes_match_local_build": false,
+        "remote_pair_tested_in_four_cells": true,
+        "main_changed": false,
+        "release_owner_acceptance": "pending",
+        "release_publication_performed": false,
+        "human_acceptance_claimed": false
+      }
+    },
+    {
+      "id": "DISTRIBUTIONS",
+      "requirement": "Validate final wheel and source distribution outside the checkout on Linux Python 3.11 and 3.12.",
+      "status": "locally_verified",
+      "evidence": [
+        "scripts/check_public_release.py",
+        "scripts/check_installed_artifact.py",
+        "scripts/check_conformance.py",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019-typed/candidate.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
+      ],
+      "installed_matrix": [
+        {
+          "environment": "3.11-wheel",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.11-wheel"
+        },
+        {
+          "environment": "3.11-sdist",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.11-sdist"
+        },
+        {
+          "environment": "3.12-wheel",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.12-wheel"
+        },
+        {
+          "environment": "3.12-sdist",
+          "acceptance_commands": 42,
+          "conformance_commands": 47,
+          "conformance_scenarios": 10,
+          "receipts": "out/implementation-validation-20261019-typed/installed/3.12-sdist"
+        }
+      ],
+      "remote_candidate": {
+        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "verification": {
+          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+        },
+        "run": {
+          "id": 39319125584,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "source_files_match_local_candidate": true,
+        "artifact_bytes_match_local_build": false,
+        "remote_pair_tested_in_four_cells": true,
+        "main_changed": false,
+        "release_owner_acceptance": "pending",
+        "release_publication_performed": false,
+        "human_acceptance_claimed": false
+      }
+    },
+    {
+      "id": "AUTOMATION",
+      "requirement": "Gate lock, lint, format, types, schemas, tests, documented examples and installed artifacts; retain failure receipts in CI.",
+      "status": "candidate_revision_verified_locally_and_remotely",
+      "evidence": [
+        ".pre-commit-config.yaml",
+        ".github/workflows/ci.yml",
+        "scripts/release_candidate.py",
+        "tests/unit/test_release_candidate.py",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019/ci-configuration.json",
+        "out/implementation-validation-20261019-typed/candidate.json",
+        "out/implementation-validation-20261019-typed/ci-configuration.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
+      ],
+      "remote_execution_status": "passed",
+      "release_pipeline": "build_once_then_test_matrix_then_reviewable_candidate",
+      "remote_candidate": {
+        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "verification": {
+          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+        },
+        "run": {
+          "id": 39319125584,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "source_files_match_local_candidate": true,
+        "artifact_bytes_match_local_build": false,
+        "remote_pair_tested_in_four_cells": true,
+        "main_changed": false,
+        "release_owner_acceptance": "pending",
+        "release_publication_performed": false,
+        "human_acceptance_claimed": false
+      }
+    },
+    {
+      "id": "INSPECTION",
+      "requirement": "Explain all rule families and calendar records, with explicit family selection for ambiguous identifiers.",
+      "status": "locally_verified",
+      "evidence": [
+        "src/intrinsical_policy_engine/app/cli/commands/inspection.py",
+        "tests/unit/test_inspection_catalog.py",
+        "demos/process-review/expected/inspection.json",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019-typed/candidate.json"
+      ],
+      "rule_catalog_records": 18,
+      "gate_ids": [
+        "ROBUSTNESS",
+        "ARCHITECTURE"
+      ]
+    },
+    {
+      "id": "RELEASE-CANDIDATE",
+      "requirement": "Bind one distribution pair, the final source inventory, both interpreter suites and four installed acceptance/conformance cells into a reviewable candidate without authorizing publication.",
+      "status": "locally_verified_prepared",
+      "evidence": [
+        "scripts/release_candidate.py",
+        "tests/unit/test_release_candidate.py",
+        ".github/workflows/ci.yml",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019-typed/candidate.json",
+        "out/implementation-validation-20261019-typed/remote-verification.json"
+      ],
+      "external_acceptance_status": "pending",
+      "gate_ids": [
+        "RELEASE-AUTOMATION",
+        "LOCAL-ARTIFACTS",
+        "CI-CONFIGURATION"
+      ],
+      "remote_candidate": {
+        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "verification": {
+          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+        },
+        "run": {
+          "id": 39319125584,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "source_files_match_local_candidate": true,
+        "artifact_bytes_match_local_build": false,
+        "remote_pair_tested_in_four_cells": true,
+        "main_changed": false,
+        "release_owner_acceptance": "pending",
+        "release_publication_performed": false,
+        "human_acceptance_claimed": false
+      }
+    },
+    {
+      "id": "UPGRADE",
+      "requirement": "Rehearse actual package-manager replacement from the named previous public version and verify removal of the retired package namespaces.",
+      "status": "locally_verified_prepared",
+      "evidence": [
+        "out/implementation-validation-20261019/upgrade/verification.json",
+        "docs/CLI_REFERENCE.md",
+        "out/implementation-validation-20261019-typed/upgrade/verification.json"
+      ],
+      "external_acceptance_status": "pending",
+      "policy_or_snapshot_migration_claimed": false,
+      "gate_ids": [
+        "UPGRADE-REHEARSAL"
+      ]
+    },
+    {
+      "id": "HANDOVER",
+      "requirement": "Prepare maintenance, support, release ownership and known-issue handover records while leaving actual maintainer acceptance pending.",
+      "status": "locally_verified_prepared",
+      "evidence": [
+        "out/implementation-validation-20261019/handover.json",
+        "out/implementation-validation-20261019/candidate.json",
+        "out/implementation-validation-20261019-typed/handover.json",
+        "out/implementation-validation-20261019-typed/candidate.json"
+      ],
+      "external_acceptance_status": "pending",
+      "human_acceptance_claimed": false,
+      "gate_ids": [
+        "HANDOVER",
+        "MAINTAINER-ACCEPTANCE"
+      ]
+    },
+    {
+      "id": "TYPING",
+      "requirement": "Distribute the PEP 561 marker in both archives and reject incompatible argument types in representative external consumers.",
+      "status": "locally_verified",
+      "evidence": [
+        "src/intrinsical_policy_engine/py.typed",
+        "pyproject.toml",
+        "scripts/check_installed_artifact.py",
+        "tests/unit/test_release_candidate.py",
+        "tests/unit/test_installed_acceptance_contract.py",
+        "out/implementation-validation-20261019/typing-consumer/regression.json",
+        "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json"
+      ],
+      "gate_ids": [
+        "ARCHITECTURE",
+        "LOCAL-ARTIFACTS"
+      ],
+      "scope": "One representative typed public function; valid arguments infer bool, invalid argument types are rejected. This does not claim strict typing of every public API.",
+      "installed_consumer_checks": 8,
+      "strict_typing_of_every_public_api_claimed": false
+    }
+  ],
+  "external_acceptance": [
+    {
+      "id": "HUMAN-WALKTHROUGH",
+      "status": "pending",
+      "required_evidence": "Independent person completes the mock walkthrough and records friction, outcome and scope."
+    },
+    {
+      "id": "REAL-POLICY-PILOT",
+      "status": "pending_outside_this_repository",
+      "required_evidence": "Framework owner and subject expert approve the real policy content and real pilot results in the separate framework project."
+    },
+    {
+      "id": "INDEPENDENT-SECURITY-REVIEW",
+      "status": "pending",
+      "required_evidence": "Separate reviewer records findings and disposition against the final revision; local adversarial tests are supporting evidence."
+    },
+    {
+      "id": "LIVE-CONNECTOR",
+      "status": "conditional_not_selected",
+      "required_evidence": "Only if live delivery is selected: provider sandbox credentials, actual delivery receipts, retry and idempotency acceptance. Offline request fixtures do not establish delivery."
+    },
+    {
+      "id": "REMOTE-CI-RELEASE",
+      "status": "remote_ci_passed_owner_acceptance_and_publication_pending",
+      "required_evidence": "Actual remote CI for the accepted revision, release owner approval and publication receipt. No commit, push or publication is inferred from local validation.",
+      "remote_ci_status": "passed",
+      "remote_candidate": {
+        "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+        "verification": {
+          "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+          "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+        },
+        "run": {
+          "id": 39319125584,
+          "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+        "branch": "codex/ipe-v3-candidate-20261019-typed",
+        "source_files_match_local_candidate": true,
+        "artifact_bytes_match_local_build": false,
+        "remote_pair_tested_in_four_cells": true,
+        "main_changed": false,
+        "release_owner_acceptance": "pending",
+        "release_publication_performed": false,
+        "human_acceptance_claimed": false
+      },
+      "release_owner_acceptance": "pending",
+      "release_publication_status": "pending"
+    },
+    {
+      "id": "MAINTAINER-ACCEPTANCE",
+      "status": "pending",
+      "required_evidence": "An identified maintainer reviews and accepts the prepared handover; proposed roles and local receipts do not establish actual transfer."
+    },
+    {
+      "id": "PERFORMANCE-DISPOSITION",
+      "status": "pending",
+      "required_evidence": "A named release owner accepts or rejects the preserved synthetic performance tradeoff; the strict exploratory zero-slowdown check remains failed."
+    }
+  ],
+  "final_validation_receipts": [
+    "out/implementation-validation-20261018/summary.json",
+    "out/implementation-validation-20261019/candidate.json",
+    "out/implementation-validation-20261019/docs-full/documented-examples.json",
+    "out/implementation-validation-20261019/upgrade/verification.json",
+    "out/implementation-validation-20261019/historical-regressions/summary.json",
+    "out/implementation-validation-20261019/performance-disposition.json",
+    "out/implementation-validation-20261019/ci-configuration.json",
+    "out/implementation-validation-20261019/handover.json",
+    "out/implementation-validation-20261019/summary.json",
+    "out/implementation-validation-20261019-typed/candidate.json",
+    "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
+    "out/implementation-validation-20261019-typed/upgrade/verification.json",
+    "out/implementation-validation-20261019-typed/performance-disposition.json",
+    "out/implementation-validation-20261019-typed/ci-configuration.json",
+    "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json",
+    "out/implementation-validation-20261019-typed/handover.json",
+    "out/implementation-validation-20261019-typed/summary.json"
+  ],
+  "final_validation_summary_sha256": "14d53c87176635029f61cd9c57778b5333c457d97f52ad81ba0a9f024d986368",
+  "delivery_plan": "docs/delivery-plan.json",
+  "latest_local_integration": {
+    "recorded_at": "2026-10-19T00:24:10.648886+00:00",
+    "receipts": {
+      "candidate": {
+        "path": "out/implementation-validation-20261019-typed/candidate.json",
+        "sha256": "076f5d382ace341283252ab57adf8d56db94bdc6915eb67e9264b84e6744a33f",
+        "size": 36808
+      },
+      "documentation": {
+        "path": "out/implementation-validation-20261019-typed/docs-full/documented-examples.json",
+        "sha256": "3b370f899ec75ea21573dac2dc26dda5a1d7d4cb12f50390ff9210e49c7a4192",
+        "size": 302375
+      },
+      "upgrade": {
+        "path": "out/implementation-validation-20261019-typed/upgrade/verification.json",
+        "sha256": "802ff5a24d7e1d19de61300e92dcbb45d00fc14e518ab26d25f0008692be127e",
+        "size": 7282
+      },
+      "historical_regressions": {
+        "path": "out/implementation-validation-20261019/historical-regressions/summary.json",
+        "sha256": "be6bb935cf4cad8a9eaf4a71327706fbc4df03f4eda6f5bc527b5c35bc1bbce6",
+        "size": 9319
+      },
+      "performance_disposition": {
+        "path": "out/implementation-validation-20261019-typed/performance-disposition.json",
+        "sha256": "95d0cad166f536facb2e3359d198954ed2cac35c7774dbfc31a332e633b9ac6d",
+        "size": 3857
+      },
+      "ci_configuration": {
+        "path": "out/implementation-validation-20261019-typed/ci-configuration.json",
+        "sha256": "3a6d7fad5cb3f53b704e122f6169762aa80c95f70c4477c8f19578db2844cbf5",
+        "size": 4304
+      },
+      "typing_consumer": {
+        "path": "out/implementation-validation-20261019-typed/typing-consumer/acceptance.json",
+        "sha256": "5362f22ece7b3b21f267451d8ec631d2c273a0baac307ac0bf59d8f79f2cb511",
+        "size": 8735
+      },
+      "handover": {
+        "path": "out/implementation-validation-20261019-typed/handover.json",
+        "sha256": "70d04656ca76b717eed927c01db5f5b7a28ae68b2c7310c875e14ee0bfe10925",
+        "size": 34866
+      },
+      "summary": {
+        "path": "out/implementation-validation-20261019-typed/summary.json",
+        "sha256": "14d53c87176635029f61cd9c57778b5333c457d97f52ad81ba0a9f024d986368",
+        "size": 40711
+      }
+    },
+    "final_summary_attached": true,
+    "final_summary_integration_pending": false,
+    "remote_ci_run_claimed": false,
+    "publication_authorized": false,
+    "human_acceptance_claimed": false,
+    "original_dirty_audited_state_reconstructed": false
+  },
+  "latest_remote_validation": {
+    "recorded_at": "2026-10-19T20:32:01.038197+00:00",
+    "verification": {
+      "path": "out/implementation-validation-20261019-typed/remote-verification.json",
+      "sha256": "aa0bede6c3db20a312618153d374cef5e126c06d82c5658cff16f0a00516b52f"
+    },
+    "run": {
+      "id": 39319125584,
+      "url": "https://github.com/Intrinsical-AI/intrinsical-policy-engine/actions/runs/39319125584",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "revision": "8ff185ffe0f6a1e33918ec3f74599cb5877a5a69",
+    "branch": "codex/ipe-v3-candidate-20261019-typed",
+    "source_files_match_local_candidate": true,
+    "artifact_bytes_match_local_build": false,
+    "remote_pair_tested_in_four_cells": true,
+    "main_changed": false,
+    "release_owner_acceptance": "pending",
+    "release_publication_performed": false,
+    "human_acceptance_claimed": false
+  }
+}

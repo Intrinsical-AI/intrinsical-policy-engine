@@ -1,0 +1,43 @@
+# {{ framework.name }}
+
+This synthetic process demonstrates technical authoring, not legal requirements.
+Read the [overview](README.md) and [scope notice](LEGAL_NOTICE.md) first.
+
+## Follow the selected path
+
+- Process route: `{{ routing.route }}`
+- Outcome: {% if outcome %}{{ outcome | join(", ") }}{% else %}No work outcome selected{% endif %}
+- Paused by the mock: {{ outcome_axes.blocked }}
+
+The questionnaire evaluates its questions in declaration order. Later questions
+use flags emitted by earlier answers. Derivations then select intake, review
+and signoff work. A missing coordinator stops selection and fails the CI check.
+
+## Selected work and evidence
+
+{% for action in actions_meta %}
+### {{ action.title }} · `{{ action.id }}`
+
+{{ action.description }}
+
+- Example deadline: {{ due_hints.get(action.id, "Not assigned") }}
+{% for path in actions_evidence_map.get(action.id, []) %}
+- Required record: `evidence/{{ path }}`
+{% endfor %}
+{% else %}
+No action was selected. Inspect the input and stop trace before interpreting this result.
+{% endfor %}
+
+## Review the snapshot
+
+1. Compare the [summary](_metadata/summary.json) with the intended scenario.
+2. Inspect the [trace](_metadata/trace.json), including derivations and any stop.
+3. Read the supplied records and [manifest](_metadata/evidence_manifest.json).
+4. Preserve the [file inventory](CHECKSUMS.sha256) when sharing the snapshot.
+
+{% if due_hints %}
+The [calendar](compliance.ics) contains fictional scheduling dates, not legal deadlines.
+{% endif %}
+
+The complete framework is defined separately and is not reproduced in this mock.
+Successful checks establish execution and file integrity, not process approval.

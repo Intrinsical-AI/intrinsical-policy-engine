@@ -1,0 +1,35 @@
+pack_format_version: 3
+framework_id: process.mock
+version: 0.1.0
+contracts:
+  flags:
+  - contracts/flags.yml
+  rules:
+  - contracts/rules.yml
+  actions:
+  - contracts/actions.yml
+  articles:
+  - contracts/topics.yml
+  questions:
+  - contracts/questions.yml
+  evidence_map:
+  - contracts/evidence.yml
+  due_rules:
+  - contracts/due.yml
+  calendar:
+  - contracts/dates.yml
+bundle_profiles:
+- delivery/profiles/*.yml
+runtime:
+  semantics:
+  - runtime/semantics.yml
+  policies:
+  - runtime/policies.yml
+  presentation:
+  - runtime/branding.yml
+templates_dir: render
+evidence_templates_dir: evidence/templates
+runtime_files:
+  context_defaults: render/config/defaults.yml
+  backlog_config: render/config/backlog.yml
+requires_engine: '>=3.0.0,<4.0.0'

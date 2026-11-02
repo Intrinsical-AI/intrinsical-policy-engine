@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,42 +15,182 @@ env:
   PYTHONDONTWRITEBYTECODE: "1"
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
-      - name: Install dependencies
-        run: uv sync --all-extras --dev
-      - name: Public release guard
-        run: uv run python scripts/check_public_release.py
-      - name: Lint
-        run: uv run ruff check src tests scripts
-      - name: Format check
-        run: uv run ruff format --check src tests scripts
-      - name: Type check
-        run: uv run mypy src --ignore-missing-imports
-      - name: Validate starter pack
-        run: uv run ipe lint --contracts frameworks/starter --strict
-      - name: Export and seal starter pack
-        env:
-          IPE_SKIP_GPG_SIGNING: "1"
+      - name: Install locked build tools
+        run: uv sync --locked --python 3.12
+      - name: Verify source and lock
         run: |
-          uv run ipe export --contracts frameworks/starter --answers demos/starter/basic/answers.json --out out/starter --strict --strict-templates
-          uv run ipe seal --export-dir out/starter
+          uv lock --check
+          uv run --frozen python scripts/check_public_release.py
+      - name: Build one distribution pair for the entire matrix
+        run: |
+          uv build
+          uv export --frozen --no-dev --no-emit-project --output-file dist/runtime-requirements.txt --quiet
+          uv run --frozen python scripts/check_public_release.py --distribution dist/*.whl --distribution dist/*.tar.gz
+          uv run --frozen python scripts/release_candidate.py prepare --artifacts dist
+      - name: Retain exact build inputs and artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-distributions
+          path: dist/
+          if-no-files-found: error
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    env:
+      UV_PYTHON: ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: candidate-distributions
+          path: out/candidate-dist
+      - name: Install dependencies and require test signing support
+        run: |
+          uv sync --locked
+          gpg --version > /dev/null
+      - name: Verify project lock
+        run: uv lock --check
+      - name: Verify generated schemas
+        run: uv run --frozen python scripts/export_schemas.py --out-dir docs/schemas --check
+      - name: Public release guard
+        run: uv run --frozen python scripts/check_public_release.py
+      - name: Lint
+        run: uv run --frozen ruff check src tests scripts
+      - name: Format check
+        run: uv run --frozen ruff format --check src tests scripts
+      - name: Type check
+        run: uv run --frozen mypy src scripts
+      - name: Validate starter pack
+        run: uv run --frozen ipe lint --contracts frameworks/starter --strict
+      - name: Export and seal starter pack
+        run: |
+          uv run --frozen ipe assess --contracts frameworks/starter --answers demos/starter/basic/answers.json --out out/assessment --strict
+          uv run --frozen ipe export --contracts frameworks/starter --answers demos/starter/basic/answers.json --evidence-dir demos/starter/basic/evidence --check-ci --strict --out out/starter
+          uv run --frozen ipe seal --export-dir out/starter --output out/starter.zip --strict --no-sign
       - name: Tests
-        run: uv run pytest tests/unit tests/smoke --tb=short --cov=src --cov-report=term-missing --cov-fail-under=19
-      - name: Build distribution artifacts
-        run: uv build
-      - name: Run installed CLI from an isolated environment
+        run: |
+          mkdir -p out/validation
+          uv run --frozen pytest tests/unit tests/smoke --tb=short \
+            --cov=intrinsical_policy_engine --cov-report=term-missing \
+            --cov-report=json:out/validation/coverage.json \
+            --junitxml=out/validation/tests.xml
+      - name: Execute documented examples
         shell: bash
         run: |
-          wheel="$(find dist -maxdepth 1 -name '*.whl' -print -quit)"
-          test -n "$wheel"
-          uv run --isolated --no-project --with "$wheel" ipe --version
+          scope=()
+          if [[ "$UV_PYTHON" == "3.12" ]]; then scope+=(--include-delegated); fi
+          uv run --frozen python scripts/check_documented_examples.py \
+            --workdir "$RUNNER_TEMP/ipe-documented-examples" "${scope[@]}"
+      - name: Scan both distribution artifacts
+        run: uv run --frozen python scripts/check_public_release.py --distribution out/candidate-dist/*.whl --distribution out/candidate-dist/*.tar.gz
+      - name: Run wheel and source distribution outside the checkout
+        shell: bash
+        run: |
+          fixture_root="$PWD"
+          for artifact in "$PWD"/out/candidate-dist/*.whl "$PWD"/out/candidate-dist/*.tar.gz; do
+            sandbox="$(mktemp -d)"
+            uv venv --python "$UV_PYTHON" "$sandbox/venv"
+            uv pip install --python "$sandbox/venv/bin/python" --require-hashes --requirements out/candidate-dist/runtime-requirements.txt
+            uv pip install --python "$sandbox/venv/bin/python" --no-deps "$artifact"
+            uv pip check --python "$sandbox/venv/bin/python"
+            receipt_dir="$RUNNER_TEMP/ipe-installed-validation/$(basename "$artifact")"
+            mkdir -p "$receipt_dir"
+            "$sandbox/venv/bin/python" "$fixture_root/scripts/check_installed_artifact.py" \
+              --ipe "$sandbox/venv/bin/ipe" --fixtures "$fixture_root" --workdir "$receipt_dir/acceptance" \
+              --artifact "$artifact"
+            "$sandbox/venv/bin/python" "$fixture_root/scripts/check_conformance.py" \
+              --ipe "$sandbox/venv/bin/ipe" --fixtures "$fixture_root" --workdir "$receipt_dir/conformance" \
+              --artifact "$artifact"
+          done
+      - name: Collect success and failure receipts
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p out/validation
+          documented="$RUNNER_TEMP/ipe-documented-examples/documented-examples.json"
+          if [[ -f "$documented" ]]; then cp "$documented" out/validation/; fi
+          for artifact in "$PWD"/out/candidate-dist/*.whl "$PWD"/out/candidate-dist/*.tar.gz; do
+            if [[ ! -f "$artifact" ]]; then continue; fi
+            name="$(basename "$artifact")"
+            source="$RUNNER_TEMP/ipe-installed-validation/$name"
+            destination="out/validation/installed/$name"
+            mkdir -p "$destination"
+            for receipt in acceptance.json acceptance-metadata.json; do
+              if [[ -f "$source/acceptance/$receipt" ]]; then cp "$source/acceptance/$receipt" "$destination/"; fi
+            done
+            if [[ -f "$source/conformance/conformance.json" ]]; then cp "$source/conformance/conformance.json" "$destination/"; fi
+          done
+      - name: Retain validation receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-python-${{ matrix.python-version }}
+          path: out/validation/
+          if-no-files-found: warn
+
+  candidate:
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --locked --python 3.12
+      - uses: actions/download-artifact@v4
+        with:
+          name: candidate-distributions
+          path: out/release-candidate/dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: validation-python-3.11
+          path: out/release-candidate/receipts/python-3.11
+      - uses: actions/download-artifact@v4
+        with:
+          name: validation-python-3.12
+          path: out/release-candidate/receipts/python-3.12
+      - name: Bind candidate to both installed acceptance results
+        run: >-
+          uv run --frozen python scripts/release_candidate.py verify
+          --artifacts out/release-candidate/dist
+          --receipts out/release-candidate/receipts
+          --output out/release-candidate/candidate.json
+      - name: Retain candidate for release-owner review
+        uses: actions/upload-artifact@v4
+        with:
+          name: reviewable-release-candidate
+          path: out/release-candidate/
+          if-no-files-found: error

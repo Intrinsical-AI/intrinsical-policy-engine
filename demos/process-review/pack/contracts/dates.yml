@@ -1,0 +1,5 @@
+base_date: '2030-01-30'
+calendar:
+  process.intake_due: T+2d
+  process.review_due: T+7d
+  process.approval_due: T+10d

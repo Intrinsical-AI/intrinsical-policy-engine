@@ -1,0 +1,20 @@
+profiles:
+  process.overview:
+    id: process.overview
+    kind: process_mock
+    root_dir: .
+    nodes:
+    - id: process.start_here
+      kind: file
+      name: 00_START_HERE.md
+      template: artifacts/core/00_START_HERE.md.j2
+      context: default
+      trace_back_to:
+        actions:
+        - process.intake
+        - process.review
+        - process.approval
+        articles:
+        - process.topic.intake
+        - process.topic.review
+        - process.topic.approval

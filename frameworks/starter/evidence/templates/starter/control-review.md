@@ -1,31 +1,44 @@
 ---
 id: starter.control_review
-title: Control Review
+title: Control Review Draft
 category: evidence
-status: ready
-owner: control_owner
-version: "1.0"
-created_at: "2026-04-19"
+status: draft
 related_articles:
   - TOPIC-STARTER-CONTROLS
 related_actions:
   - STARTER-CONTROL-REVIEW
-tags:
-  - starter
 ---
 
-# Control Review
+# Control review draft
 
-Use this document to capture the minimum review context for a workflow.
+This is an authoring guide, not completed evidence. Replace the instructions
+with observations from an actual review, remove unanswered prompts, and record
+the reviewer and review date. Store the completed document at
+`starter/control-review.md` inside the evidence directory supplied to the CLI.
+A `status` label does not establish readiness or human approval.
 
-## Workflow
+TODO: complete every section with observed results before supplying this as evidence.
 
-- Name: {{ system.name | default("Example workflow") }}
-- Owner: Example owner
+## Workflow and ownership
 
-## Review Notes
+Record the workflow's purpose, its accountable owner, and the reviewer. Explain
+which decision or recommendation is supported and how a person can override it.
 
-- What decision or recommendation does the workflow support?
-- What inputs are used?
-- Who reviews exceptions?
-- What follow-up checks are planned?
+## Inputs and decision points
+
+Describe the inputs used, their origin, and any sensitive information involved.
+Record the decision points checked, the observations made, and the source
+material that supports them. Avoid including unnecessary personal information.
+
+## Exceptions and follow-up
+
+Describe who reviews exceptions, how issues are escalated, and which checks
+remain open. Give each follow-up an owner and an agreed date; this starter pack
+does not assign deadlines.
+
+## Review result
+
+Record what was tested, what the reviewer found, and the limits of those findings.
+Do not describe a synthetic example or an unanswered checklist as a completed
+production review. Export with the completed evidence, inspect its quality
+results, and verify the resulting snapshot before sharing it.

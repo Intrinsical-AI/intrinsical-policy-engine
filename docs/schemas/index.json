@@ -1,0 +1,101 @@
+{
+  "engine_version": "3.0.0",
+  "generator": "scripts/export_schemas.py",
+  "pack_format_version": 3,
+  "schema_index_version": 1,
+  "schemas": [
+    {
+      "file": "actions.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.ActionsContract",
+      "sha256": "a1d821d4ed487ece0cf8a91fde3a7085effd219f09379d05c125b18926c10689"
+    },
+    {
+      "file": "articles.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.ArticlesContract",
+      "sha256": "c67b4146c32aa340d7685c63127b308b580b82e1b94f1a5ef42edb24e47d5398"
+    },
+    {
+      "file": "assessment-input.schema.json",
+      "model": "intrinsical_policy_engine.domain.input_models.AssessmentInput",
+      "sha256": "222b459c5fcc624c9cc57d8018240eff365d20fe5d6d0e19c4ad5bea72fb6bff"
+    },
+    {
+      "file": "backlog-config.schema.json",
+      "model": "intrinsical_policy_engine.domain.bundles.models.BacklogConfig",
+      "sha256": "dbf3bfea123b24d11260b718ce4f73278b8b542a0c3d1662b90df739b693e78c"
+    },
+    {
+      "file": "bundle-profiles.schema.json",
+      "model": "intrinsical_policy_engine.domain.bundles.models.BundleProfilesContract",
+      "sha256": "eaccc5c9cacbecba76e57aeeb4216e83439e24666ba55520a87097488bb0279c"
+    },
+    {
+      "file": "calendar.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.CalendarContract",
+      "sha256": "9ba3032744ba7948c56fc540bd2b446f6fc0084834c1291fa22ad61cae0bb0d7"
+    },
+    {
+      "file": "condition.schema.json",
+      "model": "intrinsical_policy_engine.domain.conditions.Condition",
+      "sha256": "a49cf541349a9cbfecdca94ec835576334d1a3a2cd7f8a150760cf5cd2a47206"
+    },
+    {
+      "file": "contract-bundle.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.ContractBundle",
+      "sha256": "5b777b0d9491ad3469bdeb7e89fa9d7f1b4d24f70cafeb631a39b225af3c1884"
+    },
+    {
+      "file": "due-rules.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.DueRulesContract",
+      "sha256": "e3e909b11528c577689925ecf7b36b75c0ada2a00d84fd443c419093ba378dce"
+    },
+    {
+      "file": "export-settings.schema.json",
+      "model": "intrinsical_policy_engine.adapters.export.base.models.export_config.ExportSettings",
+      "sha256": "6512a45684ff18cbd317b232faa4fc8c99807c14b6ea38a4e9d606f6d1af8b14"
+    },
+    {
+      "file": "flags.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.FlagsContract",
+      "sha256": "a971b540195361eee5573b7988500e80312fe860214a7874404b5eca614d3524"
+    },
+    {
+      "file": "framework-presentation.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.FrameworkPresentation",
+      "sha256": "49374b8348f4adb9f4a28e112f38dd60915f69a0927544100941d4f45660cfb2"
+    },
+    {
+      "file": "framework-semantics.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.FrameworkSemantics",
+      "sha256": "1302da789c46b48d25814b25b821310a8bee71a9bf15f74810f16dce0b729635"
+    },
+    {
+      "file": "pack-manifest.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.PackManifest",
+      "sha256": "2ec812d7e495e8d16223cedefdf457fa0b8ce29913b2a0d48a8366d946d30b5a"
+    },
+    {
+      "file": "questionnaire.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.QuestionnaireContract",
+      "sha256": "ec8c0e160f111071d99df4ea7a3a36659ca0701d60a22589b7d63c73887b998d"
+    },
+    {
+      "file": "rules.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.RulesContract",
+      "sha256": "092391d52cff32f8c8631a738faabb7739d366b08d7141bfcb3f0b9ac2a709cd"
+    },
+    {
+      "file": "runtime-policies.schema.json",
+      "model": "intrinsical_policy_engine.domain.contract_models.RuntimePolicies",
+      "sha256": "9cf41714847f61fd99c0ea75d983dd04e2c5eb574a54308e39fb4840d646e382"
+    }
+  ],
+  "validation_limits": [
+    "JSON Schema describes model structure and expressible field constraints; it does not execute Python field or model validators.",
+    "Use ipe lint --contracts PATH --strict for complete pack compilation, including references, paths, engine compatibility and unconditional output collisions.",
+    "Use assess_from_bundle for programmatic contract validation and the assessment input boundary.",
+    "Assessment input requires exactly one non-null answers or flags field; that model-level invariant is not represented by the generated schema.",
+    "Condition positivity, valid calendar dates, profile/node relationships and export URL/header constraints require their authoritative Pydantic validators.",
+    "Runtime selection, filesystem containment, evidence quality and integrity checks are outside structural schema validation."
+  ]
+}

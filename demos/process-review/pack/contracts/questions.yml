@@ -1,0 +1,61 @@
+groups:
+- id: process.questions
+  title: Synthetic process intake
+  questions:
+  - id: process.submitted
+    text: Has the synthetic item been submitted?
+    type: one_of
+    options:
+    - value: 'yes'
+      label: 'Yes'
+    - value: 'no'
+      label: 'No'
+    map_to_flags:
+      'yes':
+      - process.submitted
+      'no': []
+  - id: process.review
+    text: Does the item need a documented review?
+    type: one_of
+    options:
+    - value: 'yes'
+      label: 'Yes'
+    - value: 'no'
+      label: 'No'
+    map_to_flags:
+      'yes':
+      - process.review_requested
+      'no': []
+    when:
+      has: process.submitted
+  - id: process.owner
+    text: Is a coordinator assigned?
+    type: one_of
+    options:
+    - value: assigned
+      label: Assigned
+    - value: missing
+      label: Missing
+    map_to_flags:
+      assigned:
+      - process.owner_assigned
+      missing:
+      - process.owner_missing
+    when:
+      has: process.submitted
+  - id: process.approval
+    text: Should the review include a signoff record?
+    type: one_of
+    options:
+    - value: 'yes'
+      label: 'Yes'
+    - value: 'no'
+      label: 'No'
+    map_to_flags:
+      'yes':
+      - process.approval_requested
+      'no': []
+    when:
+      all:
+      - has: process.review_requested
+      - has: process.owner_assigned

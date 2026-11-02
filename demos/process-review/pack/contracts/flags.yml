@@ -1,0 +1,17 @@
+registry:
+- id: process.submitted
+  description: A synthetic intake item has been submitted.
+- id: process.review_requested
+  description: The submitter requests a documented review.
+- id: process.owner_assigned
+  description: The synthetic item has an assigned coordinator.
+- id: process.owner_missing
+  description: The synthetic item has no coordinator and must pause.
+- id: process.approval_requested
+  description: A review with a coordinator requests a signoff record.
+- id: process.intake_required
+  description: Derived work flag for the intake record.
+- id: process.review_required
+  description: Derived work flag for the review record.
+- id: process.approval_required
+  description: Derived work flag for the signoff record.

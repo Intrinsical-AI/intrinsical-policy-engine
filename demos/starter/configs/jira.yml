@@ -1,0 +1,8 @@
+uid_namespace: starter-demo
+profiles:
+  - starter_smoke
+filesystem: {}
+jira:
+  base_url: https://jira.example.test
+  project_key: DEMO
+  issue_type: Task

@@ -1,23 +1,39 @@
 # Pre-commit hooks for Intrinsical Policy Engine
 # See https://pre-commit.com for more information
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.0
+  - repo: local
     hooks:
-      # Run the linter (with auto-fix)
+      - id: uv-lock-check
+        name: Check project and dependency lock agree
+        entry: uv lock --check --offline
+        language: system
+        pass_filenames: false
+        always_run: true
+        files: ^(pyproject\.toml|uv\.lock)$
       - id: ruff
-        args: [--fix]
-      # Run the formatter
+        name: Ruff from the project lock
+        entry: uv run --locked ruff check src tests scripts
+        language: system
+        pass_filenames: false
+        always_run: true
+        types_or: [python, pyi]
       - id: ruff-format
-
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.2
-    hooks:
+        name: Ruff format from the project lock
+        entry: uv run --locked ruff format --check src tests scripts
+        language: system
+        pass_filenames: false
+        always_run: true
+        types_or: [python, pyi]
       - id: mypy
-        additional_dependencies:
-          - types-PyYAML
-          - types-jsonschema
-          - pydantic>=2.9.0
-        args: [--ignore-missing-imports]
-        # Only run on src, not tests (tests have more relaxed typing)
+        name: Mypy from the project lock
+        entry: uv run --locked mypy src scripts
+        language: system
+        pass_filenames: false
+        always_run: true
         files: ^src/
+      - id: schema-sync
+        name: Versioned schema exports match the models
+        entry: uv run --locked python scripts/export_schemas.py --out-dir docs/schemas --check
+        language: system
+        pass_filenames: false
+        always_run: true
